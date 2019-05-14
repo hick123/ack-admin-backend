@@ -16,7 +16,8 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', loadChildren: '../dashboard/dashboard.module#DashboardModule' },
       { path: 'groups', loadChildren: '../groups/groups.module#GroupsModule' },
-      // { path: 'account-settings', loadChildren: '../account-settings/account-settings.module#AccountSettingsModule' },
+      { path: 'clusters', loadChildren: '../clusters/clusters.module#ClustersModule' },
+      { path: 'members', loadChildren: '../members/members.module#MembersModule' }
     ]
   }
   ,
@@ -25,7 +26,8 @@ const routes: Routes = [
     component: NoDashComponent,
     children: [
       { path: 'login', loadChildren: '../login/login.module#LoginModule' },
-      { path: 'register', loadChildren: '../register/register.module#RegisterModule' }
+      { path: 'register', loadChildren: '../register/register.module#RegisterModule' },
+      {path: 'Register', loadChildren: '../register/register.module#RegisterModule'}
     ]
   },
 ];

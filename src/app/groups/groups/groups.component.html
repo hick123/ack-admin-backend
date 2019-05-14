@@ -1,3 +1,82 @@
-<p>
-  groups works!
-</p>
+ <div class="col-md-4">
+      <!-- general form elements -->
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Create a group</h3>
+        </div>
+        <form [formGroup]="createGroupForm" (ngSubmit)="createChurchG()">
+          <div class="box-body">
+            <div class="form-group">
+              <label>Group name</label>
+              <input type="text" id="group_name" class="form-control" formControlName="group_name" placeholder="Group name"
+                [ngClass]="{ 'is-invalid': submitted && f.group_name.errors }">
+              <div *ngIf="submitted && f.group_name.errors" class="invalid-feedback">
+                <div *ngIf="f.group_name.errors.required" class="text-danger">Group name is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="box-footer">
+            <button class="btn btn-primary btn-block btn-flat" [disabled]="!createGroupForm.valid">Create</button>
+          </div>
+        </form>
+      </div>
+    
+    </div>
+    <div class="col-md-4">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Available groups</h3>
+        </div>
+        <ul>
+          <li *ngFor="let g of groups">
+            {{g.group_name}}
+          </li>
+        </ul>
+      </div>
+    
+    </div>
+    <!-- enrolling members to groups form -->
+    <div class="col-md-4">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Add members to groups</h3>
+        </div>
+        <form [formGroup]="addToGroupForm" (ngSubmit)=" addToGroup()">
+          <div class="box-body">
+            <div class=form-group>
+              <label>Group name</label>
+              <select formControlName="churchgroups_id">
+                <option *ngFor="let gr of groups" [value]="gr.churchgroups_id">
+                  {{gr.group_name}}
+                </option>
+              </select>
+            </div>
+    
+            <div class=form-group>
+              <label>Member name name</label>
+              <select formControlName="member_id">
+                <option *ngFor="let mb of members" [value]="mb.member_id">
+                  {{mb.first_name}}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="radio" [value]="0" checked formControlName="is_admin" class="flat-red">
+                Member
+              </label>
+              <label>
+                <input type="radio" [value]="1" formControlName="is_admin" class="flat-red">
+                Admin
+              </label>
+            </div>
+          </div>
+    
+          <div class="box-footer">
+            <button class="btn btn-primary btn-block btn-flat">Add</button>
+          </div>
+        </form>
+      </div>
+    
+    </div>
+    

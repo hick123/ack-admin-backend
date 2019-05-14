@@ -1,0 +1,77 @@
+<div class="col-md-4">
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Create a Cluster</h3>
+    </div>
+    <form [formGroup]="createClusterForm"  (ngSubmit)="createClusterm()">
+      <div class="box-body">
+        <div class="form-cluster">
+          <label >Cluster name</label>
+          <input type="text" id="cluster_name" class="form-control" formControlName="cluster_name" placeholder="Cluster name" [ngClass]="{ 'is-invalid': submitted && f.cluster_name.errors }">
+          <div *ngIf="submitted && f.cluster_name.errors" class="invalid-feedback">
+              <div *ngIf="f.cluster_name.errors.required" class="text-danger">Cluster name  is required</div>
+          </div>
+        </div>
+      </div>  
+      <div class="box-footer">
+        <button class="btn btn-primary btn-block btn-flat" [disabled]="!createClusterForm.valid">Create</button>
+      </div>
+    </form>
+  </div>
+
+</div>
+<div class="col-md-4">
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Available Clusters</h3>
+    </div>
+      <ul>
+          <li *ngFor="let g of clusters">
+               {{g.cluster_name}}
+          </li>
+        </ul>
+  </div>
+
+</div>
+<!-- enrolling members to cluster form -->
+<div class="col-md-4">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Add members to Cluster</h3>
+        </div>
+        <form [formGroup]="addMembersToClusterForm"  (ngSubmit)=" addMembersToClusters()">
+          <div class="box-body"> 
+           <div class=form-cluster>
+              <label>member</label>
+               <select formControlName="member_id">
+                 <option *ngFor="let mb of members" [value]="mb.member_id">
+                   {{mb.first_name}}
+                 </option>
+               </select>
+         </div>
+         <div class=form-cluster>
+          <label>Cluster name</label>
+           <select formControlName="clusters_id" >
+             <option *ngFor="let cluster of clusters" [value]="cluster.clusters_id">
+               {{cluster.cluster_name}}
+             </option>
+           </select>
+     </div>
+         <div class="form-cluster">
+          <label>
+            <input  type="radio" [value]="0" checked formControlName="is_admin" class="flat-red"  >
+            Member
+          </label>
+          <label>
+            <input type="radio" [value]="1" formControlName="is_admin" class="flat-red">
+            Admin
+          </label>
+        </div>
+      </div>  
+        
+          <div class="box-footer">
+            <button class="btn btn-primary btn-block btn-flat">Add</button>
+          </div>
+        </form>  
+      </div>
+ </div>

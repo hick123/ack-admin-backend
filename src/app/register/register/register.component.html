@@ -1,3 +1,129 @@
-<p>
-  register works!
-</p>
+<body class="hold-transition register-page">
+  <div class="register-box">
+    <div class="register-logo">
+      <a href="#"><b>ST MARTINS</b> ACK</a>
+    </div>
+  
+    <div class="register-box-body">
+      <p class="login-box-msg">Register a new membership</p>
+  
+
+    <form [formGroup]="registerForm"  (ngSubmit)="register()">
+      <div class="form-group has-feedback">
+          <label>Username*</label>
+        <input type="text" id="username" class="form-control" formControlName="username" placeholder="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required" class="text-danger">username is required</div>
+        </div>
+      </div>
+
+      <div class="form-group has-feedback">
+          <label>First name*</label>
+        <input type="text" id="first_name" class="form-control" formControlName="first_name" placeholder="First name" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }">
+        <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+            <div *ngIf="f.first_name.errors.required" class="text-danger">First name is required</div>
+        </div>
+      </div>
+
+      
+      <div class="form-group has-feedback">
+          <label>Other names*</label>
+        <input type="text" id="other_names" class="form-control" formControlName="other_names" placeholder="Other Names" [ngClass]="{ 'is-invalid': submitted && f.other_names.errors }">
+        <div *ngIf="submitted && f.other_names.errors" class="invalid-feedback">
+            <div *ngIf="f.other_names.errors.required" class="text-danger">Other names is required</div>
+        </div>
+      </div>
+
+      <div class="form-group has-feedback">
+        <label>Password*</label>
+        <input type="password" id="password" class="form-control" placeholder="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required" class="text-danger">password is required</div>
+        </div>
+      </div>
+     <div class="form-group has-feedback">
+        <label>Email*</label>
+        <input type="email" id="email" class="form-control" placeholder="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required" class="text-danger">Email is required</div>
+        </div>
+      </div>
+
+      <div class="form-group has-feedback">
+          <label>Phone*</label>
+        <input type="number" id="phone" class="form-control" placeholder="phone" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+            <div *ngIf="f.phone.errors.required" class="text-danger">Phone is required</div>
+        </div>
+      </div>
+      <div class="form-group has-feedback">
+          <label>Gender*</label>
+          <label>
+              <input type="radio" value="Male" formControlName="gender">
+                <span>Male</span>
+            </label>
+            <label>
+              <input type="radio" value="Female" formControlName="gender">
+                <span>female</span>
+            </label>
+            <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                <div *ngIf="f.gender.errors.required" class="text-danger">Gender is required</div>
+            </div>
+      </div>
+  
+      <div class="form-group has-feedback">
+          <label>Occupation*</label>
+        <input type="text" id="occupation" class="form-control" placeholder="occupation"formControlName="occupation" [ngClass]="{ 'is-invalid': submitted && f.occupation.errors }">
+        <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
+            <div *ngIf="f.occupation.errors.required" class="text-danger">Occupation is required</div>
+        </div>
+      </div>
+
+      <div class="form-group has-feedback">
+          <label>Location*</label>
+        <input type="text" id="location" class="form-control" placeholder="location" formControlName="location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }">
+        <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+            <div *ngIf="f.location.errors.required" class="text-danger">Location is required</div>
+        </div>
+      </div>
+
+      <div class="form-group has-feedback">
+          <label>Marital status*</label>
+        <input type="text" id="marital_status" class="form-control" placeholder="marital_status" formControlName="marital_status" [ngClass]="{ 'is-invalid': submitted && f.marital_status.errors }">
+        <div *ngIf="submitted && f.marital_status.errors" class="invalid-feedback">
+            <div *ngIf="f.marital_status.errors.required" class="text-danger">Marital status is required</div>
+        </div>
+      </div>
+
+      <div class="form-group has-feedback">
+          <label>Age*</label>
+        <input type="number" id="age" class="form-control" placeholder="age" formControlName="age" [ngClass]="{ 'is-invalid': submitted && f.age.errors }">
+        <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+            <div *ngIf="f.age.errors.required" class="text-danger">Age is required</div>
+        </div>
+      </div>
+        <!-- /.col -->
+        <div class="row">
+          <div class="col-xs-8">
+             <div class="checkbox icheck">
+               <label>
+                    <input type="checkbox"> I agree to the <a href="#">terms</a>
+                  </label>
+                </div>
+              </div>
+          <div class="col-xs-4">
+           <button class="btn btn-primary btn-block btn-flat" [disabled]="!registerForm.valid">Register</button>
+         </div>
+         <div class="col-xs-4">
+            <!-- <button class="btn btn-primary btn-block btn-flat" (click)="register()">Register</button> -->
+            <a routerLink="/login">Already a member login here</a>
+  
+          </div>
+        </div>
+        <!-- <div class="col-xs-4">
+          <button class="btn btn-primary btn-block btn-flat" (click)="login()">Sign In</button>
+        </div> -->
+        <!-- /.col -->
+    </form>
+  <!-- /.login-box-body -->
+</div>
