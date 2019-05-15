@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Member} from '../models/members';
-import { Observable } from 'rxjs';
+import { Observable,Subject } from 'rxjs';
 import { map,tap } from 'rxjs/operators';
 import { HttpClient,HttpHeaders  } from '@angular/common/http';
 
@@ -17,6 +17,10 @@ export class MembersService {
   private localgeturl='http://localhost:3000';
   private localsignup='http://localhost:3000/signup';
   private localnewmembers='http://localhost:3000/newmembers';
+  private member='http://localhost:3000/newmembers';
+  private subject = new Subject<any>();
+
+
 
   constructor(private http: HttpClient) { }
   register(member: Member) {
@@ -28,6 +32,11 @@ export class MembersService {
   }
   getNewMembers(){
     return this.http.get(this.localnewmembers);    
+  }
+  getMember(member_id: String){
+    const url =`${this.localgeturl}/${member_id}`
+
+    return this.http.get(url);    
   }
 // register(member: Member): Observable<any> {
 //   return this.http.post<Member>(this.serverUrl, member, httpOptions).pipe(map((res: any) => {

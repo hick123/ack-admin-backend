@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MembersService} from '../../shared/services'
+import { Member } from 'src/app/shared/models/members';
 
 @Component({
   selector: 'app-members',
@@ -7,19 +8,29 @@ import { MembersService} from '../../shared/services'
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
-  members=[];
+  members: Member[] = [];
+
+  // members=[];
 
   constructor(private memberService: MembersService) { }
 
   ngOnInit() {
     this.getMembers();
   }
+  // getMembers(){
+  //   this.memberService.getMembers().subscribe((data:any)=>{
+  //     this.members=[];
+  //     this.members=data;
+  //     console.log(data);
+  //   })
+      
+  // }
   getMembers(){
-    this.memberService.getMembers().subscribe((data:any)=>{
-      this.members=[];
-      this.members=data;
-      console.log(data);
-    })
+    const membersObservable = this.memberService.getMembers();
+    membersObservable.subscribe((memberData: Member[])=>{
+      this.members= memberData;
+      console.log('memberData',memberData);
+    });
       
   }
 
