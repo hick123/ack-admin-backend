@@ -6,6 +6,7 @@ import { MembersService} from '../../shared/services'
 import { first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { group } from '@angular/animations';
+import { Router} from '@angular/router'
 declare var $;
 
 @Component({
@@ -21,10 +22,13 @@ export class GroupsComponent implements OnInit {
  submitted = false;
  groups=[];
  members=[];
+ groupId='8a12f5bb-72f4-11e9-8cfe-8851fbfce548';
 
 // people$: Observable<Person[]>;
 // people: Person[] = [];
-  constructor(private formBuilder: FormBuilder, private groupService: GroupsService, private memberService: MembersService) { }
+  constructor(private formBuilder: FormBuilder, private groupService: GroupsService, 
+    private memberService: MembersService, private router: Router
+    ) { }
 
   ngOnInit() {
         //iCheck for checkbox and radio inputs
@@ -69,6 +73,10 @@ export class GroupsComponent implements OnInit {
     this.getGroups();
     console.log('groups ng on init');
     this.getMembers();
+  }
+   
+  onSelect(g){
+    this.router.navigate(['/groups',g.churchgroups_id]);
   }
 
   // end of ngoninit
@@ -123,7 +131,7 @@ export class GroupsComponent implements OnInit {
           // if (this.createGroupForm.invalid) {
           //     return;
           // }
-    console.log(this.addToGroupForm,'submitting form');
+    console.log(this.addToGroupForm,'submitting form for adding user');
       this.loading = true;
       this.groupService.addMembersToGroup(this.addToGroupForm.value)
            .pipe(first())
@@ -134,7 +142,6 @@ export class GroupsComponent implements OnInit {
                       this.loading = false;
                   });
                   this.addToGroupForm.reset();
-      }
-  
+      } 
 
 }

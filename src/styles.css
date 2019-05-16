@@ -7,7 +7,10 @@
 @import url(./assets/adminlte/bower_components/select2/dist/css/select2.min.css);
 @import url(./assets/adminlte/dist/css/AdminLTE.min.css);
 @import url(./assets/adminlte/dist/css/skins/_all-skins.min.css);
-/* @import "~@ng-select/ng-select/themes/default.theme.css"; */
+/* @import url(./assets/adminlte/bower_components/select2/src/); */
+@import url(https://adminlte.io/themes/AdminLTE/bower_components/select2/dist/css/select2.min.css);
+
+/* @import url("~@ng-select/ng-select/themes/default.theme.css"); */
 
 @import url(assets/adminlte/dist/css/skins/_all-skins.min.css);
 /* @import "assets/adminlte/plugins/iCheck/square/blue.css"; */

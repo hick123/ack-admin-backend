@@ -33,5 +33,7 @@ export class MembersComponent implements OnInit {
     });
       
   }
+  getmember(){
+  }
 
 }

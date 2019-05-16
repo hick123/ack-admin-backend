@@ -10,7 +10,6 @@ export class MemberDetailsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('Just entered memberdetail page');
   }
 
 }

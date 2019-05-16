@@ -17,7 +17,12 @@ const routes: Routes = [
       { path: 'dashboard', loadChildren: '../dashboard/dashboard.module#DashboardModule' },
       { path: 'groups', loadChildren: '../groups/groups.module#GroupsModule' },
       { path: 'clusters', loadChildren: '../clusters/clusters.module#ClustersModule' },
-      { path: 'members', loadChildren: '../members/members.module#MembersModule' }
+      { path: 'members', loadChildren: '../members/members.module#MembersModule' },
+      { path: 'member-details', loadChildren: '../member-details/member-details.module#MemberDetailsModule' },
+      // { path: 'member-details', loadChildren: '../member-details/member-details.module#MemberDetailsModule' },
+      { path: 'groups/:churchgroups_id', loadChildren: '../group-details/group-details.module#GroupDetailsModule' }
+
+
     ]
   }
   ,

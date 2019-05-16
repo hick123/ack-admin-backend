@@ -1,0 +1,17 @@
+<h1 *ngFor="let item of groupDetails">{{item.group_name}}</h1 >
+<p *ngFor="let item of groupDetails">{{item.created_date}}</p>
+
+<p *ngFor="let item of groupDetails">Created on {{item.created_date}}</p>
+
+
+<h1 *ngFor="let item of groupDetails">{{item.group_name}} Members</h1 >
+
+<ul>
+  <li *ngFor="let m of groupMembers">
+    {{m.username}}
+
+  </li>
+</ul>
+<a [routerLink]="['/groups']">
+  <span>Go back</span>
+</a>

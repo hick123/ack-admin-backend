@@ -28,7 +28,7 @@
           <h3 class="box-title">Available groups</h3>
         </div>
         <ul>
-          <li *ngFor="let g of groups">
+          <li (click)="onSelect(g)" *ngFor="let g of groups">
             {{g.group_name}}
           </li>
         </ul>
@@ -79,4 +79,3 @@
       </div>
     
     </div>
-    
