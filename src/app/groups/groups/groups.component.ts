@@ -16,13 +16,34 @@ declare var $;
 })
 export class GroupsComponent implements OnInit {
 
-  createGroupForm: FormGroup;
-  addToGroupForm: FormGroup;
+
   loading = false;
  submitted = false;
  groups=[];
  members=[];
  groupId='8a12f5bb-72f4-11e9-8cfe-8851fbfce548';
+//create group form formControl
+createGroupForm :FormGroup = this.formBuilder.group({
+  group_name: ['', Validators.required]
+});
+
+//formcontrol for add members to groups
+addToGroupForm: FormGroup= this.formBuilder.group({
+  member_id: [''],
+  churchgroups_id: [''],
+  is_admin:['']
+
+});
+rows = [
+  { name: 'Austin', gender: 'Male', company: 'Swimlane' },
+  { name: 'Dany', gender: 'Male', company: 'KFC' },
+  { name: 'Molly', gender: 'Female', company: 'Burger King' },
+];
+columns = [
+  { prop: 'name' },
+  { name: 'Gender' },
+  { name: 'Company' }
+];
 
 // people$: Observable<Person[]>;
 // people: Person[] = [];
@@ -56,19 +77,6 @@ export class GroupsComponent implements OnInit {
       radioClass   : 'iradio_flat-green'
     })
   });
-
-  //create group form formControl
-    this.createGroupForm = this.formBuilder.group({
-      group_name: ['', Validators.required]
-    });
-    
-    //formcontrol for add members to groups
-    this.addToGroupForm = this.formBuilder.group({
-      member_id: [''],
-      churchgroups_id: [''],
-      is_admin:['']
-
-    });
     //call function to fetch groups
     this.getGroups();
     console.log('groups ng on init');

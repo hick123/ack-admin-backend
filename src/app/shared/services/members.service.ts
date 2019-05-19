@@ -16,6 +16,8 @@ export class MembersService {
   // private ngrokurlNewMembers='http://bdd8484f.ngrok.io/newmembers';
   private localgeturl='http://localhost:3000';
   private localsignup='http://localhost:3000/signup';
+  private localgetmemberbyid='http://localhost:3000/getmemberbyid';
+
   private localnewmembers='http://localhost:3000/newmembers';
   private member='http://localhost:3000/newmembers';
   private subject = new Subject<any>();
@@ -34,7 +36,7 @@ export class MembersService {
     return this.http.get(this.localnewmembers);    
   }
   getMember(member_id: String){
-    const url =`${this.localgeturl}/${member_id}`
+    const url =`${this.localgetmemberbyid}/${member_id}`
 
     return this.http.get(url);    
   }

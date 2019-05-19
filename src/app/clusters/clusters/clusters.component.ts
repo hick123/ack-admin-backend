@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MembersService } from '../../shared/services/members.service';
 import { ClustersService } from '../../shared/services';
+import { Router} from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Validators,  FormGroup, FormBuilder } from '@angular/forms';
 
@@ -19,7 +20,7 @@ export class ClustersComponent implements OnInit {
  members=[];
 
   constructor(private formBuilder: FormBuilder, 
-    private memberService: MembersService,
+    private memberService: MembersService, private router:Router,
     private clusterService: ClustersService
     ) { }
 
@@ -40,7 +41,10 @@ export class ClustersComponent implements OnInit {
     this.getMembers();
     this.getClusters();
   }
-
+  //view cluster details
+  onSelect(g){
+    this.router.navigate(['/clusters',g.clusters_id]);
+  }
   // fetching members
   getMembers(){
     this.memberService.getMembers().subscribe((data:any)=>{

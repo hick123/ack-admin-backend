@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MembersService} from '../../shared/services'
 import { Member } from 'src/app/shared/models/members';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-members',
@@ -12,7 +13,7 @@ export class MembersComponent implements OnInit {
 
   // members=[];
 
-  constructor(private memberService: MembersService) { }
+  constructor(private memberService: MembersService, private router: Router) { }
 
   ngOnInit() {
     this.getMembers();
@@ -32,6 +33,9 @@ export class MembersComponent implements OnInit {
       console.log('memberData',memberData);
     });
       
+  }
+  onSelect(mem){
+    this.router.navigate(['/members',mem.member_id]);
   }
   getmember(){
   }

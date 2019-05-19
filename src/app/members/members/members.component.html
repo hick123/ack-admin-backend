@@ -17,7 +17,7 @@
                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="age grade: activate to sort column ascending">Age</th></tr>
               </thead>
               <tbody>
-              <tr role="row" class="odd" *ngFor="let mem of members">
+              <tr role="row" class="odd" (click)="onSelect(mem)" *ngFor="let mem of members">
                 <td class="sorting_1">{{mem.username}}</td>
                 <td>{{mem.email}}</td>
                 <td>{{mem.first_name}}</td>
@@ -74,5 +74,16 @@
         </tfoot>
     </table>
 
+ </div>
+ <div class="row">
+
+  <Ul>
+    <li (click)="onSelect(mem)" *ngFor="let mem of members"> {{mem.username}}</li>
+  </Ul>
+  <ul>
+    <li (click)="onSelect(mem)" *ngFor="let mem of members">
+      {{mem.username}}
+    </li>
+  </ul>
  </div>
  

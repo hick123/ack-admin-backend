@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MembersService} from '../../shared/services'
 import { GroupsService} from '../../shared/services';
 import { ClustersService } from '../../shared/services';
-
+declare var $;
 
 @Component({
   selector: 'app-dashboard',
@@ -21,12 +21,23 @@ export class DashboardComponent implements OnInit {
     private groupService: GroupsService, private clusterService: ClustersService) { }
 
   ngOnInit() {
-    window.dispatchEvent(new Event('resize'));
+       window.dispatchEvent(new Event('resize'));
     document.body.className = 'hold-transition skin-blue sidebar-mini';
     this.getMembers();
     this.getNewMembers();
     this.getClusters();
     this.getGroups();
+    $(function () {
+      $("#example1").DataTable();
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": false,
+        "ordering": false,
+        "info": true,
+        "autoWidth": false
+      });
+    });
   }
   
   getMembers(){

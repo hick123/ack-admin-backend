@@ -1,3 +1,6 @@
+<a [routerLink]="['/groups']">
+  <button clas="primary">Go back</button>
+</a>
 <h1 *ngFor="let item of groupDetails">{{item.group_name}}</h1 >
 <p *ngFor="let item of groupDetails">{{item.created_date}}</p>
 
@@ -12,6 +15,54 @@
 
   </li>
 </ul>
-<a [routerLink]="['/groups']">
-  <span>Go back</span>
-</a>
+<div class="row">
+  <div class="col-md-4">
+    <!-- general form elements -->
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title" *ngFor="let item of groupDetails">Create {{item.group_name}} event</h3>
+      </div>
+      <form [formGroup]="createGroupEvents" (ngSubmit)="createGroupEvent()">
+        <div class="box-body">
+          <div class="form-group">
+            <label>Event title</label>
+            <input type="text" id="event_title" class="form-control" formControlName="event_title" placeholder="Event title"
+              [ngClass]="{ 'is-invalid': submitted && f.event_title.errors }">
+            <div *ngIf="submitted && f.event_title.errors" class="invalid-feedback">
+              <div *ngIf="f.event_title.errors.required" class="text-danger">Event title name is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Event description</label>
+            <input type="text" id="event_description" class="form-control" formControlName="event_description" placeholder="Event description"
+              [ngClass]="{ 'is-invalid': submitted && f.event_description.errors }">
+            <div *ngIf="submitted && f.event_description.errors" class="invalid-feedback">
+              <div *ngIf="f.event_description.errors.required" class="text-danger">Event description is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Start Date</label>
+            <input type="text"  id ="start_date" class="form-control" formControlName="start_date" placeholder="Start date"
+              [ngClass]="{ 'is-invalid': submitted && f.start_date.errors }">
+            <div *ngIf="submitted && f.start_date.errors" class="invalid-feedback">
+              <div *ngIf="f.start_date.errors.required" class="text-danger">Event start date is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>End date</label>
+            <input type="text" id="end_date"  class="form-control" formControlName="end_date" placeholder="End date"
+              [ngClass]="{ 'is-invalid': submitted && f.end_date.errors }">
+            <div *ngIf="submitted && f.end_date.errors" class="invalid-feedback">
+              <div *ngIf="f.end_date.errors.required" class="text-danger">End date is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="box-footer">
+          <button class="btn btn-primary btn-block btn-flat" [disabled]="!createGroupEvents.valid">Add event</button>
+        </div>
+      </form>
+    </div>
+  
+  </div>
+  
+</div>

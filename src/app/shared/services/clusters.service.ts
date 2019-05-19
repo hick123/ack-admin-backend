@@ -8,17 +8,11 @@ import { MemberCluster } from '../models/members_clusters';
 })
 export class ClustersService {
 
-  // private serverUrl = 'http://locahost:3000/signup';  // URL to web api
-  // private ngrokurlcreatecluster='http://bdd8484f.ngrok.io/clusters/createcluster';
-  // private ngrokurladdmemberstocluster='http://bdd8484f.ngrok.io/clusters/addmemberstocluster';
-  // private ngrokurlgetclusters='http://bdd8484f.ngrok.io/clusters/getclusters';
-  // private ngrokurlget='http://bdd8484f.ngrok.io/';
-  // private lo=`http://locahost:3000/signup`;
-  // private ngrokurlNewMembers='http://bdd8484f.ngrok.io/newmembers';
-
-  private localgeturl='http://localhost:3000/clusters/getclusters';
+    private localgeturl='http://localhost:3000/clusters/getclusters';
     private localaddtocluster='http://localhost:3000/clusters/addmemberstocluster';
     private localcreatecluster='http://localhost:3000/clusters/createcluster';
+    private getclusteridturl='http://localhost:3000/clusters/getclusterbyid';
+
   
   constructor(private http: HttpClient) { }
   
@@ -32,5 +26,10 @@ export class ClustersService {
 
   addMembersToCluster(memberCluster: MemberCluster){
     return this.http.post(this.localaddtocluster, memberCluster);    
+  }
+  getClusterById(clusters_id: String){
+    const url =`${this.getclusteridturl}/${clusters_id}`;
+
+    return this.http.get(url);    
   }
 }

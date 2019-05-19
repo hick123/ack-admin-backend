@@ -21,16 +21,32 @@
 
 </div>
 <div class="col-md-4">
-  <div class="box box-primary">
-    <div class="box-header with-border">
-      <h3 class="box-title">Available Clusters</h3>
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Available cluster</h3>
+        </div>
+        <div class="card-body">
+            <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+              <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div>
+              <div class="row"><div class="col-sm-12">
+            <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+              <thead>
+              <tr role="row">
+                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending">Cluster name</th>
+                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="email: activate to sort column ascending">Creaated Date</th>
+              </thead>
+              <tbody>
+              <tr role="row" class="odd"  (click)="onSelect(g)"  *ngFor="let c of clusters">
+                <td >  {{c.cluster_name}}</td>
+                <td>{{c.created_date |  date:'medium'}}</td>
+              </tr>
+            </tbody>
+
+            </table>
+          </div></div>
+          </div>
+          </div>
     </div>
-      <ul>
-          <li *ngFor="let g of clusters">
-               {{g.cluster_name}}
-          </li>
-        </ul>
-  </div>
 
 </div>
 <!-- enrolling members to cluster form -->

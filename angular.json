@@ -23,9 +23,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css"
             ],
             "scripts": [
+               "node_modules/jquery/dist/jquery.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js",
               "src/assets/adminlte/bower_components/jquery/dist/jquery.min.js",
               "src/assets/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js",
               "src/assets/adminlte/plugins/iCheck/icheck.min.js",
@@ -35,6 +38,8 @@
               "src/assets/adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js",
               "src/assets/adminlte/bower_components/select2/dist/js/select2.min.js",
               "src/assets/adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js",
+              "src/assets/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js",
+              "src/assets/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js",
               "src/assets/adminlte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js",
               "src/assets/adminlte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js",
               "src/assets/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js",
