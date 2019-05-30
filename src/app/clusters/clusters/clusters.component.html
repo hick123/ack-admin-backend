@@ -1,56 +1,29 @@
-<div class="col-md-4">
-  <div class="box box-primary">
-    <div class="box-header with-border">
-      <h3 class="box-title">Create a Cluster</h3>
-    </div>
-    <form [formGroup]="createClusterForm"  (ngSubmit)="createClusterm()">
-      <div class="box-body">
-        <div class="form-cluster">
-          <label >Cluster name</label>
-          <input type="text" id="cluster_name" class="form-control" formControlName="cluster_name" placeholder="Cluster name" [ngClass]="{ 'is-invalid': submitted && f.cluster_name.errors }">
-          <div *ngIf="submitted && f.cluster_name.errors" class="invalid-feedback">
-              <div *ngIf="f.cluster_name.errors.required" class="text-danger">Cluster name  is required</div>
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Create a Cluster</h3>
           </div>
+          <form [formGroup]="createClusterForm"  (ngSubmit)="createClusterm()">
+            <div class="box-body">
+              <div class="form-cluster">
+                <label >Cluster name</label>
+                <input type="text" id="cluster_name" class="form-control" formControlName="cluster_name" placeholder="Cluster name" [ngClass]="{ 'is-invalid': submitted && f.cluster_name.errors }">
+                <div *ngIf="submitted && f.cluster_name.errors" class="invalid-feedback">
+                    <div *ngIf="f.cluster_name.errors.required" class="text-danger">Cluster name  is required</div>
+                </div>
+              </div>
+            </div>  
+            <div class="box-footer">
+              <button class="btn btn-primary btn-block btn-flat" [disabled]="!createClusterForm.valid">Create</button>
+            </div>
+          </form>
         </div>
-      </div>  
-      <div class="box-footer">
-        <button class="btn btn-primary btn-block btn-flat" [disabled]="!createClusterForm.valid">Create</button>
+      
       </div>
-    </form>
-  </div>
-
-</div>
-<div class="col-md-4">
-    <div class="box box-primary">
-        <div class="box-header with-border">
-            <h3 class="box-title">Available cluster</h3>
-        </div>
-        <div class="card-body">
-            <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
-              <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div>
-              <div class="row"><div class="col-sm-12">
-            <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-              <thead>
-              <tr role="row">
-                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending">Cluster name</th>
-                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="email: activate to sort column ascending">Creaated Date</th>
-              </thead>
-              <tbody>
-              <tr role="row" class="odd"  (click)="onSelect(g)"  *ngFor="let c of clusters">
-                <td >  {{c.cluster_name}}</td>
-                <td>{{c.created_date |  date:'medium'}}</td>
-              </tr>
-            </tbody>
-
-            </table>
-          </div></div>
-          </div>
-          </div>
-    </div>
-
-</div>
-<!-- enrolling members to cluster form -->
-<div class="col-md-4">
+      <!-- enrolling members to cluster form -->
+<div class="col-md-6">
     <div class="box box-primary">
         <div class="box-header with-border">
           <h3 class="box-title">Add members to Cluster</h3>
@@ -91,3 +64,35 @@
         </form>  
       </div>
  </div>
+
+</div>
+
+<div class="row">  
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Available clusters</h3>
+        </div>
+        <div class="card-body">
+            <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+              <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div>
+              <div class="row"><div class="col-sm-12">
+            <table id="groupstable" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+              <thead>
+              <tr role="row">
+                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending">Cluster names</th>
+                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="email: activate to sort column ascending">Created Date</th>
+              </thead>
+              <tbody>
+              <tr role="row" class="odd" (click)="onSelect(c)"  *ngFor="let c of clusters">
+                <td > {{c.cluster_name}}</td>
+                <td>{{c.created_date |  date:'medium'}}</td>
+              </tr>
+            </tbody>
+
+            </table>
+          </div></div>
+          </div>
+          </div>
+    </div>
+</div>
+

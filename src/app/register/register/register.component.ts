@@ -11,27 +11,31 @@ import { MembersService} from '../../shared/services/members.service'
 export class RegisterComponent implements OnInit {
   loading = false;
   submitted = false;
-  registerForm: FormGroup;
   members =[];
+  registerForm:FormGroup = this.formBuilder.group({
+    username: ['', Validators.required],
+    first_name: ['',  Validators.required],
+    other_names: ['',  Validators.required],
+    password: ['',  Validators.required],
+    email: ['',  Validators.required],
+    phone: ['',  Validators.required],
+    gender: ['',  Validators.required],
+    occupation: ['',  Validators.required],
+    location: ['',  Validators.required],
+    ministry :this.formBuilder.group({
+      street: [''],
+      houseNumber: ['']
+  }),
+    marital_status: ['',  Validators.required],
+    age: ['',  Validators.required]
+  });
+
 
   constructor(private router: Router, private formBuilder: FormBuilder,
     private memberService: MembersService) { }
 
   ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      first_name: ['',  Validators.required],
-      other_names: ['',  Validators.required],
-      password: ['',  Validators.required],
-      email: ['',  Validators.required],
-      phone: ['',  Validators.required],
-      gender: ['',  Validators.required],
-      occupation: ['',  Validators.required],
-      location: ['',  Validators.required],
-      marital_status: ['',  Validators.required],
-      age: ['',  Validators.required]
-    });
-
+  
   }
   get f() { return this.registerForm.controls; }
 
@@ -40,9 +44,9 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
 
         // stop here if form is invalid
-        if (this.registerForm.invalid) {
-            return;
-        }
+        // if (this.registerForm.invalid) {
+        //     return;
+        // }
   console.log(this.registerForm,'submitting form');
     this.loading = true;
     this.memberService.register(this.registerForm.value)

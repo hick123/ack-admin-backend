@@ -1,0 +1,62 @@
+<tabset>
+  <tab heading="Active Events" id="tab1">
+    <div class="row">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Active events</h3>
+        </div>
+        <div class="card-body">
+            <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+              <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div>
+              <div class="row"><div class="col-sm-12">
+            <table id="example" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+              <thead>
+              <tr role="row">
+                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Event Title: activate to sort column descending">Event Tittle</th>
+                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="event_description: activate to sort column ascending">Email</th>
+                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="start_date: activate to sort column ascending">Start Date</th>
+                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="phone : activate to sort column ascending">End Date</th>
+                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="descriptor : activate to sort column ascending">Belongs</th></tr>
+              </thead>
+              <tbody>
+              <tr role="row" class="odd" *ngFor="let e of Events">
+                <td class="sorting_1">{{e.event_title}}</td>
+                <td>{{e.event_description}}</td>
+                <td>{{e.start_date}}</td>
+                <td>{{e.end_date}}</td>
+                <td>{{e?.descriptor}}</td>
+              </tr>
+            </tbody>
+              <tfoot>
+              <tr><th rowspan="1" colspan="1">Event title</th>
+                <th rowspan="1" colspan="1">Event description</th>
+                <th rowspan="1" colspan="1">Start date</th>
+                <th rowspan="1" colspan="1">End date</th>
+                <th rowspan="1" colspan="1">Belongs</th></tr>
+              </tfoot>
+            </table>
+          </div></div>
+          </div>
+          </div>
+    </div>
+      </div>       
+  </tab>
+  <tab heading="Completed Events">
+      <table cdk-table [dataSource]="Events">
+  
+          <!-- Hero Name Column -->
+          <ng-container cdkColumnDef="name">
+            <th cdk-header-cell *cdkHeaderCellDef> Event title </th>
+            <td cdk-cell *cdkCellDef="let row"> {{row.event_title}} </td>
+          </ng-container>
+          
+         <tr cdk-header-row *cdkHeaderRowDef="displayedColumns$.value"></tr>
+          <tr cdk-row *cdkRowDef="let row; columns: displayedColumns$.value"></tr>
+        
+        </table>
+  </tab>
+  <tab heading="Cancelled Events">
+     
+  </tab>
+  
+</tabset> 

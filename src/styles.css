@@ -18,6 +18,10 @@
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
 
 /* @import url("~@ng-select/ng-select/themes/default.theme.css"); */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~@ng-select/ng-select/themes/material.theme.css";
+@import "~ag-grid-community/dist/styles/ag-grid.css";
+@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
 
 @import url(assets/adminlte/dist/css/skins/_all-skins.min.css);
 /* @import "assets/adminlte/plugins/iCheck/square/blue.css"; */

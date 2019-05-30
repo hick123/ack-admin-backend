@@ -1,3 +1,11 @@
+<ngx-spinner
+    bdOpacity = 0.2
+    bdColor = "rgba(57,217,233,0.63)"
+    size = "small"
+    color = ""
+    type = "ball-8bits"
+    [fullScreen] = "false"><p style="color: white" > Loading... </p>
+</ngx-spinner>
 <div class="row">
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -38,52 +46,3 @@
           </div>
     </div>
   </div>
-
- <div class="row">
-    <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
-        <thead>
-        <tr>
-            <th style="width: 20%">
-                <mfDefaultSorter by="name">Name</mfDefaultSorter>
-            </th>
-            <th style="width: 50%">
-                <mfDefaultSorter by="email">Email</mfDefaultSorter>
-            </th>
-            <th style="width: 10%">
-                <mfDefaultSorter by="age">Age</mfDefaultSorter>
-            </th>
-            <th style="width: 20%">
-                <mfDefaultSorter by="city">City</mfDefaultSorter>
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let mem of mf.members">
-            <td>{{mem.username}}</td>
-            <td>{{mem.email}}</td>
-            <td class="text-right">{{item.age}}</td>
-            <td>{{mem.city | uppercase}}</td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="4">
-                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-            </td>
-        </tr>
-        </tfoot>
-    </table>
-
- </div>
- <div class="row">
-
-  <Ul>
-    <li (click)="onSelect(mem)" *ngFor="let mem of members"> {{mem.username}}</li>
-  </Ul>
-  <ul>
-    <li (click)="onSelect(mem)" *ngFor="let mem of members">
-      {{mem.username}}
-    </li>
-  </ul>
- </div>
- 

@@ -1,68 +1,136 @@
+<div>
+  <tabset>
+    <tab heading="Group Details" id="tab1">
+      <div class="row">
+          <h1 *ngFor="let item of groupDetails">{{item.group_name}}</h1 >
+            <p *ngFor="let item of groupDetails">{{item.created_date}}</p>
+            
+            <p *ngFor="let item of groupDetails">Created on {{item.created_date}}</p>
+        </div>       
+          <div class="row">
+              <div class="box box-primary">
+                  <div class="box-header with-border">
+                      <h3 class="box-title" *ngFor="let item of groupDetails">List of members for {{item.group_name}} </h3>
+                  </div>
+                  <div class="card-body">
+                      <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div>
+                        <div class="row"><div class="col-sm-12">
+                      <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                        <thead>
+                        <tr role="row">
+                          <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending">Username</th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="email: activate to sort column ascending">Email</th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="first name: activate to sort column ascending">First name</th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="phone version: activate to sort column ascending">Phone</th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="age grade: activate to sort column ascending">Age</th></tr>
+                        </thead>
+                        <tbody>
+                        <tr role="row" class="odd" *ngFor="let mem of groupMembers">
+                          <td class="sorting_1">{{mem.username}}</td>
+                          <td>{{mem.email}}</td>
+                          <td>{{mem.first_name}}</td>
+                          <td>{{mem.phone}}</td>
+                          <td>{{mem.age}}</td>
+                        </tr>
+                      </tbody>
+                        <tfoot>
+                        <tr><th rowspan="1" colspan="1">Username</th>
+                          <th rowspan="1" colspan="1">Email</th>
+                          <th rowspan="1" colspan="1">First name</th>
+                          <th rowspan="1" colspan="1">phone</th>
+                          <th rowspan="1" colspan="1">Age</th></tr>
+                        </tfoot>
+                      </table>
+                    </div></div>
+                    </div>
+                    </div>
+              </div>
+          </div>
+    </tab>
+    <tab heading="Group Events">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title" *ngFor="let item of groupDetails">Events for {{item.group_name}}</h3>
+            </div>
+            <div class="card-body">
+                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                  <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div>
+                  <div class="row"><div class="col-sm-12">
+                <table id="groupstable" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                  <thead>
+                  <tr role="row">
+                    <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending">Events title</th>
+                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="email: activate to sort column ascending">Creaated Date</th>
+                  </thead>
+                  <tbody>
+                  <tr role="row" class="odd"  *ngFor="let ge of groupEvents">
+                    <td > {{ge.event_title}}</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+  
+                </table>
+              </div></div>
+              </div>
+              </div>
+        </div>
+    </tab>
+    <tab heading="Add group event">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title" *ngFor="let item of groupDetails">Create {{item.group_name}} event</h3>
+            </div>
+            <form [formGroup]="createGroupEvents" (ngSubmit)="createGroupEvent()">
+              <div class="box-body">
+                <div class="form-group">
+                  <label>Event title</label>
+                  <input type="text" id="event_title" class="form-control" formControlName="event_title" placeholder="Event title">
+                  <!-- <div *ngIf="submitted && f.event_title.errors" class="invalid-feedback">
+                    <div *ngIf="f.event_title.errors.required" class="text-danger">Event title name is required</div>
+                  </div> -->
+                </div>
+                
+                <div class="form-group">
+                  <label>Event description</label>
+                    <textarea class="form-control" rows="3" formControlName="event_description" placeholder="Event description"></textarea>
+                  <!-- <div *ngIf="submitted && f.event_description.errors" class="invalid-feedback">
+                    <div *ngIf="f.event_description.errors.required" class="text-danger">Event description is required</div>
+                  </div> -->
+                </div>
+                <div class="form-group">
+                    <label>start date</label>
+                  <input
+                    placeholder="Start Date"
+                    class="form-control"
+                    #dp="bsDatepicker"
+                    formControlName="start_date"
+                    [minDate]="minDate"
+                    bsDatepicker>
+                </div>
+                <div class="form-group">
+                    <label>End date</label>
+                  <input
+                    placeholder="End Date"
+                    formControlName="end_date"
+                    class="form-control"
+                    #dp="bsDatepicker"
+                    [minDate]="minDate"
+                    bsDatepicker>
+                </div>
+              </div>
+              <div class="box-footer">
+                <button class="btn btn-primary btn-block btn-flat" >Add event</button>
+              </div>
+            </form>
+          </div>
+    </tab>
+    <tab heading="Group Forum">
+     
+    </tab>
+  </tabset>
+</div>
 <a [routerLink]="['/groups']">
   <button clas="primary">Go back</button>
 </a>
-<h1 *ngFor="let item of groupDetails">{{item.group_name}}</h1 >
-<p *ngFor="let item of groupDetails">{{item.created_date}}</p>
 
-<p *ngFor="let item of groupDetails">Created on {{item.created_date}}</p>
-
-
-<h1 *ngFor="let item of groupDetails">{{item.group_name}} Members</h1 >
-
-<ul>
-  <li *ngFor="let m of groupMembers">
-    {{m.username}}
-
-  </li>
-</ul>
-<div class="row">
-  <div class="col-md-4">
-    <!-- general form elements -->
-    <div class="box box-primary">
-      <div class="box-header with-border">
-        <h3 class="box-title" *ngFor="let item of groupDetails">Create {{item.group_name}} event</h3>
-      </div>
-      <form [formGroup]="createGroupEvents" (ngSubmit)="createGroupEvent()">
-        <div class="box-body">
-          <div class="form-group">
-            <label>Event title</label>
-            <input type="text" id="event_title" class="form-control" formControlName="event_title" placeholder="Event title"
-              [ngClass]="{ 'is-invalid': submitted && f.event_title.errors }">
-            <div *ngIf="submitted && f.event_title.errors" class="invalid-feedback">
-              <div *ngIf="f.event_title.errors.required" class="text-danger">Event title name is required</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Event description</label>
-            <input type="text" id="event_description" class="form-control" formControlName="event_description" placeholder="Event description"
-              [ngClass]="{ 'is-invalid': submitted && f.event_description.errors }">
-            <div *ngIf="submitted && f.event_description.errors" class="invalid-feedback">
-              <div *ngIf="f.event_description.errors.required" class="text-danger">Event description is required</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Start Date</label>
-            <input type="text"  id ="start_date" class="form-control" formControlName="start_date" placeholder="Start date"
-              [ngClass]="{ 'is-invalid': submitted && f.start_date.errors }">
-            <div *ngIf="submitted && f.start_date.errors" class="invalid-feedback">
-              <div *ngIf="f.start_date.errors.required" class="text-danger">Event start date is required</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>End date</label>
-            <input type="text" id="end_date"  class="form-control" formControlName="end_date" placeholder="End date"
-              [ngClass]="{ 'is-invalid': submitted && f.end_date.errors }">
-            <div *ngIf="submitted && f.end_date.errors" class="invalid-feedback">
-              <div *ngIf="f.end_date.errors.required" class="text-danger">End date is required</div>
-            </div>
-          </div>
-        </div>
-        <div class="box-footer">
-          <button class="btn btn-primary btn-block btn-flat" [disabled]="!createGroupEvents.valid">Add event</button>
-        </div>
-      </form>
-    </div>
-  
-  </div>
-  
-</div>

@@ -1,12 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Validators,  FormGroup, FormBuilder } from '@angular/forms';
-import { GroupsService} from '../../shared/services';
+import { GroupsService, Person} from '../../shared/services';
 import { MembersService} from '../../shared/services'
 
-import { first } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { first, debounceTime, distinctUntilChanged, tap, switchMap, catchError } from 'rxjs/operators';
+import { Observable, concat, of, Subject } from 'rxjs';
 import { group } from '@angular/animations';
 import { Router} from '@angular/router'
+import { ChurchGroups } from 'src/app/shared/models/churchgroups';
 declare var $;
 
 @Component({
@@ -21,6 +22,7 @@ export class GroupsComponent implements OnInit {
  submitted = false;
  groups=[];
  members=[];
+ simpleItems=[];
  groupId='8a12f5bb-72f4-11e9-8cfe-8851fbfce548';
 //create group form formControl
 createGroupForm :FormGroup = this.formBuilder.group({
@@ -34,24 +36,23 @@ addToGroupForm: FormGroup= this.formBuilder.group({
   is_admin:['']
 
 });
-rows = [
-  { name: 'Austin', gender: 'Male', company: 'Swimlane' },
-  { name: 'Dany', gender: 'Male', company: 'KFC' },
-  { name: 'Molly', gender: 'Female', company: 'Burger King' },
-];
-columns = [
-  { prop: 'name' },
-  { name: 'Gender' },
-  { name: 'Company' }
-];
 
-// people$: Observable<Person[]>;
-// people: Person[] = [];
+people$: Observable<Person[]>;
+people: Person[] = [];
+
+groups$: Observable<ChurchGroups[]>;
+group: ChurchGroups [] = [];
+
+// people3Loading = false;
+// groupsinput$ = new Subject<string>();
+
+
   constructor(private formBuilder: FormBuilder, private groupService: GroupsService, 
     private memberService: MembersService, private router: Router
     ) { }
-
+    
   ngOnInit() {
+    this.getGr();
         //iCheck for checkbox and radio inputs
  $(() => {
   window.dispatchEvent(new Event('resize'));
@@ -89,13 +90,21 @@ columns = [
 
   // end of ngoninit
 
+
   //fetching groups
    getGroups(){
      this.groupService.getChurchGroups().subscribe((data:any)=>{
      this.groups= data;
+
      console.log('groupes',this.groups);
      console.log(data);
      })
+   }
+   //obersavable fetch groups
+   getGr(){
+    this.people$ = this.groupService.getPeople();
+    this.groupService.getPeople().subscribe(items => this.people = items);
+    this.simpleItems = [true, 'Two', 3];  
    }
 // fetching members
    getMembers(){

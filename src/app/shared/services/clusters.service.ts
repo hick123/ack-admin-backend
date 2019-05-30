@@ -12,6 +12,7 @@ export class ClustersService {
     private localaddtocluster='http://localhost:3000/clusters/addmemberstocluster';
     private localcreatecluster='http://localhost:3000/clusters/createcluster';
     private getclusteridturl='http://localhost:3000/clusters/getclusterbyid';
+    private getclustermbersurl='http://localhost:3000/clusters/getclustermbers';
 
   
   constructor(private http: HttpClient) { }
@@ -20,6 +21,12 @@ export class ClustersService {
     return this.http.get(this.localgeturl);    
 
   }
+  getclusterMembers(clusters_id: String){
+    const url =`${this.getclustermbersurl}/${clusters_id}`;
+
+    return this.http.get(url);    
+  }
+
   createCluster(clusters: Clusters){
     return this.http.post(this.localcreatecluster, clusters);    
   }

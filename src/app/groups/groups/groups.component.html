@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <!-- general form elements -->
         <div class="box box-primary">
           <div class="box-header with-border">
@@ -21,40 +21,10 @@
             </div>
           </form>
         </div>
-      
-      </div>
-      <div class="col-md-4">
-        <div class="box box-primary">
-          <div class="box-header with-border">
-              <h3 class="box-title">Available groups</h3>
-          </div>
-          <div class="card-body">
-              <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div>
-                <div class="row"><div class="col-sm-12">
-              <table id="groupstable" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-                <thead>
-                <tr role="row">
-                  <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending">Gr name</th>
-                  <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="email: activate to sort column ascending">Creaated Date</th>
-                </thead>
-                <tbody>
-                <tr role="row" class="odd" (click)="onSelect(g)"  *ngFor="let g of groups">
-                  <td > {{g.group_name}}</td>
-                  <td>{{g.created_date |  date:'medium'}}</td>
-                </tr>
-              </tbody>
-
-              </table>
-            </div></div>
-            </div>
-            </div>
-      </div>
-        
-      
+       
       </div>
       <!-- enrolling members to groups form -->
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="box box-primary">
           <div class="box-header with-border">
             <h3 class="box-title">Add members to groups</h3>
@@ -69,7 +39,6 @@
                   </option>
                 </select>
               </div>
-      
               <div class=form-group>
                 <label>Member name name</label>
                 <select formControlName="member_id">
@@ -79,15 +48,19 @@
                 </select>
               </div>
               <div class="form-group">
-                <label>
-                  <input type="radio" [value]="0" checked formControlName="is_admin" class="flat-red">
-                  Member
-                </label>
-                <label>
-                  <input type="radio" [value]="1" formControlName="is_admin" class="flat-red">
-                  Admin
-                </label>
-              </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="is_admin" formControlName="is_admin" id="is_admin" value="0" checked>
+                      Member
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="is_admin" formControlName="is_admin" id="is_admin" value="1">
+                      Admin
+                    </label>
+                  </div>
+                </div>
             </div>
       
             <div class="box-footer">
@@ -97,5 +70,44 @@
         </div>
       
       </div>
+</div>
+<div class="row">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Available groups</h3>
+        </div>
+        <div class="card-body">
+            <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+              <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div>
+              <div class="row"><div class="col-sm-12">
+            <table id="groupstable" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+              <thead>
+              <tr role="row">
+                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending">Gr name</th>
+                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="email: activate to sort column ascending">Creaated Date</th>
+              </thead>
+              <tbody>
+              <tr role="row" class="odd" (click)="onSelect(g)"  *ngFor="let g of groups">
+                <td > {{g.group_name}}</td>
+                <td>{{g.created_date |  date:'medium'}}</td>
+              </tr>
+            </tbody>
+
+            </table>
+          </div></div>
+          </div>
+          </div>
+    </div>
+      
+
+</div>
+
+<div class="row">
+    <ng-select [items]="people$ | async"
+                   bindLabel="name"
+                   autofocus
+                   bindValue="id"
+                   [(ngModel)]="selectedPersonId">
+        </ng-select>
 </div>
     

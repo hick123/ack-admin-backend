@@ -56,21 +56,20 @@
             <div *ngIf="f.phone.errors.required" class="text-danger">Phone is required</div>
         </div>
       </div>
-      <div class="form-group has-feedback">
-          <label>Gender*</label>
-          <label>
-              <input type="radio" value="Male" formControlName="gender">
-                <span>Male</span>
-            </label>
+      <div class="form-group">
+          <div class="radio">
             <label>
-              <input type="radio" value="Female" formControlName="gender">
-                <span>female</span>
+              <input type="radio" name="gender" formControlName="gender" id="gender" value="male" checked>
+              Male
             </label>
-            <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
-                <div *ngIf="f.gender.errors.required" class="text-danger">Gender is required</div>
-            </div>
-      </div>
-  
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="gender" formControlName="gender" id="gender" value="female">
+              Female
+            </label>
+          </div>
+        </div>
       <div class="form-group has-feedback">
           <label>Occupation*</label>
         <input type="text" id="occupation" class="form-control" placeholder="occupation"formControlName="occupation" [ngClass]="{ 'is-invalid': submitted && f.occupation.errors }">
@@ -112,7 +111,7 @@
                 </div>
               </div>
           <div class="col-xs-4">
-           <button class="btn btn-primary btn-block btn-flat" [disabled]="!registerForm.valid">Register</button>
+           <button class="btn btn-primary btn-block btn-flat" >Register</button>
          </div>
          <div class="col-xs-4">
             <!-- <button class="btn btn-primary btn-block btn-flat" (click)="register()">Register</button> -->
