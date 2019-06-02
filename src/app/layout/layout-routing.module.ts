@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { NoDashComponent } from './no-dash/no-dash.component';
+import { AuthGuard } from './../_guards/auth.guard';
 
 // const routes: Routes = [];
 const routes: Routes = [
@@ -23,9 +24,9 @@ const routes: Routes = [
       { path: 'members/:member-id', loadChildren: '../member-details/member-details.module#MemberDetailsModule' },
       // { path: 'member-details', loadChildren: '../member-details/member-details.module#MemberDetailsModule' },
       { path: 'groups/:churchgroups_id', loadChildren: '../group-details/group-details.module#GroupDetailsModule' }
+    ],
+    // canActivate: [AuthGuard],
 
-
-    ]
   }
   ,
   {
@@ -33,8 +34,8 @@ const routes: Routes = [
     component: NoDashComponent,
     children: [
       { path: 'login', loadChildren: '../login/login.module#LoginModule' },
-      { path: 'register', loadChildren: '../register/register.module#RegisterModule' },
-      {path: 'Register', loadChildren: '../register/register.module#RegisterModule'}
+      // { path: 'register', loadChildren: '../register/register.module#RegisterModule' },
+      // {path: 'Register', loadChildren: '../register/register.module#RegisterModule'}
     ]
   },
 ];

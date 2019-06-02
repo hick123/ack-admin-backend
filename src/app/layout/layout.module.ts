@@ -10,6 +10,8 @@ import { SettingsnavbarComponent } from './settingsnavbar/settingsnavbar.compone
 import { TopnavbarComponent } from './topnavbar/topnavbar.component';
 import { NoDashComponent } from './no-dash/no-dash.component';
 import { RouterModule } from '@angular/router';
+// import { BrowserModule } from '@angular/platform-browser';
+
 
 @NgModule({
   declarations: [AsidenavbarComponent, 
@@ -17,12 +19,14 @@ import { RouterModule } from '@angular/router';
      SettingsnavbarComponent,
       TopnavbarComponent, 
       NoDashComponent,
-      MainLayoutComponent
+      MainLayoutComponent,
     ],
   imports: [
     CommonModule,
     RouterModule,
     LayoutRoutingModule,
+          // BrowserModule
+
     // LayoutModule
   ],
   exports:[]

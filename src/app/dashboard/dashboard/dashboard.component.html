@@ -1,121 +1,145 @@
+
 <div class="row"> 
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+  <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text" click>New Members</span>
-              <span class="info-box-number">{{newMembers | json}}</span>
-            </div>
+      <div class="info-box-content">
+        <span class="info-box-text" click>New Members</span>
+        <span class="info-box-number">{{newMembers | json}}</span>
+      </div>
+    </div>
+  </div>
+ </div>
+ <div class="row">
+
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)"  placeholder="Search member">
+      </mat-form-field>
+      
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+      
+          <!-- ID Column -->
+          <!-- <ng-container matColumnDef="member_number">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Member Number </th>
+            <td mat-cell *matCellDef="let row"> {{row.member_id}} </td>
+          </ng-container> -->
+      
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
+            <td mat-cell *matCellDef="let row"> {{row.username}} </td>
+          </ng-container>
+          <!-- Progress Column -->
+          <ng-container matColumnDef="first_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> First name </th>
+            <td mat-cell *matCellDef="let row"> {{row.first_name}} </td>
+          </ng-container>
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="other_names">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Other names </th>
+            <td mat-cell *matCellDef="let row"> {{row.other_names}} </td>
+          </ng-container>
+      
+          <!-- Color Column -->
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+            <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
+          </ng-container>
+        <!-- Color Column -->
+        <ng-container matColumnDef="occupation">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> occupation </th>
+          <td mat-cell *matCellDef="let row"> {{row.occupation}} </td>
+        </ng-container>
+    
+          <!-- Color Column -->
+          <ng-container matColumnDef="gender">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+            <td mat-cell *matCellDef="let row"> {{row.gender}} </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+
+ </div>
+ <div class="row">
+    <div class="col-md-6">
+        <mat-form-field>
+            <input matInput (keyup)="groupFilter($event.target.value)"  placeholder="Search a group">
+          </mat-form-field>
+          
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="groups" matSort>
+       
+                      <ng-container matColumnDef="group_name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Group name </th>
+                <td mat-cell *matCellDef="let row"> {{row.group_name}} </td>
+              </ng-container>
+              <ng-container matColumnDef="created_date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Created date </th>
+                <td mat-cell *matCellDef="let row"> {{row.created_date}} </td>
+              </ng-container>
+          
+                            
+              <tr mat-header-row *matHeaderRowDef="displayedGroups"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedGroups;">
+              </tr>
+            </table>
+          
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
           </div>
-        </div>
-       </div>
-       <div class="row">
+    </div> 
+    <div class="col-md-6">
         <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">List of members</h3>
-            </div>
-            <div class="card-body">
-                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                  <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div>
-                  <div class="row"><div class="col-sm-12">
-                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-                  <thead>
-                  <tr role="row">
-                    <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending">Username</th>
-                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="email: activate to sort column ascending">Email</th>
-                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="first name: activate to sort column ascending">First name</th>
-                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="phone version: activate to sort column ascending">Phone</th>
-                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="age grade: activate to sort column ascending">Age</th></tr>
-                  </thead>
-                  <tbody>
-                  <tr role="row" class="odd" *ngFor="let mem of members">
-                    <td class="sorting_1">{{mem.username}}</td>
-                    <td>{{mem.email}}</td>
-                    <td>{{mem.first_name}}</td>
-                    <td>{{mem.phone}}</td>
-                    <td>{{mem.age}}</td>
-                  </tr>
-                </tbody>
-                  <tfoot>
-                  <tr><th rowspan="1" colspan="1">Username</th>
-                    <th rowspan="1" colspan="1">Email</th>
-                    <th rowspan="1" colspan="1">First name</th>
-                    <th rowspan="1" colspan="1">phone</th>
-                    <th rowspan="1" colspan="1">Age</th></tr>
-                  </tfoot>
-                </table>
-              </div></div>
-              </div>
-              </div>
-        </div>
-      </div>
-      <div class="row">
-          <div class="col-md-6">
-              <div class="box box-primary">
-                  <div class="box-header with-border">
-                      <h3 class="box-title">Available Groups</h3>
-                      <a [routerLink]="['/groups']">
-                        <button class="primary">manage</button>
-                        </a>
-                  </div>
-                  <div class="card-body">
-                      <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                        <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div>
-                        <div class="row"><div class="col-sm-12">
-                      <table id="groupstable" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-                        <thead>
-                        <tr role="row">
-                          <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending">Gr name</th>
-                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="email: activate to sort column ascending">Creaated Date</th>
-                        </thead>
-                        <tbody>
-                        <tr role="row" class="odd"   *ngFor="let g of groups">
-                          <td > {{g.group_name}}</td>
-                          <td>{{g.created_date |  date:'medium'}}</td>
-                        </tr>
-                      </tbody>
-
-                      </table>
-                    </div></div>
-                    </div>
-                    </div>
-              </div>
-            
-            </div>
-            <div class="col-md-6">
-                  <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Available cluster</h3>
-                        <a [routerLink]="['/clusters']">
-                          <button class="primary">manage</button>
-                          </a>
-                    </div>
-                    <div class="card-body">
-                        <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                          <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div>
-                          <div class="row"><div class="col-sm-12">
-                        <table id="clusterstable" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-                          <thead>
-                          <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending">Cluster name</th>
-                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="email: activate to sort column ascending">Creaated Date</th>
-                          </thead>
-                          <tbody>
-                          <tr role="row" class="odd"  *ngFor="let c of clusters">
-                            <td >  {{c.cluster_name}}</td>
-                            <td>{{c.created_date |  date:'medium'}}</td>
-                          </tr>
-                        </tbody>
-  
-                        </table>
-                      </div></div>
-                      </div>
-                      </div>
+          <div class="box-header with-border">
+              <h3 class="box-title">Available cluster</h3>
+              <a [routerLink]="['/clusters']">
+                <button class="primary">manage</button>
+                </a>
+          </div>
+          <div class="card-body">
+              <mat-form-field>
+                  <input matInput (keyup)="clusterFilter($event.target.value)"  placeholder="Search a Cluster">
+                </mat-form-field>
+                
+                <div class="mat-elevation-z8">
+                  <table mat-table [dataSource]="clusters" matSort>
+             
+                            <ng-container matColumnDef="cluster_name">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Group name </th>
+                      <td mat-cell *matCellDef="let row"> {{row.cluster_name}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="created_date">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Created date </th>
+                      <td mat-cell *matCellDef="let row"> {{row.created_date}} </td>
+                    </ng-container>
+                
+                                  
+                    <tr mat-header-row *matHeaderRowDef="displayedClusters"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedClusters;">
+                    </tr>
+                  </table>
+                
+                  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
                 </div>
-              
-              </div>
-
+            </div>
       </div>
+    
+    </div>
+
+
+ </div>
+ 
+                      
+             
+         
+            
+      
  
     

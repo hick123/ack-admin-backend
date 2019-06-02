@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { GroupsService,EventsServiceService } from 'src/app/shared/services';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl, FormArray } from '@angular/forms';
+// import { start } from 'repl';
+import Swal from 'sweetalert2';
+
+
+
 
 @Component({
   selector: 'app-group-details',
@@ -15,13 +20,8 @@ export class GroupDetailsComponent implements OnInit {
   groupDetails;
   groupMembers;
   groupEvents:any=[];
-  createGroupEvents :FormGroup = this.formBuilder.group({
-    event_title: [''], 
-    event_description: [''],
-    start_date: [''],
-    end_date: ['']
 
-  });
+  createGroupEvents :FormGroup;
   minDate: Date;
 
   minDate1: Date;
@@ -30,7 +30,8 @@ export class GroupDetailsComponent implements OnInit {
     private eventService:EventsServiceService,private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    //set min date
+    //set min date 
+    this.form();
     this.minDate = new Date();
     this.minDate.setDate(this.minDate.getDate()+1);
     //call functions
@@ -41,8 +42,22 @@ export class GroupDetailsComponent implements OnInit {
     console.log('sending groupname',this.route.snapshot.paramMap.get('group_name'));
 
   }
+  form(){
+   this.createGroupEvents = this.formBuilder.group({
+      event_title: ['',Validators.required], 
+      event_description: ['',Validators.required],
+      start_date: ['',Validators.required],
+      end_date: ['',Validators.required]
+  
+    });
+  }
+  get f() { return this.createGroupEvents.controls; }
 
   createGroupEvent(){  
+    if(this.createGroupEvents.value.start_date>this.createGroupEvents.value.end_date){
+      Swal.fire('Oops...', 'End date should be greater than start date!', 'error');
+            return;
+    }
     this.submitted = true;
          console.log(this.createGroupEvents);
     const id = {

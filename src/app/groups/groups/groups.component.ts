@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { Validators,  FormGroup, FormBuilder } from '@angular/forms';
 import { GroupsService, Person} from '../../shared/services';
 import { MembersService} from '../../shared/services'
@@ -8,6 +8,7 @@ import { Observable, concat, of, Subject } from 'rxjs';
 import { group } from '@angular/animations';
 import { Router} from '@angular/router'
 import { ChurchGroups } from 'src/app/shared/models/churchgroups';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 declare var $;
 
 @Component({
@@ -16,11 +17,16 @@ declare var $;
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit {
+  displayedGroups: string[] = ['group_name', 'created_date'];
+  groups: MatTableDataSource<ChurchGroups>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
 
   loading = false;
  submitted = false;
- groups=[];
+//  groups=[];
  members=[];
  simpleItems=[];
  groupId='8a12f5bb-72f4-11e9-8cfe-8851fbfce548';
@@ -37,22 +43,13 @@ addToGroupForm: FormGroup= this.formBuilder.group({
 
 });
 
-people$: Observable<Person[]>;
-people: Person[] = [];
-
-groups$: Observable<ChurchGroups[]>;
-group: ChurchGroups [] = [];
-
-// people3Loading = false;
-// groupsinput$ = new Subject<string>();
-
-
   constructor(private formBuilder: FormBuilder, private groupService: GroupsService, 
     private memberService: MembersService, private router: Router
     ) { }
     
   ngOnInit() {
-    this.getGr();
+    this.getGroups();
+    // this.getGr();
         //iCheck for checkbox and radio inputs
  $(() => {
   window.dispatchEvent(new Event('resize'));
@@ -79,13 +76,21 @@ group: ChurchGroups [] = [];
     })
   });
     //call function to fetch groups
-    this.getGroups();
     console.log('groups ng on init');
     this.getMembers();
   }
    
-  onSelect(g){
-    this.router.navigate(['/groups',g.churchgroups_id]);
+   //group filter
+   groupFilter(groupValue: string) {
+    this.groups.filter = groupValue.trim().toLowerCase();
+
+    if (this.groups.paginator) {
+      this.groups.paginator.firstPage();
+    }
+  }
+
+  onSelect(row){
+    this.router.navigate(['/groups',row.churchgroups_id]);
   }
 
   // end of ngoninit
@@ -94,18 +99,17 @@ group: ChurchGroups [] = [];
   //fetching groups
    getGroups(){
      this.groupService.getChurchGroups().subscribe((data:any)=>{
-     this.groups= data;
-
-     console.log('groupes',this.groups);
-     console.log(data);
+     this.groups= new MatTableDataSource(data);
+     this.groups.paginator = this.paginator;
+     this.groups.sort = this.sort;
      })
    }
    //obersavable fetch groups
-   getGr(){
-    this.people$ = this.groupService.getPeople();
-    this.groupService.getPeople().subscribe(items => this.people = items);
-    this.simpleItems = [true, 'Two', 3];  
-   }
+  //  getGr(){
+  //   this.people$ = this.groupService.getPeople();
+  //   this.groupService.getPeople().subscribe(items => this.people = items);
+  //   this.simpleItems = [true, 'Two', 3];  
+  //  }
 // fetching members
    getMembers(){
     this.memberService.getMembers().subscribe((data:any)=>{

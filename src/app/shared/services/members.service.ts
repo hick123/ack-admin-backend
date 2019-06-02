@@ -14,12 +14,12 @@ export class MembersService {
   // private ngrokurlget='http://bdd8484f.ngrok.io/';
   // private lo=`http://locahost:3000/signup`;
   // private ngrokurlNewMembers='http://bdd8484f.ngrok.io/newmembers';
-  private localgeturl='http://localhost:3000';
-  private localsignup='http://localhost:3000/signup';
-  private localgetmemberbyid='http://localhost:3000/getmemberbyid';
+  private localgeturl='http://localhost:3000/members';
+  private localsignup='http://localhost:3000/members/signup';
+  private localgetmemberbyid='http://localhost:3000/members/getmemberbyid';
 
-  private localnewmembers='http://localhost:3000/newmembers';
-  private member='http://localhost:3000/newmembers';
+  private localnewmembers='http://localhost:3000/members/newmembers';
+  private member='http://localhost:3000/members/newmembers';
   private subject = new Subject<any>();
 
 

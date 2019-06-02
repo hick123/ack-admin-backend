@@ -5,6 +5,8 @@ import { MembersRoutingModule } from './members-routing.module';
 import { MembersComponent } from './members/members.component';
 import { MemberDetailsComponent } from './member-details/member-details.component';
 import {DataTableModule} from "angular-6-datatable";
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule, MatPaginatorModule, MatInputModule } from '@angular/material';
 
 
 @NgModule({
@@ -13,7 +15,11 @@ import {DataTableModule} from "angular-6-datatable";
     CommonModule,
     MembersRoutingModule,
     DataTableModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatInputModule
 
   ]
 })

@@ -1,4 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule.forRoot([]),
         // RouterModule.forRoot([], { preloadingStrategy: PreloadAllModules }),
     // AppRoutingModule,
-    LayoutModule
+    LayoutModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

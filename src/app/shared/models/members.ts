@@ -9,5 +9,6 @@ export class Member {
     gender: string;
     occupation: string;
     location: string;
-    age: number;   
+    age: number;
+    token?:string      
 }
