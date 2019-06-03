@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { GroupsService,EventsServiceService } from 'src/app/shared/services';
 import { FormGroup, Validators, FormBuilder, FormControl, FormArray } from '@angular/forms';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 // import { start } from 'repl';
 import Swal from 'sweetalert2';
 
@@ -23,8 +26,12 @@ export class GroupDetailsComponent implements OnInit {
 
   createGroupEvents :FormGroup;
   minDate: Date;
+  
 
   minDate1: Date;
+
+  displayedColumns: string[] = ['username', 'first_name', 'other_names', 'phone', 'occupation','gender'];
+
 
   constructor(private route:ActivatedRoute,private groupService: GroupsService,
     private eventService:EventsServiceService,private formBuilder: FormBuilder) {}
@@ -36,7 +43,7 @@ export class GroupDetailsComponent implements OnInit {
     this.minDate.setDate(this.minDate.getDate()+1);
     //call functions
     this.getgroupbyid();
-    this.getgroupmembers();
+    // this.getgroupmembers();
     this.listGroupEvents();
     console.log('sending',this.route.snapshot.paramMap.get('churchgroups_id'));
     console.log('sending groupname',this.route.snapshot.paramMap.get('group_name'));
@@ -103,12 +110,12 @@ export class GroupDetailsComponent implements OnInit {
       console.log('groupdetails', this.groupDetails);
     });
     }
-    getgroupmembers(){
-      this.groupService.getGroupMembers(this.route.snapshot.paramMap.get('churchgroups_id')).subscribe(data=>{
-        console.log('group members',data);
-        this.groupMembers=data;
-      });
-    }
+    // getgroupmembers(){
+    //   this.groupService.getGroupMembers(this.route.snapshot.paramMap.get('churchgroups_id')).subscribe(data=>{
+    //     console.log('group members',data);
+    //     this.groupMembers=data;
+    //   });
+    // }
     listGroupEvents(){
       this.eventService.listGroupEventsById(this.route.snapshot.paramMap.get('churchgroups_id')).subscribe(data=>{
         console.log('this particular group events',data);

@@ -1,0 +1,34 @@
+<mat-form-field>
+    <input matInput (keyup)="groupFilter($event.target.value)"  placeholder="Search a group">
+  </mat-form-field>
+  
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="groups" matSort>
+
+              <ng-container matColumnDef="group_name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Group name </th>
+        <td mat-cell *matCellDef="let row"> {{row.group_name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="created_date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Created date </th>
+        <td mat-cell *matCellDef="let row"> {{row.created_date}} </td>
+      </ng-container>
+  
+                    
+      <tr mat-header-row *matHeaderRowDef="displayedGroups"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedGroups;">
+      </tr>
+    </table>
+    <div *ngIf="groupLength === 0">
+      No Records Found!
+      </div>
+      <mat-card *ngIf="isLoading" 
+        style="display: flex; justify-content: center; align-items: center">
+        <mat-progress-spinner 
+          color="primary" 
+          mode="indeterminate">
+        </mat-progress-spinner>
+      </mat-card>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>

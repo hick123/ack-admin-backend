@@ -5,8 +5,9 @@ import { MembersRoutingModule } from './members-routing.module';
 import { MembersComponent } from './members/members.component';
 import { MemberDetailsComponent } from './member-details/member-details.component';
 import {DataTableModule} from "angular-6-datatable";
-import { MatTableModule } from '@angular/material/table';
-import { MatFormFieldModule, MatPaginatorModule, MatInputModule } from '@angular/material';
+import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material'
+import { MatFormFieldModule,    MatIconModule,  MatInputModule,MatToolbarModule,MatProgressSpinnerModule,MatCardModule } from '@angular/material';
 
 
 @NgModule({
@@ -19,7 +20,11 @@ import { MatFormFieldModule, MatPaginatorModule, MatInputModule } from '@angular
     MatTableModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule,
+    MatCardModule
 
   ]
 })

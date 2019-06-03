@@ -20,6 +20,7 @@ const routes: Routes = [
       { path: 'clusters', loadChildren: '../clusters/clusters.module#ClustersModule' },
       { path: 'clusters/:clusters_id', loadChildren: '../cluster-details/cluster-details.module#ClusterDetailsModule' },
       { path: 'members', loadChildren: '../members/members.module#MembersModule' },
+      { path: 'members/:member_id', loadChildren: '../member-details/member-details.module#MemberDetailsModule' },
       { path: 'events', loadChildren: '../events/events.module#EventsModule' },
       { path: 'members/:member-id', loadChildren: '../member-details/member-details.module#MemberDetailsModule' },
       // { path: 'member-details', loadChildren: '../member-details/member-details.module#MemberDetailsModule' },

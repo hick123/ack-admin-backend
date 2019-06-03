@@ -5,6 +5,9 @@ import { ClustersRoutingModule } from './clusters-routing.module';
 import { ClustersComponent } from './clusters/clusters.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'; 
+import { MatPaginatorModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule,MatToolbarModule } from '@angular/material'
+import {MatTableModule} from '@angular/material/table';
 
 
 
@@ -14,7 +17,13 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     ClustersRoutingModule,
     FormsModule, ReactiveFormsModule ,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatToolbarModule
+
   ]
 })
 export class ClustersModule { }

@@ -4,6 +4,10 @@ import { Observable,Subject } from 'rxjs';
 import { map,tap } from 'rxjs/operators';
 import { HttpClient,HttpHeaders  } from '@angular/common/http';
 
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +24,8 @@ export class MembersService {
 
   private localnewmembers='http://localhost:3000/members/newmembers';
   private member='http://localhost:3000/members/newmembers';
+  private activatemember='http://localhost:3000/members/activatemember';
+
   private subject = new Subject<any>();
 
 
@@ -40,6 +46,15 @@ export class MembersService {
 
     return this.http.get(url);    
   }
+  activate(member_id:string,member_number:string){
+    return this.http.post<any>(this.activatemember, { member_id, member_number })   
+         .pipe(map(data =>{
+          
+        }));
+
+  }
+
+  
 // register(member: Member): Observable<any> {
 //   return this.http.post<Member>(this.serverUrl, member, httpOptions).pipe(map((res: any) => {
 //     console.log('post actvitymood',member);

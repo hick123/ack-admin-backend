@@ -6,6 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-members',
@@ -13,11 +14,13 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
-  displayedColumns: string[] = ['username', 'first_name', 'other_names', 'phone', 'occupation','gender'];
+  displayedColumns: string[] = ['username', 'first_name', 'other_names', 'phone', 'occupation','gender','activate'];
   dataSource: MatTableDataSource<Member>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  isLoading = true;
+member_number;
 
   // members: Member[] = [];
 
@@ -30,10 +33,38 @@ export class MembersComponent implements OnInit {
     this.spinner.show();
     this.getMembers();
   }
-
+  activateMember(member_id:string){
+        Swal.fire({
+          title: 'Submit your Github username',
+          input: 'text',
+          type:'question',
+          inputAttributes: {
+            autocapitalize: 'off'
+          },
+          showCancelButton: true,
+          confirmButtonText: 'Activate',
+          showLoaderOnConfirm: true,
+          preConfirm: (member_number) => {
+            return this.memberService.activate(member_id,member_number).subscribe(data => {
+              Swal.insertQueueStep({
+                type: 'success',
+                title: 'You have successfully activated the member'
+              })           
+            },error => {
+              Swal.insertQueueStep({
+                type: 'error',
+                title: 'Error occured during activation'
+              })      
+              })
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    })
+  }
   getMembers(){
     const membersObservable = this.memberService.getMembers();
     membersObservable.subscribe((memberData: Member[])=>{
+      this.isLoading = false;
+
       this.dataSource = new MatTableDataSource(memberData);
 
       this.dataSource.paginator = this.paginator;
@@ -43,7 +74,9 @@ export class MembersComponent implements OnInit {
       // console.log('memberData',memberData);
       // this.spinner.hide();
 
-    });
+    }, 
+    error=>       this.isLoading = false    
+    );
       
   }
   applyFilter(filterValue: string) {
@@ -58,5 +91,41 @@ export class MembersComponent implements OnInit {
   }
   getmember(){
   }
+  // deleteStaff(staffId: number) {
+  //   swal({
+  //        type:'warning',
+  //        title: 'Are you sure to Delete Staff?',
+  //        text: 'You will not be able to recover the data of Staff',
+  //        showCancelButton: true,
+  //        confirmButtonColor: '#049F0C',
+  //        cancelButtonColor:'#ff0000',
+  //        confirmButtonText: 'Yes, delete it!',
+  //        cancelButtonText: 'No, keep it'
+  //      }).then(() => {
+  //      this.dataService.deleteStaff(staffId).subscribe(
+  //        data => {
+  //          if (data.hasOwnProperty('error')) {
+  //            this.alertService.error(data.error);
+  //          } else if (data.status) {
+  //            swal({
+  //              type:'success',
+  //              title: 'Deleted!',
+  //              text: 'The Staff has been deleted.',              
+  //            })
+  //          }
+  //        }, error => {
+  //          this.alertService.error(error);
+  //        });
+  //      }, (dismiss) => {
+  //        // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+  //        if (dismiss === 'cancel') {
+  //          swal({
+  //            type:'info',
+  //            title: 'Cancelled',
+  //            text: 'Your Staff file is safe :)'
+  //          })
+  //        }
+  //      });
+  //  }
 
 }

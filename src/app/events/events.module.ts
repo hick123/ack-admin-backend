@@ -7,6 +7,10 @@ import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { TabsModule,BsDatepickerModule  } from 'ngx-bootstrap';
 import { AgGridModule } from 'ag-grid-angular';
 import { CdkTableModule } from '@angular/cdk/table';
+import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule,MatToolbarModule,MatProgressSpinnerModule,MatCardModule } from '@angular/material';
+
 
 
 @NgModule({
@@ -17,7 +21,12 @@ import { CdkTableModule } from '@angular/cdk/table';
     CdkTableModule,
     TabsModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    MatFormFieldModule, MatInputModule,
+    MatToolbarModule,MatProgressSpinnerModule,
+    MatCardModule,
+    MatPaginatorModule,
+    MatTableModule
   ]
 })
 export class EventsModule { }

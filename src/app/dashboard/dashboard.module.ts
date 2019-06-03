@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DataTablesModule } from 'angular-datatables';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule,MatIconModule, MatInputModule,MatToolbarModule,MatProgressSpinnerModule,MatCardModule } from '@angular/material';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 
@@ -15,9 +15,11 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashGroupsComponent } from './dash-groups/dash-groups.component';
+import { DashClustersComponent } from './dash-clusters/dash-clusters.component';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, DashGroupsComponent, DashClustersComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
@@ -26,6 +28,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatFormFieldModule,
     MatPaginatorModule,
     MatInputModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatIconModule
     // BrowserAnimationsModule
   ]
 })

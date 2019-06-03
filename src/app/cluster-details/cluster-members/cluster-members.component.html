@@ -1,0 +1,63 @@
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)"  placeholder="Search member">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <!-- <ng-container matColumnDef="member_number">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Member Number </th>
+      <td mat-cell *matCellDef="let row"> {{row.member_id}} </td>
+    </ng-container> -->
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
+      <td mat-cell *matCellDef="let row"> {{row.username}} </td>
+    </ng-container>
+    <!-- Progress Column -->
+    <ng-container matColumnDef="first_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> First name </th>
+      <td mat-cell *matCellDef="let row"> {{row.first_name}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="other_names">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Other names </th>
+      <td mat-cell *matCellDef="let row"> {{row.other_names}} </td>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+      <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
+    </ng-container>
+  <!-- Color Column -->
+  <ng-container matColumnDef="occupation">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> occupation </th>
+    <td mat-cell *matCellDef="let row"> {{row.occupation}} </td>
+  </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+      <td mat-cell *matCellDef="let row"> {{row.gender}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+  </table>
+    <div *ngIf="dataSourceLength === 0">
+    No Records Found!
+    </div>
+    <mat-card *ngIf="isLoading" 
+      style="display: flex; justify-content: center; align-items: center">
+      <mat-progress-spinner 
+        color="primary" 
+        mode="indeterminate">
+      </mat-progress-spinner>
+    </mat-card>
+          
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

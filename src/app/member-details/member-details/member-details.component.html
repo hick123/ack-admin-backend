@@ -1,3 +1,58 @@
-<p>
-  member-details works!
-</p>
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+       *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" (click)="productDetails()"><mat-icon>info</mat-icon></a>
+  </div>
+  <mat-card class="example-card">
+    <form [formGroup]="editMemberForm" (ngSubmit)="onFormSubmit(editMemberForm.value)">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="First name" formControlName="first_name"
+               [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!editMemberForm.get('first_name').valid && editMemberForm.get('first_name').touched">Please enter Product Name</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Other names" formControlName="other_names"
+               [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!editMemberForm.get('other_names').valid && editMemberForm.get('other_names').touched">Please enter Product Description</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Product Price" formControlName="age"
+               [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!editMemberForm.get('age').valid && editMemberForm.get('age').touched">Please enter Product Price</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Product Price" formControlName="marital_status"
+               [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!editMemberForm.get('marital_status').valid && editMemberForm.get('marital_status').touched">Please enter Product Price</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Product Price" formControlName="phone"
+               [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!editMemberForm.get('phone').valid && editMemberForm.get('phone').touched">Please enter Product Price</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Product Price" formControlName="occupation"
+               [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!editMemberForm.get('occupation').valid && editMemberForm.get('occupation').touched">Please enter Product Price</span>
+        </mat-error>
+      </mat-form-field>
+      <div class="button-row">
+        <button type="submit" [disabled]="!editMemberForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+      </div>
+    </form>
+  </mat-card>
+</div>

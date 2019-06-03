@@ -12,6 +12,8 @@ export class ClusterDetailsComponent implements OnInit {
   clusterDetails;
   clusterMembers;
   clusterEvents;
+  isLoading=true;
+
   submitted=false;
   createClusterEvents :FormGroup = this.formBuilder.group({
     event_title: [''], 
@@ -29,8 +31,6 @@ export class ClusterDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.getclusterbyid();
-    this.getclustermembers();
-    this.listClusterEvents();
     this.minDate = new Date();
     this.minDate.setDate(this.minDate.getDate()+1);
   }
@@ -77,18 +77,7 @@ export class ClusterDetailsComponent implements OnInit {
       console.log('this cluster details', this.clusterDetails);
     })
     }
-    getclustermembers(){
-      this.clusterService.getclusterMembers(this.route.snapshot.paramMap.get('clusters_id')).subscribe(data=>{
-        console.log('cluster members',data);
-        this.clusterMembers=data;
-      });
-    }
-    listClusterEvents(){
-      this.eventService.listClusterEventsById(this.route.snapshot.paramMap.get('clusters_id')).subscribe(data=>{
-        console.log('this particular cluster events',data);
-        this.clusterEvents=data;
-      });
-    }
-
+   
+  
 
 }

@@ -26,7 +26,7 @@ export class GroupsComponent implements OnInit {
 
   loading = false;
  submitted = false;
-//  groups=[];
+ groupss=[];
  members=[];
  simpleItems=[];
  groupId='8a12f5bb-72f4-11e9-8cfe-8851fbfce548';
@@ -49,6 +49,7 @@ addToGroupForm: FormGroup= this.formBuilder.group({
     
   ngOnInit() {
     this.getGroups();
+    this.getMembers()
     // this.getGr();
         //iCheck for checkbox and radio inputs
  $(() => {
@@ -99,6 +100,9 @@ addToGroupForm: FormGroup= this.formBuilder.group({
   //fetching groups
    getGroups(){
      this.groupService.getChurchGroups().subscribe((data:any)=>{
+      // this.members=[];
+      this.groupss=data;
+
      this.groups= new MatTableDataSource(data);
      this.groups.paginator = this.paginator;
      this.groups.sort = this.sort;
@@ -113,7 +117,6 @@ addToGroupForm: FormGroup= this.formBuilder.group({
 // fetching members
    getMembers(){
     this.memberService.getMembers().subscribe((data:any)=>{
-      this.members=[];
       this.members=data;
       console.log('members in groups', this.members);
       console.log(data);

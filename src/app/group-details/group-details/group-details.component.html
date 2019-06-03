@@ -8,72 +8,15 @@
             <p *ngFor="let item of groupDetails">Created on {{item.created_date}}</p>
         </div>       
           <div class="row">
-              <div class="box box-primary">
-                  <div class="box-header with-border">
-                      <h3 class="box-title" *ngFor="let item of groupDetails">List of members for {{item.group_name}} </h3>
-                  </div>
-                  <div class="card-body">
-                      <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                        <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div>
-                        <div class="row"><div class="col-sm-12">
-                      <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-                        <thead>
-                        <tr role="row">
-                          <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending">Username</th>
-                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="email: activate to sort column ascending">Email</th>
-                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="first name: activate to sort column ascending">First name</th>
-                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="phone version: activate to sort column ascending">Phone</th>
-                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="age grade: activate to sort column ascending">Age</th></tr>
-                        </thead>
-                        <tbody>
-                        <tr role="row" class="odd" *ngFor="let mem of groupMembers">
-                          <td class="sorting_1">{{mem.username}}</td>
-                          <td>{{mem.email}}</td>
-                          <td>{{mem.first_name}}</td>
-                          <td>{{mem.phone}}</td>
-                          <td>{{mem.age}}</td>
-                        </tr>
-                      </tbody>
-                        <tfoot>
-                        <tr><th rowspan="1" colspan="1">Username</th>
-                          <th rowspan="1" colspan="1">Email</th>
-                          <th rowspan="1" colspan="1">First name</th>
-                          <th rowspan="1" colspan="1">phone</th>
-                          <th rowspan="1" colspan="1">Age</th></tr>
-                        </tfoot>
-                      </table>
-                    </div></div>
-                    </div>
-                    </div>
-              </div>
-          </div>
+              <app-group-members></app-group-members>
+        </div>
     </tab>
     <tab heading="Group Events">
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title" *ngFor="let item of groupDetails">Events for {{item.group_name}}</h3>
             </div>
-            <div class="card-body">
-                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                  <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div>
-                  <div class="row"><div class="col-sm-12">
-                <table id="groupstable" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-                  <thead>
-                  <tr role="row">
-                    <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending">Events title</th>
-                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="email: activate to sort column ascending">Creaated Date</th>
-                  </thead>
-                  <tbody>
-                  <tr role="row" class="odd"  *ngFor="let ge of groupEvents">
-                    <td > {{ge.event_title}}</td>
-                    <td></td>
-                  </tr>
-                </tbody>
-  
-                </table>
-              </div></div>
-              </div>
-              </div>
+            <app-group-events></app-group-events>
         </div>
     </tab>
     <tab heading="Add group event">
@@ -124,9 +67,6 @@
               </div>
             </form>
           </div>
-    </tab>
-    <tab heading="Group Forum">
-     
     </tab>
   </tabset>
 </div>

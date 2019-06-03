@@ -28,3 +28,13 @@
 
 @import url(assets/adminlte/dist/css/skins/_all-skins.min.css);
 /* @import "assets/adminlte/plugins/iCheck/square/blue.css"; */
+
+
+table {
+    width: 100%;
+  }
+  
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }

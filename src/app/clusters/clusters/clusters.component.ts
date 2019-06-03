@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MembersService } from '../../shared/services/members.service';
 import { ClustersService } from '../../shared/services';
 import { Router} from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Validators,  FormGroup, FormBuilder } from '@angular/forms';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { ChurchGroups } from 'src/app/shared/models/churchgroups';
 
 @Component({
   selector: 'app-clusters',
@@ -11,12 +13,20 @@ import { Validators,  FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./clusters.component.css']
 })
 export class ClustersComponent implements OnInit {
+  displayedGroups: string[] = ['group_name', 'created_date'];
+  clusters: MatTableDataSource<ChurchGroups>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+ 
+  clusterss;
+
+  loading = false;
   createClusterForm: FormGroup;
   addMembersToClusterForm: FormGroup;
 
-  loading = false;
  submitted = false;
- clusters=[];
+//  clusters=[];
  members=[];
 
   constructor(private formBuilder: FormBuilder, 
@@ -42,8 +52,8 @@ export class ClustersComponent implements OnInit {
     this.getClusters();
   }
   //view cluster details
-  onSelect(g){
-    this.router.navigate(['/clusters',g.clusters_id]);
+  onSelect(row){
+    this.router.navigate(['/clusters',row.clusters_id]);
   }
   // fetching members
   getMembers(){
@@ -60,12 +70,21 @@ export class ClustersComponent implements OnInit {
   getClusters(){
     console.log('getcluster method');
     this.clusterService.getCluster().subscribe((data:any)=>{
-      this.clusters= data;
-      console.log('cluster data',data)
-      console.log('clusters',this.clusters);
-       console.log(data);
+      this.clusterss=data;
+
+     this.clusters= new MatTableDataSource(data);
+     this.clusters.paginator = this.paginator;
+     this.clusters.sort = this.sort;;
      })
   }
+     //cluster filter
+     clusterFilter(groupValue: string) {
+      this.clusters.filter = groupValue.trim().toLowerCase();
+  
+      if (this.clusters.paginator) {
+        this.clusters.paginator.firstPage();
+      }
+    }
 
   //creating clusters
   createClusterm(){
@@ -92,10 +111,7 @@ export class ClustersComponent implements OnInit {
       this.submitted = true;
       console.log(this.addMembersToClusterForm.value);
   
-          // stop here if form is invalid
-          // if (this.createGroupForm.invalid) {
-          //     return;
-          // }
+
     console.log(this.addMembersToClusterForm,'submitting form');
       this.loading = true;
       this.clusterService.addMembersToCluster(this.addMembersToClusterForm.value)
