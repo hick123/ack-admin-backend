@@ -4,6 +4,7 @@ import {AuthService} from '../../shared/services/auth.service'
 import { first } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertifyService } from '../../shared/services/alertify.service';
+import Swal from 'sweetalert2';
 
 declare var $;
 
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
         increaseArea: '20%' /* optional */
       });
     });
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   get f() { return this.loginForm.controls; }
   onSubmit(){
@@ -46,8 +47,20 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.f.username.value,this.f.password.value).subscribe(data=>{
         // this.alertify.success('logged in successfully');
               this.router.navigate(['dashboard']);
+              Swal.fire({
+                type: 'success',
+                title: 'Welcome back!',
+                showConfirmButton: false,
+                timer: 1500
+              }); 
     },
     err=>{
+      Swal.fire({
+        type: 'error',
+        title: 'Wrong username or password!',
+        showConfirmButton: false,
+        timer: 2500
+      }); 
       // this.alertify.error('Wrong username or password');
       console.log('data not sent');
     })

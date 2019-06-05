@@ -21,6 +21,7 @@ export class MembersComponent implements OnInit {
 
   isLoading = true;
 member_number;
+// activated:any=[];
 
   // members: Member[] = [];
 
@@ -35,7 +36,7 @@ member_number;
   }
   activateMember(member_id:string){
         Swal.fire({
-          title: 'Submit your Github username',
+          title: 'Please enter member number to activate',
           input: 'text',
           type:'question',
           inputAttributes: {
@@ -46,10 +47,12 @@ member_number;
           showLoaderOnConfirm: true,
           preConfirm: (member_number) => {
             return this.memberService.activate(member_id,member_number).subscribe(data => {
-              Swal.insertQueueStep({
+              Swal.fire({
                 type: 'success',
-                title: 'You have successfully activated the member'
-              })           
+                title: 'You have succefully activated!',
+                showConfirmButton: false,
+                timer: 2500
+              });           
             },error => {
               Swal.insertQueueStep({
                 type: 'error',
@@ -61,22 +64,24 @@ member_number;
     })
   }
   getMembers(){
+    const activated=[];
     const membersObservable = this.memberService.getMembers();
-    membersObservable.subscribe((memberData: Member[])=>{
+    membersObservable.subscribe((memberData: any)=>{
       this.isLoading = false;
-
-      this.dataSource = new MatTableDataSource(memberData);
-
-      this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-
-      // this.members= memberData;
-      // console.log('memberData',memberData);
-      // this.spinner.hide();
-
+      // this.activated=data
+      var arrayLength = memberData.length;
+      for (var i = 0; i < arrayLength; i++) {
+        if( memberData[i].member_number === null){
+              activated.push(memberData[i]);
+              this.dataSource = new MatTableDataSource(activated);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+      }
+      }
     }, 
     error=>       this.isLoading = false    
     );
+    
       
   }
   applyFilter(filterValue: string) {

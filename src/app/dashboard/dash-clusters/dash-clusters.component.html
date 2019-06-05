@@ -1,12 +1,6 @@
-<div class="box box-primary">
-    <div class="box-header with-border">
-        <h3 class="box-title">Available cluster</h3>
-        <a [routerLink]="['/clusters']">
-          <button class="primary">manage</button>
-          </a>
-    </div>
-    <div class="card-body">
-        <mat-form-field>
+<mat-toolbar  class="bg-gray-active">Clusters</mat-toolbar>
+
+       <mat-form-field>
             <input matInput (keyup)="clusterFilter($event.target.value)"  placeholder="Search a Cluster">
           </mat-form-field>
           
@@ -40,5 +34,4 @@
           
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
           </div>
-      </div>
-</div>
+  

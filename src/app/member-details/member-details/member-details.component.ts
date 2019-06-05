@@ -25,29 +25,30 @@ export class MemberDetailsComponent implements OnInit {
     this.memberService.getMember(this.route.snapshot.paramMap.get('member_id')).subscribe(data=>{
       console.log('selected member data',data);
       console.log(data);
-      this.memberDetail=data;
+      this.memberDetail=data[0];    
+
       console.log('first name',data[0].first_name)
-      this.editMemberForm = this.formBuilder.group({
-        'first_name' :data[0].first_name,
-        'other_names' : data[0].other_names,
-        'marital_status' :data[0].marital_status,
-        'occupation' :data[0].occupation,
-        'phone' : data[0].phone,
-        'location' : data[0].location,
-        'age' : data[0].age
+      this.editMemberForm.setValue({
+        first_name :data[0].first_name,
+        other_names : data[0].other_names,
+        marital_status :data[0].marital_status,
+        occupation :data[0].occupation,
+        phone : data[0].phone,
+        location : data[0].location,
+        age : data[0].age
       });
 
     })
     }
     editForm(){
       this.editMemberForm = this.formBuilder.group({
-        'first_name' : ['', Validators.required],
-        'other_names' : ['', Validators.required],
-        'marital_status' : ['', Validators.required],
-        'occupation' : ['', Validators.required],
-        'phone' : ['', Validators.required],
-        'location' : ['', Validators.required],
-        'age' : ['', Validators.required]
+        first_name : ['', Validators.required],
+        other_names : ['', Validators.required],
+        marital_status : ['', Validators.required],
+        occupation : ['', Validators.required],
+        phone : ['', Validators.required],
+        location : ['', Validators.required],
+        age : ['', Validators.required]
       });
     }
   }

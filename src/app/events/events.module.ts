@@ -9,7 +9,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { CdkTableModule } from '@angular/cdk/table';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material';
-import { MatFormFieldModule, MatInputModule,MatToolbarModule,MatProgressSpinnerModule,MatCardModule } from '@angular/material';
+import { MatFormFieldModule,MatIconModule, MatInputModule,MatToolbarModule,MatProgressSpinnerModule,MatCardModule } from '@angular/material';
 
 
 
@@ -26,7 +26,8 @@ import { MatFormFieldModule, MatInputModule,MatToolbarModule,MatProgressSpinnerM
     MatToolbarModule,MatProgressSpinnerModule,
     MatCardModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule
   ]
 })
 export class EventsModule { }

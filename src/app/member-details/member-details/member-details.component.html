@@ -1,58 +1,134 @@
-<div class="example-container mat-elevation-z8">
-  <div class="example-loading-shade"
-       *ngIf="isLoadingResults">
-    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-  </div>
-  <div class="button-row">
-    <a mat-flat-button color="primary" (click)="productDetails()"><mat-icon>info</mat-icon></a>
-  </div>
-  <mat-card class="example-card">
-    <form [formGroup]="editMemberForm" (ngSubmit)="onFormSubmit(editMemberForm.value)">
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="First name" formControlName="first_name"
-               [errorStateMatcher]="matcher">
-        <mat-error>
-          <span *ngIf="!editMemberForm.get('first_name').valid && editMemberForm.get('first_name').touched">Please enter Product Name</span>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Other names" formControlName="other_names"
-               [errorStateMatcher]="matcher">
-        <mat-error>
-          <span *ngIf="!editMemberForm.get('other_names').valid && editMemberForm.get('other_names').touched">Please enter Product Description</span>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Product Price" formControlName="age"
-               [errorStateMatcher]="matcher">
-        <mat-error>
-          <span *ngIf="!editMemberForm.get('age').valid && editMemberForm.get('age').touched">Please enter Product Price</span>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Product Price" formControlName="marital_status"
-               [errorStateMatcher]="matcher">
-        <mat-error>
-          <span *ngIf="!editMemberForm.get('marital_status').valid && editMemberForm.get('marital_status').touched">Please enter Product Price</span>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Product Price" formControlName="phone"
-               [errorStateMatcher]="matcher">
-        <mat-error>
-          <span *ngIf="!editMemberForm.get('phone').valid && editMemberForm.get('phone').touched">Please enter Product Price</span>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Product Price" formControlName="occupation"
-               [errorStateMatcher]="matcher">
-        <mat-error>
-          <span *ngIf="!editMemberForm.get('occupation').valid && editMemberForm.get('occupation').touched">Please enter Product Price</span>
-        </mat-error>
-      </mat-form-field>
-      <div class="button-row">
-        <button type="submit" [disabled]="!editMemberForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+
+<div>
+  <tabset>
+    <tab heading="Member details">
+      <div class="col-md-6 offset-md-3">
+
+        <!-- Profile Image -->
+        <div class="box box-primary">
+          <div class="box-body box-profile">
+            <img class="profile-user-img img-responsive img-circle" src="../../../assets/img/person.png" onerror="this.src='../../assets/img/person.png';">
+
+            <h3 class="profile-username text-center">{{memberDetail?.username | uppercase}} </h3>
+
+            <p class="text-muted text-center">{{memberDetail?.email}}</p>
+
+            <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                    <b>Full names</b> <a class="pull-right"> {{memberDetail?.first_name}} {{memberDetail?.other_names}}</a>
+                  </li>
+              <li class="list-group-item">
+                <b>Member</b> <a class="pull-right">since {{memberDetail?.created_date }}</a>
+              </li>
+              <li class="list-group-item">
+                  <b>Member number</b> <a class="pull-right"> {{memberDetail?.member_number}}</a>
+                </li>
+                <li class="list-group-item">
+                    <b>Age</b> <a class="pull-right"> {{memberDetail?.age}}</a>
+                  </li>
+                    <hr>
+              <!-- <li class="list-group-item">
+                <b>Ministry</b> <a class="pull-right">Youth</a>
+              </li> -->
+            </ul>
+
+          </div>
+          <!-- /.box-body -->
+        </div>
+     
       </div>
-    </form>
-  </mat-card>
+      <div class="col-md-6 offset-md-3">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+               <ul class="list-group list-group-unbordered">
+             
+                <li style="padding-top: 20px;" class="list-group-item">
+                  <b>Marital status</b> <a class="pull-right">since {{memberDetail?.marital_status }}</a>
+                </li>
+                <li class="list-group-item">
+                    <b>Member number</b> <a class="pull-right"> {{memberDetail?.member_number}}</a>
+                  </li>
+                  <li class="list-group-item">
+                      <b>Occupation</b> <a class="pull-right"> {{memberDetail?.occupation}}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Location</b> <a class="pull-right"> {{memberDetail?.location}}</a>
+                      </li>
+                    <li class="list-group-item">
+                        <b>Phone number</b> <a class="pull-right"> {{memberDetail?.phone}}</a>
+                      </li>
+                      <hr>
+                <!-- <li class="list-group-item">
+                  <b>Ministry</b> <a class="pull-right">Youth</a>
+                </li> -->
+              </ul>
+  
+            </div>
+            <!-- /.box-body -->
+          </div>
+       
+        </div>
+    </tab>
+    <tab heading="Edit member details"><div class="example-container mat-elevation-z8">
+      <div class="example-loading-shade"
+           *ngIf="isLoadingResults">
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+      </div>
+      <div class="button-row">
+        <a mat-flat-button color="primary" (click)="productDetails()"><mat-icon>info</mat-icon></a>
+      </div>
+      <mat-card class="example-card">
+        <form [formGroup]="editMemberForm" (ngSubmit)="onFormSubmit(editMemberForm.value)">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="First name" formControlName="first_name"
+                   [errorStateMatcher]="matcher">
+            <mat-error>
+              <span *ngIf="!editMemberForm.get('first_name').valid && editMemberForm.get('first_name').touched">Please enter Product Name</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Other names" formControlName="other_names"
+                   [errorStateMatcher]="matcher">
+            <mat-error>
+              <span *ngIf="!editMemberForm.get('other_names').valid && editMemberForm.get('other_names').touched">Please enter Product Description</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Age" formControlName="age"
+                   [errorStateMatcher]="matcher">
+            <mat-error>
+              <span *ngIf="!editMemberForm.get('age').valid && editMemberForm.get('age').touched">Please enter Product Price</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Marital status" formControlName="marital_status"
+                   [errorStateMatcher]="matcher">
+            <mat-error>
+              <span *ngIf="!editMemberForm.get('marital_status').valid && editMemberForm.get('marital_status').touched">Please enter Product Price</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Phone" formControlName="phone"
+                   [errorStateMatcher]="matcher">
+            <mat-error>
+              <span *ngIf="!editMemberForm.get('phone').valid && editMemberForm.get('phone').touched">Please enter Product Price</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="occupation" formControlName="occupation"
+                   [errorStateMatcher]="matcher">
+            <mat-error>
+              <span *ngIf="!editMemberForm.get('occupation').valid && editMemberForm.get('occupation').touched">Please enter Product Price</span>
+            </mat-error>
+          </mat-form-field>
+          <div class="button-row">
+            <button type="submit" [disabled]="!editMemberForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+          </div>
+        </form>
+      </mat-card>
+    </div></tab>
+  </tabset>
 </div>
+ 

@@ -6,10 +6,15 @@ import { MemberDetailsComponent } from './member-details/member-details.componen
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { MatFormFieldModule,    MatIconModule,  MatInputModule,MatToolbarModule,MatProgressSpinnerModule,MatCardModule } from '@angular/material';
 
+import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material';
+import { MemberEditComponent } from './member-edit/member-edit.component';
+import { TabsModule,BsDatepickerModule  } from 'ngx-bootstrap';
+
 
 
 @NgModule({
-  declarations: [MemberDetailsComponent],
+  declarations: [MemberDetailsComponent, MemberEditComponent],
   imports: [
     CommonModule,
     MemberDetailsRoutingModule,
@@ -19,7 +24,9 @@ import { MatFormFieldModule,    MatIconModule,  MatInputModule,MatToolbarModule,
        MatInputModule,
        MatToolbarModule,
        MatProgressSpinnerModule,
-       MatCardModule
+       MatCardModule,
+       MatTableModule,
+       TabsModule.forRoot()
   ]
 })
 export class MemberDetailsModule { }

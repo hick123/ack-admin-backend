@@ -8,6 +8,8 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Member } from 'src/app/shared/models/members';
 import { Router } from '@angular/router';
+// import * as _ from 'lodash';
+
 
 declare var $;
 
@@ -17,11 +19,13 @@ declare var $;
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit,  OnDestroy {
-  private getCluster: Subscription;
-  private getMembers: Subscription;
-  private getChurchGroups: Subscription;
   isLoading = true;
+  inAct;
+  act;
 
+  activated:any=[];
+
+  phone;
   dataSourceLength;
 
   displayedColumns: string[] = ['username', 'first_name', 'other_names', 'phone', 'occupation','gender','view'];
@@ -76,20 +80,33 @@ export class DashboardComponent implements OnInit,  OnDestroy {
 
   //subsicribe members list
   getMember(){
-    this.memberService.getMembers().subscribe((data:any)=>{
+      const activated=[];
+      const inActive=[];
+      this.memberService.getMembers().subscribe((data:any)=>{
       this.dataSourceLength=data.length;
-      // this.members=[];
       this.isLoading = false
-      this.dataSource = new MatTableDataSource(data);
+      let totalActive = 0;
+      let totalInActive = 0;
 
-      this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+      var arrayLength = data.length;
+      for (var i = 0; i < arrayLength; i++) {
+        if( data[i].member_number !== null){
+               totalActive++;
+              activated.push(data[i]);
+              this.dataSource = new MatTableDataSource(activated);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+       }else if(data[i].member_number===null){
+        totalInActive++;           
+       }
 
-      // this.members=data;
-      // this.members=data;
-      console.log(data);
+      }
+      this.act=totalActive;
+      this.inAct=totalInActive;
+      console.log(totalInActive);
+      console.log(totalActive);
     },
-    error=>       this.isLoading = false    
+    error=> this.isLoading = false    
     );
       
   }
@@ -100,42 +117,9 @@ export class DashboardComponent implements OnInit,  OnDestroy {
     })
       
   }
-
-  // //groups
-  // getGroups(){
-  //   this.groupService.getChurchGroups().subscribe((data:any)=>{
-  //     this.isLoading = false
-
-  //    this.groups= new MatTableDataSource(data);
-  //    this.groups.paginator = this.grpaginator;
-  //    this.groups.sort = this.grsort;
-  //   },
-  //   error=>       this.isLoading = false    
-  //   );
-  // }
-  //  //get clusters list
-  //  getClusters(){
-  //   console.log('getcluster method');
-  //   this.clusterService.getCluster().subscribe((data:any)=>{
-  //     this.isLoading = false    
-
-  //     this.clusters= new MatTableDataSource(data);
-  //     this.clusters.paginator = this.clpaginator;
-  //     this.clusters.sort = this.clsort;
-  //     // this.clusters= data;
-  //     // console.log('cluster data',data)
-  //     // console.log('clusters',this.clusters);
-  //     //  console.log(data);
-  //    },    error=>       this.isLoading = false    
-
-  //    );
-  // }
-
-
-
     OnDestroy(){
         document.body.className = '';
-}
+   }
 ngOnDestroy(){
 
 

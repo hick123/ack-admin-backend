@@ -65,6 +65,7 @@ export class GroupDetailsComponent implements OnInit {
       Swal.fire('Oops...', 'End date should be greater than start date!', 'error');
             return;
     }
+    
     this.submitted = true;
          console.log(this.createGroupEvents);
     const id = {

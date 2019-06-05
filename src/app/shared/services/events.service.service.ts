@@ -17,6 +17,7 @@ export class EventsServiceService {
   private listeventsspecificclusters='http://localhost:3000/events/listeventsspecificclusters';
   private createclusterevent ='http://localhost:3000/events/createclusterevent';
   private getallevents ='http://localhost:3000/events/getallevents';
+  private geteventid='http://localhost:3000/events/geteventbyid'
 
 
 
@@ -45,6 +46,12 @@ export class EventsServiceService {
     const url =`${this.listeventsspecificclusters}/${clusters_id}`;
     console.log('url............',url);
     return  this.http.get(url);    
+  }
+  getEventById(churchevents_id:string){
+    console.log('event service sending ',churchevents_id);
+    const url =`${this.geteventid}/${churchevents_id}`;
+    console.log('url............',url);
+    return  this.http.get(url); 
   }
   }
      
