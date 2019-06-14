@@ -24,6 +24,8 @@ export class DashboardComponent implements OnInit,  OnDestroy {
   act;
 
   activated:any=[];
+  private getMemberssubs: Subscription;
+  private getNewMemberssubs:Subscription;
 
   phone;
   dataSourceLength;
@@ -78,11 +80,11 @@ export class DashboardComponent implements OnInit,  OnDestroy {
   }
 
 
-  //subsicribe members list
+  //subscribe members list
   getMember(){
       const activated=[];
       const inActive=[];
-      this.memberService.getMembers().subscribe((data:any)=>{
+      this.getMemberssubs=      this.memberService.getMembers().subscribe((data:any)=>{
       this.dataSourceLength=data.length;
       this.isLoading = false
       let totalActive = 0;
@@ -111,7 +113,7 @@ export class DashboardComponent implements OnInit,  OnDestroy {
       
   }
   getNewMembers(){
-    this.memberService.getNewMembers().subscribe((data:any)=>{
+    this.getNewMemberssubs=   this.memberService.getNewMembers().subscribe((data:any)=>{
       this.newMembers = data;
         console.log(data);
     })
@@ -121,8 +123,8 @@ export class DashboardComponent implements OnInit,  OnDestroy {
         document.body.className = '';
    }
 ngOnDestroy(){
-
-
-
+  this.getMemberssubs.unsubscribe();
+  this.getNewMemberssubs.unsubscribe();
+  
 }
 }

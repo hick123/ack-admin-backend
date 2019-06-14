@@ -10,5 +10,8 @@ export class Member {
     occupation: string;
     location: string;
     age: number;
-    token?:string      
+    token?:string;
+    amount:number;
+    description:string;
+    member_number:number;      
 }

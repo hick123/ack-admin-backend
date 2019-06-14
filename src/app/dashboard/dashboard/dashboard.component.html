@@ -34,13 +34,7 @@
       
       <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" matSort>
-      
-          <!-- ID Column -->
-          <!-- <ng-container matColumnDef="member_number">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Member Number </th>
-            <td mat-cell *matCellDef="let row"> {{row.member_id}} </td>
-          </ng-container> -->
-      
+    
           <ng-container matColumnDef="username">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
             <td mat-cell *matCellDef="let row"> {{row.username}} </td>

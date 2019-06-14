@@ -6,8 +6,8 @@ import { ClustersComponent } from './clusters/clusters.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'; 
 import { MatPaginatorModule } from '@angular/material';
-import { MatFormFieldModule, MatInputModule,MatToolbarModule } from '@angular/material'
 import {MatTableModule} from '@angular/material/table';
+import { MatFormFieldModule,MatSelectModule,MatIconModule, MatInputModule,MatToolbarModule,MatProgressSpinnerModule,MatCardModule } from '@angular/material';
 
 
 
@@ -22,7 +22,8 @@ import {MatTableModule} from '@angular/material/table';
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSelectModule,MatIconModule
 
   ]
 })

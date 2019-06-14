@@ -3,6 +3,7 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Member } from 'src/app/shared/models/members';
 import { ActivatedRoute } from '@angular/router';
 import { GroupsService, ClustersService } from 'src/app/shared/services';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cluster-members',
@@ -16,7 +17,7 @@ export class ClusterMembersComponent implements OnInit {
 
   dataSourceLength;
 
-  displayedColumns: string[] = ['username', 'first_name', 'other_names', 'phone', 'occupation','gender'];
+  displayedColumns: string[] = ['username', 'first_name', 'other_names', 'phone', 'occupation','gender','remove'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -29,6 +30,8 @@ export class ClusterMembersComponent implements OnInit {
       console.log('cluster members',data);
       this.isLoading=false;
       this.dataSource=data;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
   applyFilter(filterValue: string) {
@@ -37,6 +40,16 @@ export class ClusterMembersComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  remove(member_id : string){
+    this.clusterService.unenrollmemberfromcluster(member_id).subscribe(data=>{
+      Swal.fire('Oops...', 'Unenroll member from the group!', 'success');
+
+
+    },error=>{
+      Swal.fire('Oops...', 'Could not unenroll member from the group!', 'error');
+    }
+    )
   }
 
 }

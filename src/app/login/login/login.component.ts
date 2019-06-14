@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {AuthService} from '../../shared/services/auth.service'
 import { first } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertifyService } from '../../shared/services/alertify.service';
 import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 declare var $;
 
@@ -13,7 +14,9 @@ declare var $;
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit ,OnDestroy{
+  private subs: Subscription;
+
   loginForm:FormGroup = this.formBuilder.group({
     username: ['', Validators.required],
     password: ['',  Validators.required]
@@ -44,7 +47,7 @@ export class LoginComponent implements OnInit {
 // }
     this.loading = true;
     console.log(this.loginForm);
-    this.authService.login(this.f.username.value,this.f.password.value).subscribe(data=>{
+    this.subs=    this.authService.login(this.f.username.value,this.f.password.value).subscribe(data=>{
         // this.alertify.success('logged in successfully');
               this.router.navigate(['dashboard']);
               Swal.fire({
@@ -65,4 +68,9 @@ export class LoginComponent implements OnInit {
       console.log('data not sent');
     })
   }
+  ngOnDestroy(){
+    this.subs.unsubscribe();
+  }
+
+
 }

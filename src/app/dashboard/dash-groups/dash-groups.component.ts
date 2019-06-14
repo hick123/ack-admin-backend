@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -8,13 +8,16 @@ import { Member } from 'src/app/shared/models/members';
 import{ChurchGroups} from 'src/app/shared/models/churchgroups'
 
 import { GroupsService} from '../../shared/services';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dash-groups',
   templateUrl: './dash-groups.component.html',
   styleUrls: ['./dash-groups.component.css']
 })
-export class DashGroupsComponent implements OnInit {
+export class DashGroupsComponent implements OnInit,OnDestroy {
+  private getgroupsubs: Subscription;
+
   groupLength;
   isLoading = false
 
@@ -33,7 +36,7 @@ export class DashGroupsComponent implements OnInit {
     this.getGroups();
   }
   getGroups(){
-    this.groupService.getChurchGroups().subscribe((data:any)=>{
+    this.getgroupsubs=    this.groupService.getChurchGroups().subscribe((data:any)=>{
       this.isLoading = false
       this.groupLength = data.length
 
@@ -53,5 +56,7 @@ export class DashGroupsComponent implements OnInit {
         this.groups.paginator.firstPage();
       }
     }
-
+    ngOnDestroy(){
+     this.getgroupsubs.unsubscribe()
+    }
 }

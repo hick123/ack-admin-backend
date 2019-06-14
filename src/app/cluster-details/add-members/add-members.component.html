@@ -1,0 +1,42 @@
+<div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title" *ngFor="let item of groupDetails">Add members to {{item.group_name}} group</h3>
+    </div>
+
+<form [formGroup]="addToclusterForm" (ngSubmit)=" addToCluster()">
+  <div class="box-body">
+    <div class=form-group>
+      <label>Member</label>
+      <mat-form-field>
+          <mat-select formControlName="member_id"   [formControl]="searchField" placeholder="search member by user, member number or email">
+            <mat-option>
+              <ngx-mat-select-search [formControl]="searchField" [searching]="searching"></ngx-mat-select-search>
+            </mat-option>
+            <mat-option *ngFor="let member of results" [value]="member.member_id">
+                username: {{member.username}} | member number:{{member.member_number}} |Email: {{member.email}}
+              </mat-option>
+          </mat-select>
+          
+        </mat-form-field>
+    </div>
+    <div class="form-group">
+        <div class="radio">
+          <label>
+            <input type="radio" name="is_admin" formControlName="is_admin" id="is_admin" value="0" checked>
+            Member
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="is_admin" formControlName="is_admin" id="is_admin" value="1">
+            Admin
+          </label>
+        </div>
+      </div>
+  </div>
+  <div class="box-footer">
+    <button class="btn btn-primary btn-block btn-flat">Enroll member</button>
+  </div>
+</form>
+
+</div>

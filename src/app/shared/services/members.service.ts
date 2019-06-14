@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Member} from '../models/members';
 import { Observable,Subject } from 'rxjs';
-import { map,tap } from 'rxjs/operators';
+import { map,tap, delay } from 'rxjs/operators';
 import { HttpClient,HttpHeaders  } from '@angular/common/http';
 
 
@@ -12,12 +12,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class MembersService {
-
-  // private serverUrl = 'http://locahost:3000/signup';  // URL to web api
-  // private ngrokurl='http://bdd8484f.ngrok.io/signup';
-  // private ngrokurlget='http://bdd8484f.ngrok.io/';
-  // private lo=`http://locahost:3000/signup`;
-  // private ngrokurlNewMembers='http://bdd8484f.ngrok.io/newmembers';
   private localgeturl='http://localhost:3000/members';
   private localsignup='http://localhost:3000/members/signup';
   private localgetmemberbyid='http://localhost:3000/members/getmemberbyid';
@@ -25,6 +19,8 @@ export class MembersService {
   private localnewmembers='http://localhost:3000/members/newmembers';
   private member='http://localhost:3000/members/newmembers';
   private activatemember='http://localhost:3000/members/activatemember';
+  private urlu='http://localhost:3000/members/searchmember';
+
 
   private subject = new Subject<any>();
 
@@ -37,6 +33,10 @@ export class MembersService {
 
   getMembers(){
     return this.http.get(this.localgeturl);    
+  }
+  searchmembers(term: string){
+    const url =`${this.urlu}/${term}`;
+      return this.http.get<any[]>(url).pipe(tap());
   }
   getNewMembers(){
     return this.http.get(this.localnewmembers);    

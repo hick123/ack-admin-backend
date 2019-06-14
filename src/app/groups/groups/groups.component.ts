@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { Validators,  FormGroup, FormBuilder } from '@angular/forms';
-import { GroupsService, Person} from '../../shared/services';
+import { GroupsService} from '../../shared/services';
 import { MembersService} from '../../shared/services'
 
 import { first, debounceTime, distinctUntilChanged, tap, switchMap, catchError } from 'rxjs/operators';
@@ -10,6 +10,8 @@ import { Router} from '@angular/router'
 import { ChurchGroups } from 'src/app/shared/models/churchgroups';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 declare var $;
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-groups',
@@ -17,7 +19,7 @@ declare var $;
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit {
-  displayedGroups: string[] = ['group_name', 'created_date'];
+  displayedGroups: string[] = ['group_name', 'created_date','view'];
   groups: MatTableDataSource<ChurchGroups>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -139,10 +141,15 @@ addToGroupForm: FormGroup= this.formBuilder.group({
     this.groupService.createChurchGroup(this.createGroupForm.value)
          .pipe(first())
          .subscribe(
-             data=> {      
+             data=> { 
+              this.loading = false;
+     
+              Swal.fire('Successfull', 'Created the group!', 'success');
+
                 },
                 error => {
-                    this.loading = false;
+                  Swal.fire('Oops...', 'could not create then group!', 'success');
+
                 });
     }
 

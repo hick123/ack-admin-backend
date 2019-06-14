@@ -24,7 +24,10 @@ const routes: Routes = [
       { path: 'events', loadChildren: '../events/events.module#EventsModule' },
       { path: 'events/:churchevents_id', loadChildren: '../event-details/event-details.module#EventDetailsModule' },
       { path: 'members/:member-id', loadChildren: '../member-details/member-details.module#MemberDetailsModule' },
-      { path: 'groups/:churchgroups_id', loadChildren: '../group-details/group-details.module#GroupDetailsModule' }
+      { path: 'groups/:churchgroups_id', loadChildren: '../group-details/group-details.module#GroupDetailsModule' },
+      { path: 'contribution', loadChildren: '../contribution/contribution.module#ContributionModule' },
+
+      
     ],
     canActivate: [AuthGuard],
 

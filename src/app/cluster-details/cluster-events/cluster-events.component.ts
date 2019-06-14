@@ -18,8 +18,6 @@ export class ClusterEventsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-
-
   constructor( private eventService:EventsServiceService,private route:ActivatedRoute) { }
 
   ngOnInit() {
@@ -31,7 +29,16 @@ export class ClusterEventsComponent implements OnInit {
       this.isLoading=false;
 
       this.dataSource= data;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
 

@@ -1,0 +1,59 @@
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)"  placeholder="Search ">
+  </mat-form-field>
+  
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="fullName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Full names </th>
+        <td mat-cell *matCellDef="let row"> {{row.first_name}} {{row.other_names}} </td>
+      </ng-container>
+      <ng-container matColumnDef="member_number">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Member number </th>
+          <td mat-cell *matCellDef="let row"> {{row.member_number}} </td>
+        </ng-container>
+        <!-- Progress Column -->
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Amount</th>
+        <td mat-cell *matCellDef="let row"> {{row.amount}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+        <td mat-cell *matCellDef="let row"> {{row.Contribution_description}} </td>
+      </ng-container>
+  
+      <!-- Color Column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+        <td mat-cell *matCellDef="let row"> {{row.contribution_date | date:'longDate'}} </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="view">
+        <th mat-header-cell *matHeaderCellDef>View details</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button color="primary" (click)="viewdetails(row)">
+              <mat-icon >edit</mat-icon>
+          </button>
+        </td>
+      </ng-container> -->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      </tr>
+    </table>
+      <div *ngIf="dataSourceLength === 0">
+      No Records Found!
+      </div>
+      <mat-card *ngIf="isLoading" 
+        style="display: flex; justify-content: center; align-items: center">
+        <mat-progress-spinner 
+          color="primary" 
+          mode="indeterminate">
+        </mat-progress-spinner>
+      </mat-card>
+            
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>

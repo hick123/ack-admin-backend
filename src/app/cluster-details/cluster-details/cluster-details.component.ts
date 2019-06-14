@@ -14,6 +14,8 @@ export class ClusterDetailsComponent implements OnInit {
   clusterEvents;
   isLoading=true;
 
+  public clusterID =this.route.snapshot.paramMap.get('clusters_id')
+
   submitted=false;
   createClusterEvents :FormGroup = this.formBuilder.group({
     event_title: [''], 

@@ -5,6 +5,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Member } from 'src/app/shared/models/members';
 import { ActivatedRoute } from '@angular/router';
 import { GroupsService } from 'src/app/shared/services';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-group-members',
@@ -18,7 +20,7 @@ export class GroupMembersComponent implements OnInit {
 
   dataSourceLength;
 
-  displayedColumns: string[] = ['username', 'first_name', 'other_names', 'phone', 'occupation','gender'];
+  displayedColumns: string[] = ['username', 'first_name', 'other_names', 'phone', 'occupation','gender','remove'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -34,6 +36,8 @@ export class GroupMembersComponent implements OnInit {
       this.isLoading = false;
 
       this.dataSource =new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       // this.groupMembers=data;
     });
   }
@@ -43,5 +47,15 @@ export class GroupMembersComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  remove(member_id : string){
+    console.log('removing member from group')
+    this.groupService.unenrollmemberfromgroup(member_id).subscribe(data=>{
+      Swal.fire('Oops...', 'Removed member from the group!', 'warning');
+
+    },error=>{
+
+    }
+    );
   }
 }

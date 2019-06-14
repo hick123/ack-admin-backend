@@ -10,11 +10,12 @@ import {MatDatepickerModule,MatNativeDateModule } from '@angular/material';
 import { GroupMembersComponent } from './group-members/group-members.component';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material';
-import { MatFormFieldModule, MatInputModule,MatToolbarModule,MatProgressSpinnerModule,MatCardModule } from '@angular/material';
-
+import { MatFormFieldModule,MatSelectModule,MatAutocompleteModule,MatIconModule, MatInputModule,MatToolbarModule,MatProgressSpinnerModule,MatCardModule } from '@angular/material';
+import { AddMembersComponent } from './add-members/add-members.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
-  declarations: [GroupDetailsComponent, GroupEventsComponent, GroupMembersComponent],
+  declarations: [GroupDetailsComponent, GroupEventsComponent, GroupMembersComponent, AddMembersComponent],
   imports: [
     CommonModule,
     GroupDetailsRoutingModule,
@@ -28,7 +29,11 @@ import { MatFormFieldModule, MatInputModule,MatToolbarModule,MatProgressSpinnerM
     MatToolbarModule,
     MatProgressSpinnerModule,
     MatCardModule,MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule,
+    NgxMatSelectSearchModule,
+    MatSelectModule,
+    MatAutocompleteModule
   ]
 })
 export class GroupDetailsModule { }

@@ -1,8 +1,9 @@
-import { Component, OnInit ,ViewChild} from '@angular/core';
+import { Component, OnInit ,ViewChild, OnDestroy} from '@angular/core';
 import { EventsServiceService } from 'src/app/shared/services';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Events } from 'src/app/shared/models/events';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 
@@ -13,18 +14,23 @@ declare var $;
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.css']
 })
-export class EventsComponent implements OnInit {
+export class EventsComponent implements OnInit,OnDestroy{
+  private listAllEventsSubs: Subscription;
+
   displayedColumns: string[] = ['event_name',  'event_description','start_date', 'end_date', 'view_details'];
+
   dataSourceLength;
+
   isLoading=true;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
   @ViewChild(MatSort) sort: MatSort;
-
-
 
   dataSource: MatTableDataSource<Events>;
 
   Events:any=[];
+  
   constructor(private eventService:EventsServiceService, private router: Router) { }
 
   ngOnInit() {
@@ -42,6 +48,7 @@ export class EventsComponent implements OnInit {
     this.getEvents();
   }
  getEvents(){
+   this.listAllEventsSubs=
    this.eventService.listAllEvents().subscribe((data:any)=>{
      console.log('eventss',data);
      this.isLoading=false;
@@ -64,4 +71,8 @@ viewDetails(row){
   
 
 }
+ngOnDestroy(){
+ this.listAllEventsSubs.unsubscribe();
+}
+
 }

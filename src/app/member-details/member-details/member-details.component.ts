@@ -11,18 +11,22 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 })
 export class MemberDetailsComponent implements OnInit {
   editMemberForm: FormGroup;
+  isLoadingResults=false;
 
   memberDetail;
 
   constructor(private memberService: MembersService,private formBuilder: FormBuilder, private route: ActivatedRoute) { }
 
   ngOnInit() {
+
     this.getmemberbyid();
     console.log('sending ',this.route.snapshot.paramMap.get('member_id'));
     this.editForm();
   }
   getmemberbyid(){
+    this.isLoadingResults=true;
     this.memberService.getMember(this.route.snapshot.paramMap.get('member_id')).subscribe(data=>{
+      this.isLoadingResults=false;
       console.log('selected member data',data);
       console.log(data);
       this.memberDetail=data[0];    
@@ -50,5 +54,8 @@ export class MemberDetailsComponent implements OnInit {
         location : ['', Validators.required],
         age : ['', Validators.required]
       });
+    }
+    onFormSubmit(editMemberForm){
+      console.log('submit edit member')
     }
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MembersService } from '../../shared/services/members.service';
 import { ClustersService } from '../../shared/services';
 import { Router} from '@angular/router';
@@ -6,14 +6,23 @@ import { first } from 'rxjs/operators';
 import { Validators,  FormGroup, FormBuilder } from '@angular/forms';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { ChurchGroups } from 'src/app/shared/models/churchgroups';
+import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-clusters',
   templateUrl: './clusters.component.html',
   styleUrls: ['./clusters.component.css']
 })
-export class ClustersComponent implements OnInit {
-  displayedGroups: string[] = ['group_name', 'created_date'];
+export class ClustersComponent implements OnInit, OnDestroy {
+  // private getMembersubs: Subscription;
+  // private addMembersToClusterSubs: Subscription;
+  // private createClusterSubs: Subscription;
+  // private getClusterSubs: Subscription;
+
+
+  displayedGroups: string[] = ['group_name', 'created_date', 'view'];
   clusters: MatTableDataSource<ChurchGroups>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -48,27 +57,28 @@ export class ClustersComponent implements OnInit {
       is_admin:['']
 
     });
-    this.getMembers();
     this.getClusters();
   }
   //view cluster details
   onSelect(row){
     this.router.navigate(['/clusters',row.clusters_id]);
   }
-  // fetching members
-  getMembers(){
-    this.memberService.getMembers().subscribe((data:any)=>{
-      this.members=[];
-      this.members=data;
-      console.log('members in clusters', this.members);
-      console.log(data);
-    })
+  // // fetching members
+  // getMembers(){
+  //   this.getMembersubs=
+  //   this.memberService.getMembers().subscribe((data:any)=>{
+  //     this.members=[];
+  //     this.members=data;
+  //     console.log('members in clusters', this.members);
+  //     console.log(data);
+  //   })
       
-  }
+  // }
 
   //get clusters list
   getClusters(){
     console.log('getcluster method');
+    // this.getClusterSubs=
     this.clusterService.getCluster().subscribe((data:any)=>{
       this.clusterss=data;
 
@@ -96,12 +106,17 @@ export class ClustersComponent implements OnInit {
         // }
   console.log(this.createClusterForm,'submitting form for creating clusters');
     this.loading = true;
+    // this.createClusterSubs=
     this.clusterService.createCluster(this.createClusterForm.value)
          .pipe(first())
          .subscribe(
-             data=> {      
+             data=> {  
+              Swal.fire('Successfull', 'Created the cluster!', 'success');
+    
                 },
                 error => {
+                  Swal.fire('Oops...', 'could not create then cluster already exists!', 'success');
+
                     this.loading = false;
                 });
     }
@@ -114,6 +129,7 @@ export class ClustersComponent implements OnInit {
 
     console.log(this.addMembersToClusterForm,'submitting form');
       this.loading = true;
+      // this.addMembersToClusterSubs=
       this.clusterService.addMembersToCluster(this.addMembersToClusterForm.value)
            .pipe(first())
            .subscribe(
@@ -123,6 +139,17 @@ export class ClustersComponent implements OnInit {
                       this.loading = false;
                   });
       }
+      remove(cluster_id){
+        
+
+      }
+      ngOnDestroy(){
+      //  this.addMembersToClusterSubs.unsubscribe();
+      //  this.createClusterSubs.unsubscribe();
+      //  this.getClusterSubs.unsubscribe();
+
+      }
+  
 
 
 }

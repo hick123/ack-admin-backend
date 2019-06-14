@@ -4,13 +4,11 @@ import { map, tap } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Member } from '../models/members';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import Swal from 'sweetalert2'
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
-// const httpOptions = {
-//   headers: new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
-// };
 
 @Injectable({
   providedIn: 'root'
@@ -66,11 +64,18 @@ getToken() {
 }
 
 loggedIn() {
-  console.log(localStorage.getItem('currentMember'));
-  return !!localStorage.getItem('currentMember')    
+  const token= localStorage.getItem('currentMember');
+  console.log(token);
+  return !this.helper.isTokenExpired(token);        
 }
 logout() {
     // remove user from local storage to log user out
+    Swal.fire({
+      type: 'error',
+      title: 'You have logged out!',
+      showConfirmButton: false,
+      timer: 2500
+    });
     localStorage.removeItem('currentMember');
     this.currentMemberSubject.next(null);
 }

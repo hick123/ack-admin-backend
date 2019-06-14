@@ -9,13 +9,12 @@ import { ClusterMembersComponent } from './cluster-members/cluster-members.compo
 import { ClusterEventsComponent } from './cluster-events/cluster-events.component';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material';
-import { MatFormFieldModule, MatInputModule,MatToolbarModule,MatProgressSpinnerModule,MatCardModule } from '@angular/material';
-
-
-
+import { MatFormFieldModule,MatSelectModule,MatIconModule, MatInputModule,MatToolbarModule,MatProgressSpinnerModule,MatCardModule } from '@angular/material';
+import { AddMembersComponent } from './add-members/add-members.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
-  declarations: [ClusterDetailsComponent, ClusterMembersComponent, ClusterEventsComponent],
+  declarations: [ClusterDetailsComponent, ClusterMembersComponent, ClusterEventsComponent, AddMembersComponent],
   imports: [
     CommonModule,
     BsDatepickerModule.forRoot(),
@@ -24,11 +23,14 @@ import { MatFormFieldModule, MatInputModule,MatToolbarModule,MatProgressSpinnerM
     ClusterDetailsRoutingModule,
     MatFormFieldModule,
      MatInputModule,
+     MatIconModule,
      MatToolbarModule,
      MatProgressSpinnerModule,
      MatCardModule,
      MatTableModule,
-     MatPaginatorModule
+     MatPaginatorModule,
+     NgxMatSelectSearchModule,
+     MatSelectModule
   ]
 })
 export class ClusterDetailsModule { }
