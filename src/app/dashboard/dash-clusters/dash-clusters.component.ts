@@ -35,10 +35,6 @@ export class DashClustersComponent implements OnInit {
         this.clusters= new MatTableDataSource(data);
         this.clusters.paginator = this.paginator;
         this.clusters.sort = this.sort;
-        // this.clusters= data;
-        // console.log('cluster data',data)
-        // console.log('clusters',this.clusters);
-        //  console.log(data);
        },    error=>       this.isLoading = false    
   
        );

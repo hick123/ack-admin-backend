@@ -2,98 +2,147 @@
 <div class="row"> 
   <div class="col-md-3 col-sm-6 col-xs-12">
     <div class="info-box">
-      <span class="info-box-icon bg-green"><i class="ion ion-ios-people-outline"></i></span>
-
+      <span class="info-box-icon bg-blue"><i class="ion ion-ios-people-outline"></i></span>
       <div class="info-box-content">
-        <span class="info-box-text" click>Active Members</span>
-           <span class="info-box-number">{{  act}}</span>
-
-
-      </div>
+        <span class="info-box-text" >Active Members</span>
+           <span class="info-box-number">{{act}}</span>
+        </div>
     </div>
   </div>
 
   <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box">
-        <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
-
+        <span class="info-box-icon bg-green"><i class="ion ion-ios-people-outline"></i></span>
         <div class="info-box-content">
-          <span class="info-box-text">New Members</span>
-          <span class="info-box-number">{{inAct}}</span>
+            <span class="info-box-text">Inactive Members</span>
+            <span class="info-box-number">{{inAct}}</span>
         </div>
-        <!-- /.info-box-content -->
       </div>
-      <!-- /.info-box -->
     </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-yelow"><i  class="ion ion-ios-people-outline"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Total Groups</span>
+            <span class="info-box-number"> {{total_cluster}} </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i  class="ion ion-ios-people-outline"></i></span>
+              <div class="info-box-content">
+              <span class="info-box-text">Total Clusters</span>
+              <span class="info-box-number">‎{{total_clusters}}</span>
+            </div>
+          </div>
+        </div>
  </div>
  <div class="row">
-    <mat-toolbar class="bg-green">Active members</mat-toolbar>
-    <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)"  placeholder="Search member">
-      </mat-form-field>
+   <div class="col-md-8">
+      <mat-toolbar class="bg-green">Active members</mat-toolbar>
+      <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)"  placeholder="Search member">
+        </mat-form-field>
+        
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort>
       
-      <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort>
-    
-          <ng-container matColumnDef="username">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
-            <td mat-cell *matCellDef="let row"> {{row.username}} </td>
-          </ng-container>
-          <!-- Progress Column -->
-          <ng-container matColumnDef="first_name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> First name </th>
-            <td mat-cell *matCellDef="let row"> {{row.first_name}} </td>
-          </ng-container>
-      
-          <!-- Name Column -->
-          <ng-container matColumnDef="other_names">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Other names </th>
-            <td mat-cell *matCellDef="let row"> {{row.other_names}} </td>
-          </ng-container>
-      
+            <ng-container matColumnDef="username">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
+              <td mat-cell *matCellDef="let row"> {{row.username}} </td>
+            </ng-container>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="first_name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> First name </th>
+              <td mat-cell *matCellDef="let row"> {{row.first_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="other_names">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Other names </th>
+              <td mat-cell *matCellDef="let row"> {{row.other_names}} </td>
+            </ng-container>
+        
+            <!-- Color Column -->
+            <ng-container matColumnDef="phone">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+              <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
+            </ng-container>
           <!-- Color Column -->
-          <ng-container matColumnDef="phone">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
-            <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
+          <ng-container matColumnDef="occupation">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> occupation </th>
+            <td mat-cell *matCellDef="let row"> {{row.occupation}} </td>
           </ng-container>
-        <!-- Color Column -->
-        <ng-container matColumnDef="occupation">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> occupation </th>
-          <td mat-cell *matCellDef="let row"> {{row.occupation}} </td>
-        </ng-container>
-    
-          <!-- Color Column -->
-          <ng-container matColumnDef="gender">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
-            <td mat-cell *matCellDef="let row"> {{row.gender}} </td>
-          </ng-container>
+      
+            <!-- Color Column -->
+            <ng-container matColumnDef="gender">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+              <td mat-cell *matCellDef="let row"> {{row.gender}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="view">
+              <th mat-header-cell *matHeaderCellDef>View details</th>
+              <td mat-cell *matCellDef="let row">
+                <button mat-icon-button color="primary" (click)="viewdetails(row)">
+                    <mat-icon >edit</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+      
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+            <div *ngIf="dataSourceLength === 0">
+            No Records Found!
+            </div>
+            <mat-card *ngIf="isLoading" 
+              style="display: flex; justify-content: center; align-items: center">
+              <mat-progress-spinner 
+                color="primary" 
+                mode="indeterminate">
+              </mat-progress-spinner>
+            </mat-card>
+                  
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+   </div>
 
-          <ng-container matColumnDef="view">
-            <th mat-header-cell *matHeaderCellDef>View details</th>
-            <td mat-cell *matCellDef="let row">
-              <button mat-icon-button color="primary" (click)="viewdetails(row)">
-                  <mat-icon >edit</mat-icon>
-              </button>
-            </td>
-          </ng-container>
-    
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-          </tr>
-        </table>
-          <div *ngIf="dataSourceLength === 0">
-          No Records Found!
-          </div>
-          <mat-card *ngIf="isLoading" 
-            style="display: flex; justify-content: center; align-items: center">
-            <mat-progress-spinner 
-              color="primary" 
-              mode="indeterminate">
-            </mat-progress-spinner>
-          </mat-card>
-                
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+   <div class="col-md-4">
+      <!-- Info Boxes Style 2 -->
+      <div style="padding-bottom:8px" class="info-box bg-yellow">
+        <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Total Church Contributions</span>
+          <span class="info-box-number">‎KSh, /= {{total_church_contribution}}</span>
+        </div>
       </div>
+      <div style="padding-bottom:8px" class="info-box bg-green">
+        <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">Groups contributions</span>
+            <span class="info-box-number">‎KSh, /= {{total_group_contribution}}</span>
+        </div>
+      </div>
+      <div style="padding-bottom:8px" class="info-box bg-red">
+        <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">Cluster contributions</span>
+            <span class="info-box-number">‎KSh, /= {{total_cluster_contribution}}</span>
+        </div>
+      </div>
+      <div style="padding-bottom:8px" class="info-box bg-aqua">
+        <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">None member contributions</span>
+          <span class="info-box-number">1,633</span>
+        </div>
+      </div>
+ 
+    </div>
+       
 
  </div>
  <div class="row">

@@ -1,13 +1,15 @@
 import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
-import { MembersService} from '../../shared/services'
+import { MembersService, GroupsService} from '../../shared/services'
 // import { GroupsService} from '../../shared/services';
 import { ClustersService } from '../../shared/services';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Member } from 'src/app/shared/models/members';
 import { Router } from '@angular/router';
+import { ContributionService } from 'src/app/shared/services/contribution.service';
+import { Contributions } from 'src/app/shared/models/contribution';
 // import * as _ from 'lodash';
 
 
@@ -41,9 +43,16 @@ export class DashboardComponent implements OnInit,  OnDestroy {
 
 
  newMembers="";
+ total_clusters;
+ total_groups;
+ total_group_contribution;
+ total_cluster_contribution;
+ total_church_contribution;
+ totalChurchContribution: Observable<Contributions>;
 
-
-  constructor(  private memberService: MembersService, private router: Router) {
+  constructor(  private memberService: MembersService, private router: Router,
+    private contributionService:ContributionService,private clusterService: ClustersService,
+    private groupService: GroupsService) {
      }
 
   ngOnInit() {
@@ -64,9 +73,12 @@ export class DashboardComponent implements OnInit,  OnDestroy {
         "autoWidth": false
       });
     });
+    this.contributionWithGroup();
+    this.contributionWithClusters();
+    this.totalContribution();
+    this.getClusters();
+    this.getClusters();    
   }
-
-
   viewdetails(row){
     this.router.navigate(['/members',row.member_id]);
 
@@ -78,8 +90,6 @@ export class DashboardComponent implements OnInit,  OnDestroy {
       this.dataSource.paginator.firstPage();
     }
   }
-
-
   //subscribe members list
   getMember(){
       const activated=[];
@@ -112,6 +122,49 @@ export class DashboardComponent implements OnInit,  OnDestroy {
     );
       
   }
+  //total church contributions
+  totalContribution(){
+     this.contributionService.getAllContributions().toPromise().then((data:any[])=>{
+      let sum=0;
+      var arrayLength=data.length;
+      for (let i=0;i <arrayLength; i++){
+        sum+=data[i].amount;        
+      }
+            this.total_church_contribution=sum;
+            console.log('Total church contributions',this.total_church_contribution);
+    });
+  }
+  //sums group contributions
+contributionWithGroup(){
+  console.log('church groups');
+
+  this.contributionService.contributionWithGroups().subscribe((data:any)=>{
+    console.log(data);
+    let sum=0;
+    var arrayLength = data.length;
+    for (var i = 0; i < arrayLength; i++) {
+             sum+=data[i].amount;
+    }
+    this.total_group_contribution=sum;
+    console.log('sum total_group_contribution',sum);
+  });
+}
+//sums cluster contributions
+contributionWithClusters(){
+  console.log('cluster');
+
+  this.contributionService.contributionWithClusters().subscribe((data:any[])=>{
+    console.log(data);
+    let sum=0;
+    var arrayLength = data.length;
+    for (var i = 0; i < arrayLength; i++) {
+             sum+=data[i].amount;
+    }
+    this.total_cluster_contribution=sum;
+    console.log('sum total_cluster_contribution',sum);
+  });
+}
+
   getNewMembers(){
     this.getNewMemberssubs=   this.memberService.getNewMembers().subscribe((data:any)=>{
       this.newMembers = data;
@@ -119,6 +172,31 @@ export class DashboardComponent implements OnInit,  OnDestroy {
     })
       
   }
+         //get groups total number
+    getClusters(){
+      console.log('getcluster method');
+      this.clusterService.getCluster().toPromise().then((data:any[])=>{
+        let sum=0;
+        let arrayLength=data.length;
+        for(let i=0;i<arrayLength;i++){
+          sum++;
+        }
+        this.total_clusters=sum;
+      });
+    }
+         //get groups total number
+    getGroups(){
+      this.groupService.getChurchGroups().toPromise().then((data:any[])=>{
+        let sum=0;
+        let arrayLength=data.length;
+        for(let i=0;i<arrayLength;i++){
+          sum++;
+        }
+        this.total_groups=sum;   
+      },
+      error=> this.isLoading = false    
+      );
+    }
     OnDestroy(){
         document.body.className = '';
    }

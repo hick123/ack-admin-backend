@@ -12,6 +12,9 @@
           <div class="text-danger" *ngIf="f.member_number.invalid && (f.member_number.dirty || f.member_number.touched)">
             <div *ngIf="f.member_number.errors['required']">Member number is required</div>
           </div>
+          <!-- <div class="alert alert-primary" role="alert">
+            You can leave this fil
+          </div> -->
         </div>
         <div class="form-group">
             <label>Amount*</label>
@@ -21,7 +24,7 @@
             </div>
           </div>
           <div class="form-group">
-              <label>description*</label>
+              <label>Description*</label>
               <input type="text" id="description" class="form-control" placeholder="Enter description" formControlName="description" >
               <div class="text-danger" *ngIf="f.description.invalid && (f.description.dirty || f.description.touched)">
                 <div *ngIf="f.description.errors['required']">Description is required</div>

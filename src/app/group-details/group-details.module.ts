@@ -13,6 +13,8 @@ import { MatPaginatorModule } from '@angular/material';
 import { MatFormFieldModule,MatSelectModule,MatAutocompleteModule,MatIconModule, MatInputModule,MatToolbarModule,MatProgressSpinnerModule,MatCardModule } from '@angular/material';
 import { AddMembersComponent } from './add-members/add-members.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 
 @NgModule({
   declarations: [GroupDetailsComponent, GroupEventsComponent, GroupMembersComponent, AddMembersComponent],
@@ -33,7 +35,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     MatIconModule,
     NgxMatSelectSearchModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    NgSelectModule
   ]
 })
 export class GroupDetailsModule { }

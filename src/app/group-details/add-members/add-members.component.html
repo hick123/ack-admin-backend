@@ -1,18 +1,3 @@
-<!-- <form [formGroup]="searchForm">
-    <input type="text" formControlName="search" class="form-control" placeholder="search by names or member number or email">
-</form> -->
-<!-- <mat-form-field>
-    <mat-select [formControl]="searchField" placeholder="member" #singleSelect>
-      <mat-option>
-        <ngx-mat-select-search [formControl]="searchField"></ngx-mat-select-search>
-      </mat-option>
-      <mat-option *ngFor="let member of results" [value]="member_id">
-       username:{{member.username}} | member number:{{member.member_number}} |Email:{{member.email}}
-
-
-      </mat-option>
-    </mat-select>
-  </mat-form-field> -->
   <div class="box box-primary">
       <div class="box-header with-border">
         <h3 class="box-title" *ngFor="let item of groupDetails">Add members to {{item.group_name}} group</h3>
@@ -20,36 +5,35 @@
 
   <form [formGroup]="addToGroupForm" (ngSubmit)=" addToGroup()">
     <div class="box-body">
-      <!-- <div class=form-group>
-        <label>Member</label>
-        <mat-form-field>
-            <mat-select formControlName="member_id"   [formControl]="searchField" placeholder="search member by user, member number or email">
-                <ngx-mat-select-search [formControl]="searchField" [searching]="searching"></ngx-mat-select-search>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Choose a member" [matAutocomplete]="auto" formControlName='search'>
-          </mat-form-field>    
-          <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let member of results" [value]="member.member_id">
-                <span>{{ member.username }}</span>
-                <small> |  {{member.first_name}}</small>
-              </mat-option>
-          </mat-autocomplete>
-      </div> -->
       <div class=form-group>
         <label>Member</label>
         <mat-form-field>
-            <mat-select formControlName="member_id"   [formControl]="searchField" placeholder="search member by user, member number or email">
+            <ng-select [items]="results$ | async"
+            bindLabel="username"
+            autofocus
+            bindValue="member_id"
+            [(ngModel)]="selectedPersonId">
+          </ng-select>
+          <ng-select [items]="people3$ | async"
+          bindLabel="name"
+          [addTag]="true"
+          [multiple]="true"
+          [hideSelected]="true"
+          [trackByFn]="trackByFn"
+          [loading]="people3Loading"
+          [typeahead]="people3input$"
+          [(ngModel)]="selectedPersons">
+          </ng-select>
+
+          
+            <!-- <mat-select formControlName="member_id"   [formControl]="searchField" placeholder="search member by user, member number or email">
               <mat-option>
                 <ngx-mat-select-search [formControl]="searchField" [searching]="searching"></ngx-mat-select-search>
               </mat-option>
               <mat-option *ngFor="let member of results" [value]="member.member_id">
                   username: {{member.username}} | member number:{{member.member_number}} |Email: {{member.email}}
                 </mat-option>
-            </mat-select>
-            
+            </mat-select> -->
           </mat-form-field>
       </div>
       <div class="form-group">
