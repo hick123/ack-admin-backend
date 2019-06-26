@@ -37,30 +37,12 @@ export class AddMembersComponent implements OnInit {
 
     this.searchField.valueChanges.pipe(debounceTime(2000), distinctUntilChanged(),filter(term => !!term),
       switchMap(term => this.memberService.searchmembers(term)))
-      .toPromise().then((data:any[])=>{
-        this.results=data;        
-      });
-      // .subscribe((resultValue) => {
-      //   console.log(resultValue);
-      //   this.results=resultValue;  
-      // }); 
-      this.loaddata();
+      .subscribe((resultValue) => {
+      console.log(resultValue);
+         this.results=resultValue;  
+      }); 
      }
 
-     private loaddata() {
-      this.people3$ = concat(
-          of([]), // default items
-          this.people3input$.pipe(
-             debounceTime(200),
-             distinctUntilChanged(),
-             tap(() => this.people3Loading = true),
-             switchMap(term => this.memberService.searchmembers(term).pipe(
-                 catchError(() => of([])), // empty list on error
-                 tap(() => this.people3Loading = false)
-             )) 
-          )
-      );
-  }
    customSearchFn(term: string, item: Member) {
     term = term.toLocaleLowerCase();
     return item.username.toLocaleLowerCase().indexOf(term) > -1 || item.gender.toLocaleLowerCase() === term;
@@ -87,8 +69,12 @@ trackByFn(item: Member) {
                     this.groupService.addMembersToGroup(toDb).subscribe(data=>{
                       this.addToGroupForm.reset();
 
-            }, error=>{
+ 
+              Swal.fire('Successfully', 'added member to the group!', 'success');
 
+                },
+                error => {
+                  Swal.fire('Oops...', 'That member already belongs to a group!', 'error');
             });
   }
 

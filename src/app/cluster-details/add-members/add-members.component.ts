@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { MembersService, GroupsService, ClustersService } from 'src/app/shared/services';
 import { debounceTime, distinctUntilChanged, switchMap,filter } from 'rxjs/operators';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-add-members',
@@ -54,8 +56,14 @@ export class AddMembersComponent implements OnInit {
             console.log(toDb);
                     this.clusterService.addMembersToCluster(toDb).subscribe(data=>{
 
-            });
+                      Swal.fire('Successfully', 'added member to the Cluster!', 'success');
+
+                    },
+                    error => {
+                      Swal.fire('Oops...', 'That member already belongs to a cluster!', 'error');
+                });
   }
+  
 
 
 }

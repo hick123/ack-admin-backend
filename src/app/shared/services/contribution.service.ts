@@ -6,11 +6,11 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ContributionService {
-  private addurl ='http://localhost:3000/contribution/addcontribution';
-  private getAll ='http://localhost:3000/contribution/allContributions';
-  private getGroup ='http://localhost:3000/contribution/groupcontributions';
-  private contributionWithGroupsurl ='http://localhost:3000/contribution/contributionWithGroups';
-  private contributionWithclustersurl ='http://localhost:3000/contribution/contributionwithclusters';
+  private addurl ='https://ackbackend.herokuapp.com/contribution/addcontribution';
+  private getAll ='https://ackbackend.herokuapp.com/contribution/allContributions';
+  private getGroup ='https://ackbackend.herokuapp.com/contribution/groupcontributions';
+  private contributionWithGroupsurl ='https://ackbackend.herokuapp.com/contribution/contributionWithGroups';
+  private contributionWithclustersurl ='https://ackbackend.herokuapp.com/contribution/contributionwithclusters';
    
 
   constructor(private http: HttpClient) { }

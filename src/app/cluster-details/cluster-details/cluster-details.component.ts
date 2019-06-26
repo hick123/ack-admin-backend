@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ClustersService, EventsServiceService } from '../../shared/services';
 import { ActivatedRoute} from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-cluster-details',
@@ -67,8 +69,12 @@ export class ClusterDetailsComponent implements OnInit {
      console.log(toServer);
 
      this.eventService.createClusterEvent(toServer).subscribe(data=>{
+      Swal.fire('Successfull', 'Created the Cluster event!', 'success');
 
-     });
+    },
+    error => {
+      Swal.fire('Oops...', 'could not create group  event!', 'error');      
+    });
   }
 
   getclusterbyid(){

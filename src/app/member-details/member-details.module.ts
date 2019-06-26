@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MemberDetailsRoutingModule } from './member-details-routing.module';
 import { MemberDetailsComponent } from './member-details/member-details.component';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
-import { MatFormFieldModule,    MatIconModule,  MatInputModule,MatToolbarModule,MatProgressSpinnerModule,MatCardModule } from '@angular/material';
+import { MatFormFieldModule, MatRadioModule,   MatIconModule,  MatInputModule,MatToolbarModule,MatProgressSpinnerModule,MatCardModule } from '@angular/material';
 
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material';
@@ -25,6 +25,7 @@ import { TabsModule,BsDatepickerModule  } from 'ngx-bootstrap';
        MatToolbarModule,
        MatProgressSpinnerModule,
        MatCardModule,
+       MatRadioModule,
        MatTableModule,
        TabsModule.forRoot()
   ]

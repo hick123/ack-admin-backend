@@ -15,6 +15,8 @@ const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
+      {
+        path: '', redirectTo: '/dashboard', pathMatch: 'full' },
       { path: 'dashboard', loadChildren: '../dashboard/dashboard.module#DashboardModule' },
       { path: 'groups', loadChildren: '../groups/groups.module#GroupsModule' },
       { path: 'clusters', loadChildren: '../clusters/clusters.module#ClustersModule' },
@@ -41,7 +43,7 @@ const routes: Routes = [
       // { path: 'register', loadChildren: '../register/register.module#RegisterModule' },
       // {path: 'Register', loadChildren: '../register/register.module#RegisterModule'}
     ]
-  },
+  }  
 ];
 
 @NgModule({

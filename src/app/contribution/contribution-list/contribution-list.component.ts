@@ -20,7 +20,7 @@ export class ContributionListComponent implements OnInit {
   constructor(private contributionService:ContributionService) { }
 
   ngOnInit() {
-    this.getGroupedContributions();
+    // this.getGroupedContributions();
   }
 
 

@@ -37,14 +37,6 @@ createGroupForm :FormGroup = this.formBuilder.group({
   group_name: ['', Validators.required]
 });
 
-//formcontrol for add members to groups
-addToGroupForm: FormGroup= this.formBuilder.group({
-  member_id: [''],
-  churchgroups_id: [''],
-  is_admin:['']
-
-});
-
   constructor(private formBuilder: FormBuilder, private groupService: GroupsService, 
     private memberService: MembersService, private router: Router
     ) { }
@@ -96,10 +88,6 @@ addToGroupForm: FormGroup= this.formBuilder.group({
     this.router.navigate(['/groups',row.churchgroups_id]);
   }
 
-  // end of ngoninit
-
-
-  //fetching groups
    getGroups(){
      this.groupService.getChurchGroups().subscribe((data:any)=>{
       // this.members=[];
@@ -110,13 +98,6 @@ addToGroupForm: FormGroup= this.formBuilder.group({
      this.groups.sort = this.sort;
      })
    }
-   //obersavable fetch groups
-  //  getGr(){
-  //   this.people$ = this.groupService.getPeople();
-  //   this.groupService.getPeople().subscribe(items => this.people = items);
-  //   this.simpleItems = [true, 'Two', 3];  
-  //  }
-// fetching members
    getMembers(){
     this.memberService.getMembers().subscribe((data:any)=>{
       this.members=data;
@@ -128,11 +109,9 @@ addToGroupForm: FormGroup= this.formBuilder.group({
    
   get f() { return this.createGroupForm.controls; }
 
-  //submiting create group form for members 
   createChurchG(){
     this.submitted = true;
 
-        // stop here if form is invalid
         if (this.createGroupForm.invalid) {
             return;
         }
@@ -148,31 +127,8 @@ addToGroupForm: FormGroup= this.formBuilder.group({
 
                 },
                 error => {
-                  Swal.fire('Oops...', 'could not create then group!', 'success');
+                  Swal.fire('Oops...', 'could not create then group!', 'error');
 
                 });
     }
-
-    // adding members to groups
-    addToGroup(){
-      this.submitted = true;
-      console.log(this.addToGroupForm.value);
-  
-          // stop here if form is invalid
-          // if (this.createGroupForm.invalid) {
-          //     return;
-          // }
-    console.log(this.addToGroupForm,'submitting form for adding user');
-      this.loading = true;
-      this.groupService.addMembersToGroup(this.addToGroupForm.value)
-           .pipe(first())
-           .subscribe(
-               data=> {      
-                  },
-                  error => {
-                      this.loading = false;
-                  });
-                  this.addToGroupForm.reset();
-      } 
-
-}
+  }

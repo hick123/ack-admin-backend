@@ -104,8 +104,13 @@ export class GroupDetailsComponent implements OnInit,OnDestroy {
      console.log(toServer);
 
      this.eventService.createEvent(toServer).subscribe(data=>{
+      Swal.fire('Successfull', 'Created the group event!', 'success');
 
-     });
+    },
+    error => {
+      Swal.fire('Oops...', 'could not create group event!', 'error');
+      
+    });
   }
 
   getgroupbyid(){
@@ -138,6 +143,7 @@ export class GroupDetailsComponent implements OnInit,OnDestroy {
       this.listGroupEventsByIdSubs.unsubscribe();
       
     }
+
     
   
 }

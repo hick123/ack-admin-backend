@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit,  OnDestroy {
   inAct;
   act;
 
+
   activated:any=[];
   private getMemberssubs: Subscription;
   private getNewMemberssubs:Subscription;
@@ -32,7 +33,7 @@ export class DashboardComponent implements OnInit,  OnDestroy {
   phone;
   dataSourceLength;
 
-  displayedColumns: string[] = ['username', 'first_name', 'other_names', 'phone', 'occupation','gender','view'];
+  displayedColumns: string[] = ['username', 'first_name', 'other_names','member_number', 'phone', 'occupation','gender','view'];
 
 
   dataSource: MatTableDataSource<Member>;
@@ -48,6 +49,7 @@ export class DashboardComponent implements OnInit,  OnDestroy {
  total_group_contribution;
  total_cluster_contribution;
  total_church_contribution;
+ non_member_contributions;
  totalChurchContribution: Observable<Contributions>;
 
   constructor(  private memberService: MembersService, private router: Router,
@@ -77,7 +79,7 @@ export class DashboardComponent implements OnInit,  OnDestroy {
     this.contributionWithClusters();
     this.totalContribution();
     this.getClusters();
-    this.getClusters();    
+    this.getGroups();    
   }
   viewdetails(row){
     this.router.navigate(['/members',row.member_id]);
@@ -192,7 +194,8 @@ contributionWithClusters(){
         for(let i=0;i<arrayLength;i++){
           sum++;
         }
-        this.total_groups=sum;   
+        this.total_groups=sum;  
+        console.log('total_groups',this.total_groups) 
       },
       error=> this.isLoading = false    
       );

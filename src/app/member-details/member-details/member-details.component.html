@@ -1,85 +1,104 @@
 
+.
+
+
 <div>
   <tabset>
     <tab heading="Member details">
-      <div class="col-md-6 offset-md-3">
-
-        <!-- Profile Image -->
-        <div class="box box-primary">
-          <div class="box-body box-profile">
-            <img class="profile-user-img img-responsive img-circle" src="../../../assets/img/person.png" onerror="this.src='../../assets/img/person.png';">
-
-            <h3 class="profile-username text-center">{{memberDetail?.username | uppercase}} </h3>
-
-            <p class="text-muted text-center">{{memberDetail?.email}}</p>
-
-            <ul class="list-group list-group-unbordered">
-                <li class="list-group-item">
-                    <b>Full names</b> <a class="pull-right"> {{memberDetail?.first_name}} {{memberDetail?.other_names}}</a>
-                  </li>
-              <li class="list-group-item">
-                <b>Member</b> <a class="pull-right">since {{memberDetail?.created_date }}</a>
-              </li>
-              <li class="list-group-item">
-                  <b>Member number</b> <a class="pull-right"> {{memberDetail?.member_number}}</a>
-                </li>
-                <li class="list-group-item">
-                    <b>Age</b> <a class="pull-right"> {{memberDetail?.age}}</a>
-                  </li>
-                    <hr>
-              <!-- <li class="list-group-item">
-                <b>Ministry</b> <a class="pull-right">Youth</a>
-              </li> -->
-            </ul>
-
-          </div>
-          <!-- /.box-body -->
-        </div>
-     
-      </div>
-      <div class="col-md-6 offset-md-3">
-
-          <!-- Profile Image -->
-          <div class="box box-primary">
-            <div class="box-body box-profile">
-               <ul class="list-group list-group-unbordered">
              
-                <li style="padding-top: 20px;" class="list-group-item">
-                  <b>Marital status</b> <a class="pull-right">since {{memberDetail?.marital_status }}</a>
-                </li>
-                <li class="list-group-item">
-                    <b>Member number</b> <a class="pull-right"> {{memberDetail?.member_number}}</a>
-                  </li>
-                  <li class="list-group-item">
-                      <b>Occupation</b> <a class="pull-right"> {{memberDetail?.occupation}}</a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Location</b> <a class="pull-right"> {{memberDetail?.location}}</a>
+            <div class="row justify-content-md-center">
+              <div class="col-md-6">
+        
+                <!-- Profile Image -->
+                <div class="box box-primary">
+                  <div class="box-body box-profile">
+                    <img class="profile-user-img img-responsive img-circle" src="../../../assets/img/person.png" onerror="this.src='../../assets/img/person.png';">
+        
+                    <h3 class="profile-username text-center">{{memberDetails?.username | uppercase}} </h3>
+        
+                    <p class="text-muted text-center">{{memberDetails?.email}}</p>
+        
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>Full names</b> <a class="pull-right"> {{memberDetails?.first_name}} {{memberDetails?.other_names}}</a>
+                          </li>
+                      <li class="list-group-item">
+                        <b>Member</b> <a class="pull-right">since {{memberDetails?.created_date | date:'mediumDate' }}</a>
                       </li>
-                    <li class="list-group-item">
-                        <b>Phone number</b> <a class="pull-right"> {{memberDetail?.phone}}</a>
-                      </li>
-                      <hr>
-                <!-- <li class="list-group-item">
-                  <b>Ministry</b> <a class="pull-right">Youth</a>
-                </li> -->
-              </ul>
-  
+                      <li class="list-group-item">
+                          <b>Member number</b> <a class="pull-right"> {{memberDetails?.member_number}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Marital status</b> <a class="pull-right"> {{memberDetails?.marital_status}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Group</b> <a class="pull-right"> <span class="label label-info"> {{groupDetails?.group_name}}</span></a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Cluster</b> <a class="pull-right"> <span class="label label-info"> {{clusterDetails?.cluster_name}}</span></a>
+                        </li>
+                      
+                            <hr>
+                        </ul>
+                  </div>
+                </div>
+             
+              </div>
+              <div class="col-md-6">
+                  
+                    <div class="box box-primary">
+                          <div class="box-body">
+                              <hr>
+                          <strong><i class="fa fa-briefcase margin-r-5"></i> Occupation</strong>
+            
+                          <p class="text-muted">{{memberDetails?.occupation}}</p>
+            
+                          <hr>
+                            
+                          <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+            
+                          <p class="text-muted">{{memberDetails?.location}}</p>
+            
+                          <hr>
+            
+                          <strong><i class="fa fa-mars margin-r-5"></i><i class="fa fa-venus margin-r-5"></i> Gender</strong>
+            
+                          <p class="text-muted">{{memberDetails?.gender}}</p>
+
+            
+                          <hr>
+                          <strong><i class="fa fa-phone margin-r-5"></i> Phone</strong>
+            
+                          <p class="text-muted">{{memberDetails?.phone}}</p>
+            
+                          <hr>
+            
+                          <strong><i class="fa fa-pencil margin-r-5"></i> Ministries</strong>
+                          <hr style="  visibility: hidden">            
+                          <p class="float-left" *ngFor="let item of ministries">
+                            <span class="label label-info">{{item?.ministry_name}}</span>                 
+                          </p>
+                          <p *ngIf="ministries?.length===0">
+                              <span class="label label-info">None</span>                 
+                            </p>
+            
+            
+                          <hr>
+                        </div>
+                        <!-- /.box-body -->
+                      </div>
+                 
+              </div>
+              <!-- /.col -->
             </div>
-            <!-- /.box-body -->
-          </div>
-       
-        </div>
     </tab>
     <tab heading="Edit member details"><div class="example-container mat-elevation-z8">
       <div class="example-loading-shade"
            *ngIf="isLoadingResults">
         <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
       </div>
-      <!-- <div class="button-row">
-        <a mat-flat-button color="primary" (click)="productDetails()"><mat-icon>info</mat-icon></a>
-      </div> -->
       <mat-card class="example-card">
+          <mat-label>First name</mat-label>
         <form [formGroup]="editMemberForm" (ngSubmit)="onFormSubmit(editMemberForm.value)">
           <mat-form-field class="example-full-width">
             <input matInput placeholder="First name" formControlName="first_name"
@@ -89,6 +108,8 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width">
+              <mat-label>Other names</mat-label>
+
             <input matInput placeholder="Other names" formControlName="other_names"
   >
             <mat-error>
@@ -102,14 +123,41 @@
               <span *ngIf="!editMemberForm.get('age').valid && editMemberForm.get('age').touched">Please enter age</span>
             </mat-error>
           </mat-form-field>
+          <!-- <mat-form-field class="example-full-width">
+              <mat-label>Gender</mat-label>
+                  <mat-radio-group formControlName="gender" aria-label="Gender">
+                  <mat-radio-button value="male">Male</mat-radio-button>
+                  <mat-radio-button value="female">Female</mat-radio-button>
+                </mat-radio-group>
+            <mat-error>
+              <span *ngIf="!editMemberForm.get('gender').valid && editMemberForm.get('gender').touched">Please enter gender</span>
+            </mat-error>
+          </mat-form-field> -->
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Marital status" formControlName="marital_status"
-  >
+              <mat-label>Marital status</mat-label>
+
+            <!-- <input matInput placeholder="Marital status" formControlName="marital_status"
+  >  -->
+            <select matNativeControl required formControlName="marital_status">
+                  <!-- <option value="volvo">Volvo</option>
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option> -->
+                  <option value="single">single</option>
+                  <option value="Married in church">Married in church</option>
+                  <option value="Customary marriage">Customary marriage</option>
+                  <option value="Civil marriage">Civil marriage</option>
+                  <option value="widower">widower</option>
+                  <option value="widow">widow</option>  
+                  <option value="divorced">Divorsed</option>
+                  <option value="Separated">Separated</option>
+                </select>
             <mat-error>
               <span *ngIf="!editMemberForm.get('marital_status').valid && editMemberForm.get('marital_status').touched">Please enter marital status</span>
             </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width">
+              <mat-label>Phone</mat-label>
             <input matInput placeholder="Phone" formControlName="phone"
   >
             <mat-error>
@@ -117,14 +165,23 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width">
+              <mat-label>Occupation</mat-label>
             <input matInput placeholder="occupation" formControlName="occupation"
   >
             <mat-error>
               <span *ngIf="!editMemberForm.get('occupation').valid && editMemberForm.get('occupation').touched">Please enter Occupation</span>
             </mat-error>
           </mat-form-field>
+          <mat-form-field class="example-full-width">
+              <mat-label>Location</mat-label>
+            <input matInput placeholder="Location" formControlName="location"
+  >
+            <mat-error>
+              <span *ngIf="!editMemberForm.get('location').valid && editMemberForm.get('location').touched">Please enter Location</span>
+            </mat-error>
+          </mat-form-field>
           <div class="button-row">
-            <button type="submit" [disabled]="!editMemberForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+            <button type="submit" [disabled]="!editMemberForm.valid"  class="btn btn-success">Update profile</button>
           </div>
         </form>
       </mat-card>

@@ -8,7 +8,7 @@
       <div class=form-group>
         <label>Member</label>
         <mat-form-field>
-            <ng-select [items]="results$ | async"
+            <!-- <ng-select [items]="results$ | async"
             bindLabel="username"
             autofocus
             bindValue="member_id"
@@ -23,17 +23,17 @@
           [loading]="people3Loading"
           [typeahead]="people3input$"
           [(ngModel)]="selectedPersons">
-          </ng-select>
+          </ng-select> -->
 
           
-            <!-- <mat-select formControlName="member_id"   [formControl]="searchField" placeholder="search member by user, member number or email">
+            <mat-select formControlName="member_id"   [formControl]="searchField" placeholder="search member by user, member number or email">
               <mat-option>
                 <ngx-mat-select-search [formControl]="searchField" [searching]="searching"></ngx-mat-select-search>
               </mat-option>
               <mat-option *ngFor="let member of results" [value]="member.member_id">
                   username: {{member.username}} | member number:{{member.member_number}} |Email: {{member.email}}
                 </mat-option>
-            </mat-select> -->
+            </mat-select>
           </mat-form-field>
       </div>
       <div class="form-group">

@@ -49,13 +49,27 @@ export class LoginComponent implements OnInit ,OnDestroy{
     console.log(this.loginForm);
     this.subs=    this.authService.login(this.f.username.value,this.f.password.value).subscribe(data=>{
         // this.alertify.success('logged in successfully');
-              this.router.navigate(['dashboard']);
-              Swal.fire({
-                type: 'success',
-                title: 'Welcome back!',
-                showConfirmButton: false,
-                timer: 1500
-              }); 
+        // if(data)
+                  console.log(data);
+
+        if(data.username==='admin'){
+          console.log(data);
+          this.router.navigate(['dashboard']);
+          Swal.fire({
+            type: 'success',
+            title: 'Welcome back!',
+            showConfirmButton: false,
+            timer: 1500
+          }); 
+        }else{
+          Swal.fire({
+            type: 'error',
+            title: 'This is restricted area!',
+            showConfirmButton: false,
+          }); 
+          this.router.navigate(['login']);
+        }
+       
     },
     err=>{
       Swal.fire({

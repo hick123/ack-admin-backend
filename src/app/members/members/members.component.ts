@@ -20,14 +20,9 @@ export class MembersComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   isLoading = true;
-member_number;
-// activated:any=[];
+  member_number;
 
-  // members: Member[] = [];
-
-  // members=[];
-
-  constructor(private memberService: MembersService,
+    constructor(private memberService: MembersService,
     private spinner: NgxSpinnerService, private router: Router) { }
 
   ngOnInit() {
@@ -54,9 +49,9 @@ member_number;
                 timer: 2500
               });           
             },error => {
-              Swal.insertQueueStep({
+              Swal.fire({
                 type: 'error',
-                title: 'Error occured during activation'
+                title: 'That member number is taken'
               })      
               })
       },
@@ -64,16 +59,15 @@ member_number;
     })
   }
   getMembers(){
-    const activated=[];
+    const inActive=[];
     const membersObservable = this.memberService.getMembers();
     membersObservable.subscribe((memberData: any)=>{
       this.isLoading = false;
-      // this.activated=data
       var arrayLength = memberData.length;
       for (var i = 0; i < arrayLength; i++) {
         if( memberData[i].member_number === null){
-              activated.push(memberData[i]);
-              this.dataSource = new MatTableDataSource(activated);
+          inActive.push(memberData[i]);
+              this.dataSource = new MatTableDataSource(inActive);
               this.dataSource.paginator = this.paginator;
               this.dataSource.sort = this.sort;
       }
@@ -94,43 +88,4 @@ member_number;
   onSelect(mem){
     this.router.navigate(['/members',mem.member_id]);
   }
-  getmember(){
-  }
-  // deleteStaff(staffId: number) {
-  //   swal({
-  //        type:'warning',
-  //        title: 'Are you sure to Delete Staff?',
-  //        text: 'You will not be able to recover the data of Staff',
-  //        showCancelButton: true,
-  //        confirmButtonColor: '#049F0C',
-  //        cancelButtonColor:'#ff0000',
-  //        confirmButtonText: 'Yes, delete it!',
-  //        cancelButtonText: 'No, keep it'
-  //      }).then(() => {
-  //      this.dataService.deleteStaff(staffId).subscribe(
-  //        data => {
-  //          if (data.hasOwnProperty('error')) {
-  //            this.alertService.error(data.error);
-  //          } else if (data.status) {
-  //            swal({
-  //              type:'success',
-  //              title: 'Deleted!',
-  //              text: 'The Staff has been deleted.',              
-  //            })
-  //          }
-  //        }, error => {
-  //          this.alertService.error(error);
-  //        });
-  //      }, (dismiss) => {
-  //        // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
-  //        if (dismiss === 'cancel') {
-  //          swal({
-  //            type:'info',
-  //            title: 'Cancelled',
-  //            text: 'Your Staff file is safe :)'
-  //          })
-  //        }
-  //      });
-  //  }
-
 }

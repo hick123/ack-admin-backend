@@ -12,12 +12,13 @@ const httpOptions = {
 })
 export class ClustersService {
 
-    private localgeturl='http://localhost:3000/clusters/getclusters';
-    private localaddtocluster='http://localhost:3000/clusters/addmemberstocluster';
-    private localcreatecluster='http://localhost:3000/clusters/createcluster';
-    private getclusteridturl='http://localhost:3000/clusters/getclusterbyid';
-    private getclustermbersurl='http://localhost:3000/clusters/getclustermbers';
-    private unrellurl='http://localhost:3000/clusters/clustersenroll';
+    private localgeturl='https://ackbackend.herokuapp.com/clusters/getclusters';
+    private localaddtocluster='https://ackbackend.herokuapp.com/clusters/addmemberstocluster';
+    private localcreatecluster='https://ackbackend.herokuapp.com/clusters/createcluster';
+    private getclusteridturl='https://ackbackend.herokuapp.com/clusters/getclusterbyid';
+    private getclustermbersurl='https://ackbackend.herokuapp.com/clusters/getclustermbers';
+    private unrellurl='https://ackbackend.herokuapp.com/clusters/clustersenroll';
+    private getclustersurl='https://ackbackend.herokuapp.com/clusters/getclustersenrolled';
 
   
   constructor(private http: HttpClient) { }
@@ -52,6 +53,16 @@ export class ClustersService {
         const url =`${this.unrellurl}/${member_id}`;
   
       return this.http.get(url);
+  }
+  //get cluster a member is enrolled in.
+  getclustersEnrolledIn(member_id:string){
+    console.log(member_id);
+    const url =`${this.getclustersurl}/${member_id}`;
+
+    // return this.http.post<any>(this.getclustersurl,{member_id}).pipe(map(memberClusters => {
+    //   return memberClusters;
+    // }));;
+    return this.http.get(url);    
   }
 
     // return this.http.post(this.unrellurl,{member_id},httpOptions).pipe(tap((data: any) => console.log(data)

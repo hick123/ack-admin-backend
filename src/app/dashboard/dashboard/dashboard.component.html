@@ -2,7 +2,7 @@
 <div class="row"> 
   <div class="col-md-3 col-sm-6 col-xs-12">
     <div class="info-box">
-      <span class="info-box-icon bg-blue"><i class="ion ion-ios-people-outline"></i></span>
+      <span class="info-box-icon bg-green"><i class="ion ion-ios-people-outline"></i></span>
       <div class="info-box-content">
         <span class="info-box-text" >Active Members</span>
            <span class="info-box-number">{{act}}</span>
@@ -10,27 +10,28 @@
     </div>
   </div>
 
+
   <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box">
-        <span class="info-box-icon bg-green"><i class="ion ion-ios-people-outline"></i></span>
+        <span class="info-box-icon bg-blue"><i class="fa fa-bell-o  fa-xs"></i></span>
         <div class="info-box-content">
-            <span class="info-box-text">Inactive Members</span>
+            <span class="info-box-text">New Members</span>
             <span class="info-box-number">{{inAct}}</span>
         </div>
       </div>
     </div>
     <div class="col-md-3 col-sm-6 col-xs-12">
         <div class="info-box">
-          <span class="info-box-icon bg-yelow"><i  class="ion ion-ios-people-outline"></i></span>
+          <span class="info-box-icon bg-yellow"> <i class="fa fa-users fa-xs"></i></span>
           <div class="info-box-content">
             <span class="info-box-text">Total Groups</span>
-            <span class="info-box-number"> {{total_cluster}} </span>
+            <span class="info-box-number"> {{total_groups}} </span>
           </div>
         </div>
       </div>
       <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-red"><i  class="ion ion-ios-people-outline"></i></span>
+            <span class="info-box-icon bg-red"> <i class="fa fa-users fa-xs"></i></span>
               <div class="info-box-content">
               <span class="info-box-text">Total Clusters</span>
               <span class="info-box-number">‎{{total_clusters}}</span>
@@ -61,6 +62,11 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Other names </th>
               <td mat-cell *matCellDef="let row"> {{row.other_names}} </td>
             </ng-container>
+
+            <ng-container matColumnDef="member_number">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Member number </th>
+              <td mat-cell *matCellDef="let row"> {{row.member_number}} </td>
+            </ng-container>
         
             <!-- Color Column -->
             <ng-container matColumnDef="phone">
@@ -82,9 +88,8 @@
             <ng-container matColumnDef="view">
               <th mat-header-cell *matHeaderCellDef>View details</th>
               <td mat-cell *matCellDef="let row">
-                <button mat-icon-button color="primary" (click)="viewdetails(row)">
-                    <mat-icon >edit</mat-icon>
-                </button>
+                <button type="button" (click)="viewdetails(row)" class="btn btn-info">View</button>
+
               </td>
             </ng-container>
       
@@ -108,9 +113,8 @@
    </div>
 
    <div class="col-md-4">
-      <!-- Info Boxes Style 2 -->
       <div style="padding-bottom:8px" class="info-box bg-yellow">
-        <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+        <span class="info-box-icon"><i class="fa fa-money fa-xs"></i></span>
 
         <div class="info-box-content">
           <span class="info-box-text">Total Church Contributions</span>
@@ -118,7 +122,7 @@
         </div>
       </div>
       <div style="padding-bottom:8px" class="info-box bg-green">
-        <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
+        <span class="info-box-icon"><i class="fa fa-money fa-xs"></i></span>
 
         <div class="info-box-content">
             <span class="info-box-text">Groups contributions</span>
@@ -126,18 +130,18 @@
         </div>
       </div>
       <div style="padding-bottom:8px" class="info-box bg-red">
-        <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
+        <span class="info-box-icon"><i class="fa fa-money fa-xs"></i></span>
         <div class="info-box-content">
             <span class="info-box-text">Cluster contributions</span>
             <span class="info-box-number">‎KSh, /= {{total_cluster_contribution}}</span>
         </div>
       </div>
       <div style="padding-bottom:8px" class="info-box bg-aqua">
-        <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
+        <span class="info-box-icon"><i class="fa fa-money fa-xs"></i></span>
 
         <div class="info-box-content">
           <span class="info-box-text">None member contributions</span>
-          <span class="info-box-number">1,633</span>
+          <span class="info-box-number">{{non_member_contributions}}</span>
         </div>
       </div>
  
