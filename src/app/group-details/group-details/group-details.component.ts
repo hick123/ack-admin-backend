@@ -5,9 +5,13 @@ import { FormGroup, Validators, FormBuilder, FormControl, FormArray } from '@ang
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { MatDialog, MatDialogConfig } from "@angular/material";
+
 // import { start } from 'repl';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
+import { AddMembersComponent } from 'src/app/cluster-details/add-members/add-members.component';
+import { GroupEventsComponent } from '../group-events/group-events.component';
 
  
 
@@ -38,7 +42,8 @@ export class GroupDetailsComponent implements OnInit,OnDestroy {
   displayedColumns: string[] = ['username', 'first_name', 'other_names', 'phone', 'occupation','gender'];
 
 
-  constructor(private route:ActivatedRoute,private groupService: GroupsService,
+  constructor(private route:ActivatedRoute,private groupService: GroupsService,    private dialog: MatDialog,
+
     private eventService:EventsServiceService,private formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -53,6 +58,13 @@ export class GroupDetailsComponent implements OnInit,OnDestroy {
     console.log('sending',this.route.snapshot.paramMap.get('churchgroups_id'));
     console.log('sending groupname',this.route.snapshot.paramMap.get('group_name'));
 
+  }
+  onCreate() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "60%";
+    this.dialog.open(AddMembersComponent,dialogConfig);
   }
   form(){
    this.createGroupEvents = this.formBuilder.group({
@@ -125,12 +137,6 @@ export class GroupDetailsComponent implements OnInit,OnDestroy {
       console.log('groupdetails', this.groupDetails);
     });
     }
-    // getgroupmembers(){
-    //   this.groupService.getGroupMembers(this.route.snapshot.paramMap.get('churchgroups_id')).subscribe(data=>{
-    //     console.log('group members',data);
-    //     this.groupMembers=data;
-    //   });
-    // }
     listGroupEvents(){
       this.listGroupEventsByIdSubs=
       this.eventService.listGroupEventsById(this.route.snapshot.paramMap.get('churchgroups_id')).subscribe(data=>{

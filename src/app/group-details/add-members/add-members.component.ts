@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged,filter, switchMap, first, tap, catchError } from 'rxjs/operators';
-import { of, Observable, concat, Subject } from 'rxjs';
+import { of, Observable, concat, Subject ,throwError} from 'rxjs';
 import { MembersService, GroupsService } from 'src/app/shared/services';
 import Swal from 'sweetalert2';
+import { MatDialogRef } from '@angular/material';
 import { Member } from 'src/app/shared/models/members';
 
 
@@ -24,9 +25,9 @@ export class AddMembersComponent implements OnInit {
   people3Loading = false;
   people3input$ = new Subject<string>();
 
-   constructor(    private formBuilder: FormBuilder,private memberService: MembersService,private groupService: GroupsService
+   constructor(    private formBuilder: FormBuilder,private memberService: MembersService,
+    private groupService: GroupsService,public dialogRef: MatDialogRef<AddMembersComponent>
     ) { }
-
   ngOnInit() {
     this.searchField = new FormControl;
     this.addToGroupForm = this.formBuilder.group({ 
@@ -66,16 +67,23 @@ trackByFn(item: Member) {
               'form':form
             } 
             console.log(toDb);
-                    this.groupService.addMembersToGroup(toDb).subscribe(data=>{
-                      this.addToGroupForm.reset();
+                 this.groupService.addMembersToGroup(toDb).subscribe(data=>{
+                 this.addToGroupForm.reset();
 
- 
-              Swal.fire('Successfully', 'added member to the group!', 'success');
+               Swal.fire('Successfully', 'added member to the group!', 'success');
 
                 },
                 error => {
-                  Swal.fire('Oops...', 'That member already belongs to a group!', 'error');
+                  this.addToGroupForm.reset();
+                  console.log('error', error);
+                  console.log('error message url', error.error.message);
+                  if(error.status===409){
+                    Swal.fire('Oops...', 'That member already belongs to a ${error.error.message} group', 'error');
+                  }else if(error.status===404){
+                    Swal.fire('Oops...', 'We could not complete try again later!', 'error');
+                  }
             });
+
   }
 
 }

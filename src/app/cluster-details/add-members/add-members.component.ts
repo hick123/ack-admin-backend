@@ -17,6 +17,7 @@ export class AddMembersComponent implements OnInit {
 
   results: any[] = [];
 
+
   constructor(private formBuilder: FormBuilder,private memberService: MembersService,    private clusterService: ClustersService
     ) { }
 
@@ -54,13 +55,29 @@ export class AddMembersComponent implements OnInit {
               'form':form
             } 
             console.log(toDb);
-                    this.clusterService.addMembersToCluster(toDb).subscribe(data=>{
+                    this.clusterService.addMembersToCluster(toDb).subscribe(resp=>{
+                      this.addToclusterForm.reset();
+                     console.log('resp ok',resp.ok);
+
+                    const keys = resp.headers.keys();
+                      // response => console.log(response.text())
+
+                      console.log('response http ',keys)
+                
+
 
                       Swal.fire('Successfully', 'added member to the Cluster!', 'success');
 
                     },
                     error => {
-                      Swal.fire('Oops...', 'That member already belongs to a cluster!', 'error');
+                      this.addToclusterForm.reset();
+                      console.log('error', error);
+                      console.log('error message url', error.error.message);
+                      if(error.status===409){
+                        Swal.fire('Oops...', 'That member already belongs to a cluster!', 'error');
+                      }else if(error.status===404){
+                        Swal.fire('Oops...', 'We could not complete try again later!', 'error');
+                      }
                 });
   }
   

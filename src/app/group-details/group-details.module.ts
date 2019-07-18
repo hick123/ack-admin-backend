@@ -15,11 +15,14 @@ import { AddMembersComponent } from './add-members/add-members.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { NgSelectModule } from '@ng-select/ng-select';
 
+import {MatDialogModule,MatDialogRef} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [GroupDetailsComponent, GroupEventsComponent, GroupMembersComponent, AddMembersComponent],
+  entryComponents:[AddMembersComponent],
   imports: [
     CommonModule,
+    MatDialogModule,
     GroupDetailsRoutingModule,
     FormsModule,ReactiveFormsModule,
     MatDatepickerModule,
@@ -37,6 +40,23 @@ import { NgSelectModule } from '@ng-select/ng-select';
     MatSelectModule,
     MatAutocompleteModule,
     NgSelectModule
-  ]
+  ],
+  exports:[AddMembersComponent,MatDialogModule,
+    GroupDetailsRoutingModule,
+    FormsModule,ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule ,
+    MatFormFieldModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule,
+    MatCardModule,MatPaginatorModule,
+    MatTableModule,
+    MatIconModule,
+    NgxMatSelectSearchModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    NgSelectModule],
+  providers:[{provide: MatDialogRef, useValue: {}}],
 })
 export class GroupDetailsModule { }

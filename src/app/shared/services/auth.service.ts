@@ -18,9 +18,9 @@ export class AuthService {
   public currentMember: Observable<Member>;
   authToken: any;
   user: any;
-  private localsignin='https://ackbackend.herokuapp.com/auth/login';
-  private localsignup='https://ackbackend.herokuapp.com/auth/signup';
-  private checkemailurl='https://ackbackend.herokuapp.com/auth/checkemail';
+  private localsignin='http://localhost:3000/auth/login';
+  private localsignup='http://localhost:3000/auth/signup';
+  private checkemailurl='http://localhost:3000/auth/checkemail';
 
 
   helper = new JwtHelperService();

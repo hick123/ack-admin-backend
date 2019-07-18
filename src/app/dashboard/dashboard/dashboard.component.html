@@ -40,7 +40,24 @@
         </div>
  </div>
  <div class="row">
-   <div class="col-md-8">
+    <!-- <div class="col-md-8"> -->
+        <!-- <div>
+          <div class="chart">
+            <canvas baseChart
+              [data]="pieChartData"
+              [labels]="pieChartLabels"
+              [chartType]="pieChartType"
+              [options]="pieChartOptions"
+              [plugins]="pieChartPlugins"
+              [colors]="pieChartColors"
+              [legend]="pieChartLegend">
+            </canvas>
+          </div>
+        </div> -->
+        <!-- <div class="d3-chart" #chart></div>
+
+      </div> -->
+   <!-- <div class="col-md-8">
       <mat-toolbar class="bg-green">Active members</mat-toolbar>
       <mat-form-field>
           <input matInput (keyup)="applyFilter($event.target.value)"  placeholder="Search member">
@@ -53,7 +70,6 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
               <td mat-cell *matCellDef="let row"> {{row.username}} </td>
             </ng-container>
-            <!-- Progress Column -->
             <ng-container matColumnDef="first_name">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> First name </th>
               <td mat-cell *matCellDef="let row"> {{row.first_name}} </td>
@@ -68,18 +84,15 @@
               <td mat-cell *matCellDef="let row"> {{row.member_number}} </td>
             </ng-container>
         
-            <!-- Color Column -->
             <ng-container matColumnDef="phone">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
               <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
             </ng-container>
-          <!-- Color Column -->
           <ng-container matColumnDef="occupation">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> occupation </th>
             <td mat-cell *matCellDef="let row"> {{row.occupation}} </td>
           </ng-container>
       
-            <!-- Color Column -->
             <ng-container matColumnDef="gender">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
               <td mat-cell *matCellDef="let row"> {{row.gender}} </td>
@@ -110,7 +123,26 @@
                   
           <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
         </div>
-   </div>
+   </div> -->
+
+   <!-- <ag-grid-angular 
+    style="width:auto; height:auto;" 
+    class="ag-theme-balham"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    >
+</ag-grid-angular> -->
+<ag-grid-angular
+#agGrid
+style="width: 1000px; height: 400px;"
+id="myGrid"
+class="ag-theme-balham"
+[columnDefs]="columnDefs"
+[paginationAutoPageSize]="true"
+[pivotPanelShow]="pivotPanelShow"
+[pagination]="true"
+[rowData]="rowData"
+></ag-grid-angular>
 
    <div class="col-md-4">
       <div style="padding-bottom:8px" class="info-box bg-yellow">

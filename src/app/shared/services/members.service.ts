@@ -12,16 +12,16 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class MembersService {
-  private localgeturl='https://ackbackend.herokuapp.com/members';
-  private localsignup='https://ackbackend.herokuapp.com/members/signup';
-  private localgetmemberbyid='https://ackbackend.herokuapp.com/members/getmemberbyid';
+  private localgeturl='http://localhost:3000/members';
+  private localsignup='http://localhost:3000/members/signup';
+  private localgetmemberbyid='http://localhost:3000/members/getmemberbyid';
 
-  private localnewmembers='https://ackbackend.herokuapp.com/members/newmembers';
-  private member='https://ackbackend.herokuapp.com/members/newmembers';
-  private activatemember='https://ackbackend.herokuapp.com/members/activatemember';
-  private urlu='https://ackbackend.herokuapp.com/members/searchmember';
-  private getloggedinmemberbyidministry='https://ackbackend.herokuapp.com/members/getloggedinmemberbyidministry';
-  private updateprofile ='https://ackbackend.herokuapp.com/members/updateprofile'
+  private localnewmembers='http://localhost:3000/members/newmembers';
+  private member='http://localhost:3000/members/newmembers';
+  private activatemember='http://localhost:3000/members/activatemember';
+  private urlu='http://localhost:3000/members/searchmember';
+  private getloggedinmemberbyidministry='http://localhost:3000/members/getloggedinmemberbyidministry';
+  private updateprofile ='http://localhost:3000/members/updateprofile'
   private subject = new Subject<any>();
 
   constructor(private http: HttpClient) { }

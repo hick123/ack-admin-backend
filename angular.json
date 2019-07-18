@@ -29,6 +29,7 @@
             ],
             "scripts": [
                "node_modules/jquery/dist/jquery.js",
+               "node_modules/chart.js/dist/Chart.min.js",
               "node_modules/datatables.net/js/jquery.dataTables.js",
               "src/assets/adminlte/bower_components/jquery/dist/jquery.min.js",
               "src/assets/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js",
