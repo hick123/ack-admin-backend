@@ -25,11 +25,16 @@
             "styles": [
               "src/styles.css",
               "node_modules/datatables.net-dt/css/jquery.dataTables.css",
-              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "node_modules/primeng/resources/themes/nova-light/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css"
+              
             ],
             "scripts": [
                "node_modules/jquery/dist/jquery.js",
                "node_modules/chart.js/dist/Chart.min.js",
+               "node_modules/jquery/dist/jquery.js",
               "node_modules/datatables.net/js/jquery.dataTables.js",
               "src/assets/adminlte/bower_components/jquery/dist/jquery.min.js",
               "src/assets/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js",

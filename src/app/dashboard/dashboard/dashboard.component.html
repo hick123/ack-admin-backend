@@ -1,47 +1,99 @@
-
-<div class="row"> 
+<div class="row">
   <div class="col-md-3 col-sm-6 col-xs-12">
     <div class="info-box">
-      <span class="info-box-icon bg-green"><i class="ion ion-ios-people-outline"></i></span>
+      <span class="info-box-icon bg-green"
+        ><i class="ion ion-ios-people-outline"></i
+      ></span>
       <div class="info-box-content">
-        <span class="info-box-text" >Active Members</span>
-           <span class="info-box-number">{{act}}</span>
-        </div>
+        <span class="info-box-text">Active Members</span>
+        <span class="info-box-number">{{ act }}</span>
+      </div>
     </div>
   </div>
 
-
   <div class="col-md-3 col-sm-6 col-xs-12">
-      <div class="info-box">
-        <span class="info-box-icon bg-blue"><i class="fa fa-bell-o  fa-xs"></i></span>
-        <div class="info-box-content">
-            <span class="info-box-text">New Members</span>
-            <span class="info-box-number">{{inAct}}</span>
-        </div>
+    <div class="info-box">
+      <span class="info-box-icon bg-blue"
+        ><i class="fa fa-bell-o  fa-xs"></i
+      ></span>
+      <div class="info-box-content">
+        <span class="info-box-text">New Members</span>
+        <span class="info-box-number">{{ inAct }}</span>
       </div>
     </div>
-    <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box">
-          <span class="info-box-icon bg-yellow"> <i class="fa fa-users fa-xs"></i></span>
-          <div class="info-box-content">
-            <span class="info-box-text">Total Groups</span>
-            <span class="info-box-number"> {{total_groups}} </span>
-          </div>
-        </div>
+  </div>
+  <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-yellow">
+        <i class="fa fa-users fa-xs"></i
+      ></span>
+      <div class="info-box-content">
+        <span class="info-box-text">Total Groups</span>
+        <span class="info-box-number"> {{ total_groups }} </span>
       </div>
-      <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-red"> <i class="fa fa-users fa-xs"></i></span>
-              <div class="info-box-content">
-              <span class="info-box-text">Total Clusters</span>
-              <span class="info-box-number">‎{{total_clusters}}</span>
-            </div>
-          </div>
-        </div>
- </div>
- <div class="row">
-    <!-- <div class="col-md-8"> -->
-        <!-- <div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-red">
+        <i class="fa fa-users fa-xs"></i
+      ></span>
+      <div class="info-box-content">
+        <span class="info-box-text">Total Clusters</span>
+        <span class="info-box-number">‎{{ total_clusters }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="row">
+   <p>table</p>
+<p-button label="Click" ></p-button>
+
+<p-table [value]="rowData" [paginator]="true" [rows]="10">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Member number</th>
+            <th>Username</th>
+            <th>Full names</th>
+            <th>Age</th>
+            <th>Occupation</th>
+            <th>Gender</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-member>
+        <tr>
+            <td>{{member.member_number}}</td>
+            <td>{{member.username}}</td>
+            <td>{{member.first_name}} {{member.other_names}}</td>
+            <td>{{member.age}}</td>
+            <td>{{member.occupation}}</td>
+            <td>{{member.gender}}</td>
+
+        </tr>
+    </ng-template>
+</p-table>
+  <p-table [value]="cars">
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let col of cols">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-car>
+        <tr>
+            <td *ngFor="let col of cols">
+                    {{car[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+ </div> -->
+<div class="row"></div>
+<div class="row">
+  <!-- <div class="col-md-8"> -->
+  <!-- <div>
           <div class="chart">
             <canvas baseChart
               [data]="pieChartData"
@@ -54,10 +106,10 @@
             </canvas>
           </div>
         </div> -->
-        <!-- <div class="d3-chart" #chart></div>
+  <!-- <div class="d3-chart" #chart></div>
 
       </div> -->
-   <!-- <div class="col-md-8">
+  <!-- <div class="col-md-8">
       <mat-toolbar class="bg-green">Active members</mat-toolbar>
       <mat-form-field>
           <input matInput (keyup)="applyFilter($event.target.value)"  placeholder="Search member">
@@ -125,78 +177,70 @@
         </div>
    </div> -->
 
-   <!-- <ag-grid-angular 
+  <!-- <ag-grid-angular 
     style="width:auto; height:auto;" 
     class="ag-theme-balham"
     [rowData]="rowData"
     [columnDefs]="columnDefs"
     >
 </ag-grid-angular> -->
-<ag-grid-angular
-#agGrid
-style="width: 1000px; height: 400px;"
-id="myGrid"
-class="ag-theme-balham"
-[columnDefs]="columnDefs"
-[paginationAutoPageSize]="true"
-[pivotPanelShow]="pivotPanelShow"
-[pagination]="true"
-[rowData]="rowData"
-></ag-grid-angular>
+  <ag-grid-angular
+    #agGrid
+    style="width: 1000px; height: 400px;"
+    id="myGrid"
+    class="ag-theme-balham"
+    [columnDefs]="columnDefs"
+    [paginationAutoPageSize]="true"
+    [pivotPanelShow]="pivotPanelShow"
+    [pagination]="true"
+    [rowData]="rowData"
+  ></ag-grid-angular>
 
-   <div class="col-md-4">
-      <div style="padding-bottom:8px" class="info-box bg-yellow">
-        <span class="info-box-icon"><i class="fa fa-money fa-xs"></i></span>
+  <div class="col-md-4">
+    <div style="padding-bottom:8px" class="info-box bg-yellow">
+      <span class="info-box-icon"><i class="fa fa-money fa-xs"></i></span>
 
-        <div class="info-box-content">
-          <span class="info-box-text">Total Church Contributions</span>
-          <span class="info-box-number">‎KSh, /= {{total_church_contribution}}</span>
-        </div>
+      <div class="info-box-content">
+        <span class="info-box-text">Total Church Contributions</span>
+        <span class="info-box-number"
+          >‎KSh, /= {{ total_church_contribution }}</span
+        >
       </div>
-      <div style="padding-bottom:8px" class="info-box bg-green">
-        <span class="info-box-icon"><i class="fa fa-money fa-xs"></i></span>
-
-        <div class="info-box-content">
-            <span class="info-box-text">Groups contributions</span>
-            <span class="info-box-number">‎KSh, /= {{total_group_contribution}}</span>
-        </div>
-      </div>
-      <div style="padding-bottom:8px" class="info-box bg-red">
-        <span class="info-box-icon"><i class="fa fa-money fa-xs"></i></span>
-        <div class="info-box-content">
-            <span class="info-box-text">Cluster contributions</span>
-            <span class="info-box-number">‎KSh, /= {{total_cluster_contribution}}</span>
-        </div>
-      </div>
-      <div style="padding-bottom:8px" class="info-box bg-aqua">
-        <span class="info-box-icon"><i class="fa fa-money fa-xs"></i></span>
-
-        <div class="info-box-content">
-          <span class="info-box-text">None member contributions</span>
-          <span class="info-box-number">{{non_member_contributions}}</span>
-        </div>
-      </div>
- 
     </div>
-       
+    <div style="padding-bottom:8px" class="info-box bg-green">
+      <span class="info-box-icon"><i class="fa fa-money fa-xs"></i></span>
 
- </div>
- <div class="row">
-    <div class="col-md-6">
-      <app-dash-groups></app-dash-groups>
-       
-    </div> 
-    <div class="col-md-6">
-      <app-dash-clusters></app-dash-clusters>
+      <div class="info-box-content">
+        <span class="info-box-text">Groups contributions</span>
+        <span class="info-box-number"
+          >‎KSh, /= {{ total_group_contribution }}</span
+        >
+      </div>
     </div>
+    <div style="padding-bottom:8px" class="info-box bg-red">
+      <span class="info-box-icon"><i class="fa fa-money fa-xs"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">Cluster contributions</span>
+        <span class="info-box-number"
+          >‎KSh, /= {{ total_cluster_contribution }}</span
+        >
+      </div>
+    </div>
+    <div style="padding-bottom:8px" class="info-box bg-aqua">
+      <span class="info-box-icon"><i class="fa fa-money fa-xs"></i></span>
 
-
- </div>
- 
-                      
-             
-         
-            
-      
- 
-    
+      <div class="info-box-content">
+        <span class="info-box-text">None member contributions</span>
+        <span class="info-box-number">{{ non_member_contributions }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <app-dash-groups></app-dash-groups>
+  </div>
+  <div class="col-md-6">
+    <app-dash-clusters></app-dash-clusters>
+  </div>
+</div>

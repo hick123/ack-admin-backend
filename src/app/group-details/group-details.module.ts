@@ -41,22 +41,6 @@ import {MatDialogModule,MatDialogRef} from '@angular/material/dialog';
     MatAutocompleteModule,
     NgSelectModule
   ],
-  exports:[AddMembersComponent,MatDialogModule,
-    GroupDetailsRoutingModule,
-    FormsModule,ReactiveFormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule ,
-    MatFormFieldModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatProgressSpinnerModule,
-    MatCardModule,MatPaginatorModule,
-    MatTableModule,
-    MatIconModule,
-    NgxMatSelectSearchModule,
-    MatSelectModule,
-    MatAutocompleteModule,
-    NgSelectModule],
   providers:[{provide: MatDialogRef, useValue: {}}],
 })
 export class GroupDetailsModule { }

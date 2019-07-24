@@ -8,15 +8,15 @@
             <p *ngFor="let item of groupDetails">Created on {{item.created_date}}</p>
         </div>       
           <div class="row">
-                <button mat-raised-button  (click)="onCreate()">
+                <!-- <button mat-raised-button  (click)="onCreate()">
                   <mat-icon>add</mat-icon>Add a member
-                </button>
+                </button> -->
               <app-group-members></app-group-members>
         </div>
     </tab>
     <tab heading="Add group members">
       
-      <!-- <app-add-members [groupId]="group_id"></app-add-members> -->
+      <app-add-members [groupId]="group_id"></app-add-members>
     </tab>
     <tab heading="Group Events">
         <div class="box box-primary">

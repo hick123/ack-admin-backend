@@ -1,22 +1,36 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { DataTablesModule } from 'angular-datatables';
-import {MatTableModule} from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material';
-import { MatFormFieldModule,MatIconModule, MatInputModule,MatToolbarModule,MatProgressSpinnerModule,MatCardModule } from '@angular/material';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { DataTablesModule } from "angular-datatables";
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material";
+import {
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatToolbarModule,
+  MatProgressSpinnerModule,
+  MatCardModule
+} from "@angular/material";
 
-import { DashboardRoutingModule } from './dashboard-routing.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { DashGroupsComponent } from './dash-groups/dash-groups.component';
-import { DashClustersComponent } from './dash-clusters/dash-clusters.component';
-import { AgGridModule } from 'ag-grid-angular';
-import { ChartsModule } from 'ng2-charts';
-
+import { DashboardRoutingModule } from "./dashboard-routing.module";
+import { DashboardComponent } from "./dashboard/dashboard.component";
+import { DashGroupsComponent } from "./dash-groups/dash-groups.component";
+import { DashClustersComponent } from "./dash-clusters/dash-clusters.component";
+import { AgGridModule } from "ag-grid-angular";
+import { ChartsModule } from "ng2-charts";
+import { TableModule } from "primeng/table";
+import { ButtonModule } from "primeng/button";
 
 @NgModule({
-  declarations: [DashboardComponent, DashGroupsComponent, DashClustersComponent],
+  declarations: [
+    DashboardComponent,
+    DashGroupsComponent,
+    DashClustersComponent
+  ],
   imports: [
     CommonModule,
+    TableModule,
+    ButtonModule,
     DashboardRoutingModule,
     DataTablesModule,
     MatTableModule,
@@ -33,4 +47,4 @@ import { ChartsModule } from 'ng2-charts';
     // BrowserAnimationsModule
   ]
 })
-export class DashboardModule { }
+export class DashboardModule {}

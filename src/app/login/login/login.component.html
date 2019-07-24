@@ -25,7 +25,13 @@
           </div>
           <!-- /.col -->
           <div class="col-xs-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+              <div class="spinner-border" *ngIf="loading" style="width: 3rem; height: 3rem;" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+            <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!loginForm.valid">
+                <span *ngIf="loading"  class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+
+              Sign In</button>
           </div>
           <!-- /.col -->
         </div>
