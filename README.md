@@ -1,5 +1,7 @@
 # AckAdminDashboard
 
+This is node js backend with mysql db for church management system.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.1.
 
 ## Development server
